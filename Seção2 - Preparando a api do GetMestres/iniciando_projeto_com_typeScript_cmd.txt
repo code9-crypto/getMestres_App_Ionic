@@ -1,0 +1,7 @@
+1º instalar o ts-node
+npm install -g ts-node
+
+2º instalar o typeORM
+npm install -g typeorm
+
+3º typeorm init --name nome_do_projeto --express --database mysql
