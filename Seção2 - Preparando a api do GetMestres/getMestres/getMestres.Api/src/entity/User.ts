@@ -1,18 +1,26 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Column } from "typeorm"
+import { BaseEntity } from "./BaseEntity"
 
-@Entity()
-export class User {
+//@Entity é a notação para criar a tabela no banco
+@Entity(/*{name : "User"}*/)
+export class User extends BaseEntity{
+    //declarando e configurando campo que será criado no banco de dados
+    //pelo ORM
+    @Column({type: "varchar", length: 100})
+    name: string
 
-    @PrimaryGeneratedColumn()
-    id: number
+    //@Column é notação para criar a tabela no banco
+    @Column({type: "varchar", length: 200})
+    photo: string
 
-    @Column()
-    firstName: string
+    @Column({type: "varchar", length: 200})
+    email: string
 
-    @Column()
-    lastName: string
+    @Column({default: false})
+    isRoot: boolean
 
-    @Column()
-    age: number
-
+    @Column({type: "varchar", length: 100})
+    password: string
+    //OBS.: caso queira que um campo seja nulo
+    //apenas adicione nos paramêtros, nullable: true
 }

@@ -20,4 +20,19 @@ export const Routes = [{
     route: "/users/:id",
     controller: UserController,
     action: "remove"
+},{
+    method: "delete",
+    route: "/apagar",
+    controller: UserController,
+    action: "apagaTudo"
+},{
+    method: "post",
+    route: "/users/create",
+    controller: UserController,
+    action: "createUser"
+},{
+    method: "post",
+    route: "/users/auth",
+    controller: UserController,
+    action: "auth"
 }]
