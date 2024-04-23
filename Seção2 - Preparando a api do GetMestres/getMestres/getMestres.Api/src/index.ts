@@ -9,6 +9,8 @@ import auth from "./middleware/auth"
 // create express app
 const app = express()
 app.use(bodyParser.json())
+
+//Middleware que faz autenticação para acesso as rotas
 app.use(auth)
 
 // register express routes from defined application routes

@@ -13,7 +13,7 @@ export class UserController extends BaseController<User> {
 
     //Método que faz a validação do usuário
     async auth(req: Request){
-        //Pega os valores recebidos no corpo da requisilçao
+        //Pega os valores recebidos no corpo da requisição
         let { email, password } = req.body
         //faz um validação se foi informado email ou senha
         if( !email || !password ){
@@ -85,6 +85,8 @@ export class UserController extends BaseController<User> {
         return super.save(_user)
     }
 
+    //Este método save seria para criar o usuário diretamente sem verificação
+    //Mas o método acima fará isso, porém este método ficará aqui para estudos posteriores
     async save(request: Request){
         let _user = <User>request.body
         //O super está sendo chamado, pois é para que a validação seja feita na superclasse, não na classe local

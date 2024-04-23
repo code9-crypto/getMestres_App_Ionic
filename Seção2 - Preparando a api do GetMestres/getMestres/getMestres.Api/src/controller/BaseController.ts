@@ -18,7 +18,11 @@ export abstract class BaseController<T> extends BaseNotification{
 
     //Este controlador está acionando o GET
     async all() {
-        return this.repository.find()
+        return this.repository.find({
+            where: {
+                deleted: false
+            }
+        })
     }
 
     //Este controlador está acionando o GET com o paramêtro id
@@ -31,15 +35,24 @@ export abstract class BaseController<T> extends BaseNotification{
         })
         //Caso não encontre o usuário do id informado, será exibido esta mensagem
         if (!user) {
-            return "unregistered user"
+            return "Informação não encontrada"
         }
         return user
     }
 
     //Este controlador está acionando o POST
-    async save(model: any) {
+    //Este é um método padrão para todos os controllers(pois seu model é any ou seja aceita qualquer classe que a chame)
+    //E para ser usada, será necessário fazer uma sobrescrita do método
+    //No controlador em questão e depois chamar este método que o super
+    async save(model: any) {        
         if( model.uid ){
-            let _modelInDB = await this.repository.findOne(model.uid)
+            delete model['deleted']            
+            delete model['createAt']
+            delete model['updateAt']
+
+            let _modelInDB = await this.repository.findOne({
+                where: {uid: model.uid}
+            })
             if( _modelInDB ){
                 Object.assign(_modelInDB, model)
             }
@@ -56,6 +69,7 @@ export abstract class BaseController<T> extends BaseNotification{
         
     }
     
+    //Este método irá apagar todos os dados da entidade em questão
     async apagaTudo(){
         await this.repository.delete({active: 1})
         return "Todos os dados foram apagados com sucesso"
@@ -63,21 +77,34 @@ export abstract class BaseController<T> extends BaseNotification{
     
     async remove(req: Request){
         var texto = ""
-        if( req.params.id ){
-            const uid = req.params.id
-            await this.repository.delete(uid)
-            texto = "Usuári apagado com sucesso"
-        }else{
-            texto = "Informe o código do usuário para apagar"
-        }
         
-        return texto        
+        const uid = req.params.id
+        //Primeiro recupera do banco de dados a informação
+        var info = await this.repository.findOne({
+            where: {uid: uid}
+        })
+        //Se ela existir então será apagada
+        //Se não, então será exibida a informação ali de baixo
+        if( info ){
+            await this.repository.delete(uid)
+            return "Dado apagado com sucesso"
+        }else{
+            return{
+                status: 404,
+                errors: "Informação não encontrada. Informe um código válido para apagar"
+            }
+        }
     }
 
     //Este controlador está acionando o DELETE com o paramêtro id
+    //Este método irá apenas desabilitar o usuário do banco, como se estiver apagado
     async disable(request: Request) {
         let uid = request.params.id
-        let model = await this.repository.findOne(uid)
+        let model = await this.repository.findOne({
+            where: {
+                uid: uid
+            }
+        })
         if( model ){
             model.deleted = true
         }
