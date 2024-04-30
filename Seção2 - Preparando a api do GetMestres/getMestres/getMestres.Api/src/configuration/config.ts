@@ -4,8 +4,11 @@
 export default {
     port: process.env.PORT || 3000,
     secretKey: process.env.SECRETKEY || "minhachave",
+    //Essas rotas são públicas, ou seja, não precisa do token para acessa-los
     publicRoutes: process.env.PUBLICROUTES || [
         "/users/create",
-        "/users/auth"
+        "/users/auth",
+        "/customer/create",
+        "/serviceProvider/create"
     ]
 }

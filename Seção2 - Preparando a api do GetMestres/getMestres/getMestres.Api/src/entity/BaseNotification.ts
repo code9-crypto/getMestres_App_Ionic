@@ -1,3 +1,4 @@
+//OBS.: as imports de Request, Response e NextFunction, são variáveis de ambiente
 export abstract class BaseNotification{
     //Atributos
     notifications: Array<{message: string}>;

@@ -2,7 +2,10 @@ import { UserController } from "./controller/UserController"
 import { CategoryController } from "./controller/CategoryController"
 import { SubCategoryController } from "./controller/SubCategoryController"
 import { QuestionController } from "./controller/QuestionController"
-import { Question } from "./entity/Question"
+import { CustomerController } from "./controller/CustomerController"
+import { ServiceProviderController } from "./controller/ServiceProvider"
+import { RequestsOrderController } from "./controller/RequestsOrderController"
+import { RequestsOrderAnswersController } from "./controller/RequestsOrderAnswersController"
 
 export const Routes = [
     //Rotas para usuário
@@ -33,5 +36,34 @@ export const Routes = [
     {method: "get", route: "/question/:id", controller: QuestionController, action: "one"},
     {method: "post", route: "/question", controller: QuestionController, action: "save"},
     {method: "delete", route: "/question/:id", controller: QuestionController, action: "remove"},
-    {method: "delete", route: "/question/disable/:id", controller: QuestionController, action: "disable"}
+    {method: "delete", route: "/question/disable/:id", controller: QuestionController, action: "disable"},
+
+    //Rotas para Customer
+    {method: "get", route: "/customer", controller: CustomerController, action: "all"},
+    {method: "get", route: "/customer/:id", controller: CustomerController, action: "one"},
+    {method: "post", route: "/customer", controller: CustomerController, action: "save"},
+    {method: "post", route: "/customer/create", controller: CustomerController, action: "createCustomer"},
+    {method: "delete", route: "/customer/:id", controller: CustomerController, action: "remove"},
+    {method: "delete", route: "/customer/disable/:id", controller: CustomerController, action: "disable"},
+
+    //Rotas para ServiceProvider
+    {method: "get", route: "/serviceProvider", controller: ServiceProviderController, action: "all"},
+    {method: "get", route: "/serviceProvider/:id", controller: ServiceProviderController, action: "one"},
+    {method: "post", route: "/serviceProvider", controller: ServiceProviderController, action: "save"},
+    {method: "post", route: "/serviceProvider/create", controller: ServiceProviderController, action: "createServiceProvider"},
+    {method: "delete", route: "/serviceProvider/:id", controller: ServiceProviderController, action: "remove"},
+    {method: "delete", route: "/serviceProvider/disable/:id", controller: ServiceProviderController, action: "disable"},
+
+    //Rotas para Requests
+    {method: "get", route: "/requests", controller: RequestsOrderController, action: "all"},
+    {method: "get", route: "/requests/:id", controller: RequestsOrderController, action: "one"},
+    {method: "post", route: "/requests", controller: RequestsOrderController, action: "save"},    
+    {method: "delete", route: "/requests/:id", controller: RequestsOrderController, action: "remove"},
+    {method: "delete", route: "/requests/disable/:id", controller: RequestsOrderController, action: "disable"},
+
+    //Rotas para Requests
+    {method: "get", route: "/requestsAnswer/:orderUid/all", controller: RequestsOrderAnswersController, action: "all"},    
+    {method: "post", route: "/requestsAnswer", controller: RequestsOrderAnswersController, action: "save"},    
+    {method: "delete", route: "/requestsAnswer/:id", controller: RequestsOrderAnswersController, action: "remove"},
+    {method: "delete", route: "/requestsAnswer/disable/:id", controller: RequestsOrderAnswersController, action: "disable"}
 ]

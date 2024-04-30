@@ -16,6 +16,6 @@ export class SubCategoryController extends BaseController<SubCategory>{
         super.isTrue(isNaN(subCategoria.cost), "O custo deve ser um número")
         super.isTrue(subCategoria.cost < 0, "O custo deve ser maior do que 0")
 
-        return super.save(subCategoria)
+        return super.save(subCategoria, req)
     }
 }

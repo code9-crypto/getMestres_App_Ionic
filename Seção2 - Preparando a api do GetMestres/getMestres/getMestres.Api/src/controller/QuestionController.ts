@@ -22,6 +22,6 @@ export class QuestionController extends BaseController<Question>{
             super.isRequired(question.options, "Para o tipo Selecione, você deve informar quais são as opções")
         }
 
-        return super.save(question)
+        return super.save(question, request)
     }
 }

@@ -8,6 +8,7 @@ import config from "../configuration/config"
 export class UserController extends BaseController<User> {
 
     constructor(){
+        //O segundo paramêtro será necessário caso a classe seja usada apenas pelo ROOT
         super(User)
     }
 
@@ -82,7 +83,7 @@ export class UserController extends BaseController<User> {
         }
         _user.isRoot = isRoot
 
-        return super.save(_user)
+        return super.save(_user, request, true)
     }
 
     //Este método save seria para criar o usuário diretamente sem verificação
@@ -94,7 +95,7 @@ export class UserController extends BaseController<User> {
         super.isRequired(_user.photo, "A foto do usuário é obrigatória")
         super.isRequired(_user.email, "O email do usuário é obrigatório")
         super.isRequired(_user.password, "A senha do usuário é obrigatória")
-        return super.save(_user)
+        return super.save(_user, request)
     }
 
     /*

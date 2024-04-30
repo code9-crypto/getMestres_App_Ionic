@@ -1,8 +1,12 @@
 //route -> controller -> repository
 //route -> middleware -> controller -> repository
+//OBS.: as imports de Request, Response e NextFunction, são variáveis de ambiente
 import {Response, Request, NextFunction} from "express"
 import { verify } from "jsonwebtoken"
 import config from "../configuration/config"
+import { AppDataSource } from "../data-source"
+import { User } from "../entity/User"
+import { Repository } from "typeorm"
 
 //Esta classe foi criada para bloquear o acesso de usuários que não autorização
 //Com ela todas as rotas são bloqueadas, a não ser que tenha acesso válido
@@ -15,6 +19,9 @@ export default async(req: Request, res: Response, next: NextFunction) => {
     //OBS.: para fazer um casting é desta forma abaixo
     let publicRoutes = <Array<String>>config.publicRoutes
     let isPublicRoute: boolean = false
+    //Chamando o getRepository do AppDataSource e passando a entitade em questão para ter acesso
+    //Tipando o userRepository mais ainda para a entidade em questão
+    let userRepository: Repository<User> = AppDataSource.getRepository(User)
     //Aqui está fazendo varrendo o array procurando se há uma rota pública
     publicRoutes.forEach(url => {
         let isPublic = req.url.includes(url)
@@ -34,6 +41,15 @@ export default async(req: Request, res: Response, next: NextFunction) => {
                 //Caso não, cairá no catch()
                 let _userAuth = verify(token, config.secretKey)
                 req.userAuth = _userAuth
+
+                //Fazendo a verificação se o usuário é root
+                let userDB = await userRepository.findOne({
+                    where:{
+                        uid: _userAuth.uid
+                    }
+                })
+                req.IsRoot = userDB.isRoot
+
                 next()
             }catch(err){
                 res.status(401).send({message: "Token informado inválido"})
