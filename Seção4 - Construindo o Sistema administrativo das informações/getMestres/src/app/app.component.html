@@ -1,0 +1,53 @@
+<div class="getmestres___container-body">
+  <!-- Cabeçalho do página -->
+  <mat-toolbar color="primary" class="getmestres___toolbar">
+    <button mat-icon-button color="dark" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>GetMestres</h1>
+  </mat-toolbar>
+
+  <!-- Corpo da página -->
+  <mat-sidenav-container class="getmestres___side-nav-container">    
+    <mat-sidenav #sidenav mode="over">
+      <mat-nav-list>
+        <h3 class="mat-subheader">Cadastros</h3>
+        <a mat-list-item>
+          <mat-icon>bookmark</mat-icon>
+          Categorias
+        </a>
+        <a mat-list-item>
+          <mat-icon>bookmark_border</mat-icon>
+          SubCategorias
+        </a>
+        <a mat-list-item>
+          <mat-icon>assignment</mat-icon>
+          Questões
+        </a>
+
+        <h3 class="mat-subheader">Pessoas</h3>
+        <a mat-list-item>
+          <mat-icon>person_pin</mat-icon>
+          Profissionais
+        </a>
+        <a mat-list-item>
+          <mat-icon>person</mat-icon>
+          Clientes
+        </a>
+
+        <h3 class="mat-subheader">Segurança</h3>
+        <a mat-list-item>
+          <mat-icon>security</mat-icon>
+          Usuários
+        </a>
+        
+        <h3 class="mat-subheader">Gerenciamento</h3>
+        <a mat-list-item>
+          <mat-icon>format_list_bulleted</mat-icon>
+          Pedidos
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>    
+  </mat-sidenav-container>
+  <router-outlet></router-outlet>
+</div>

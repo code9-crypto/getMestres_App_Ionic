@@ -102,7 +102,11 @@ export abstract class BaseController<T> extends BaseNotification{
         if( this.checkPermission(req) ){
             return this.erroRoot
         }
-        await this.repository.delete({active: 1})
+        await this.repository.delete({
+            where:{
+                active: 1
+            }
+        })
         return "Todos os dados foram apagados com sucesso"
     }
     

@@ -1,0 +1,18 @@
+PARA ESSES COMANDOS FUNCIONAR, É NECESSÁRIO TER INSTALADO O GERENCIADOR DE PACOTES NPM
+
+(ref.: https://angular.io/guide/setup-local)
+Instalar Angular CLI
+npm install -g @angular/cli
+
+(ref.: https://angular.io/guide/setup-local)
+Criar novo App
+ng new my-app
+
+(ref.: https://angular.io/guide/setup-local)
+Executando a aplicação
+cd my-app(aqui é para entrar na pasta onde está o app)
+ng serve --open
+
+(ref.: https://v7.material.angular.io/guide/getting-started)
+Instalando componentes na aplicação
+ng add @angular/material(material este para os componentes)

@@ -15,6 +15,8 @@ export class UserController extends BaseController<User> {
     //Método que faz a validação do usuário
     async auth(req: Request){
         //Pega os valores recebidos no corpo da requisição
+        //Este destructing está sendo feito por meio de um objeto, por isso o uso das {}(chaves)
+        //Case tenha sido feito por meior de array, seria usado [](colchetes)
         let { email, password } = req.body
         //faz um validação se foi informado email ou senha
         if( !email || !password ){
@@ -26,7 +28,10 @@ export class UserController extends BaseController<User> {
         //Caso tenha informado login e senha
         //será feito uma busca no banco de dados com as informões de email e senha
         let user = await this.repositoryMethod.findOne({
-            where: {email:email, password:md5(password)}
+            where: {
+                email:email, 
+                password:md5(password)
+            }
         })
         //Se for encontrado um usuário válido
         if( user ){
