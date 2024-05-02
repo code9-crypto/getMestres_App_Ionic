@@ -47,7 +47,15 @@
           Pedidos
         </a>
       </mat-nav-list>
-    </mat-sidenav>    
+    </mat-sidenav>
+    <!-- A tag mat-sidenav-content é o corpo principal da tela -->
+    <mat-sidenav-content>
+      <!-- De acordo com a posição dos apps, assim será exibido para o usuário -->
+      <!-- Os apps aqui referenciados, foram importados para app.components.ts(este é o módulo principal) -->
+      <cards-dashboard></cards-dashboard>
+      <pedidos-pendentes></pedidos-pendentes>
+      <ngx-spinner></ngx-spinner>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>    
   </mat-sidenav-container>
-  <router-outlet></router-outlet>
 </div>

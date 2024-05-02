@@ -16,3 +16,7 @@ ng serve --open
 (ref.: https://v7.material.angular.io/guide/getting-started)
 Instalando componentes na aplicação
 ng add @angular/material(material este para os componentes)
+
+Criando novo componente na aplicação
+ng g component nome_do_componente
+OBS.: o paramêtro g é o mesmo que generate
