@@ -11,6 +11,7 @@ import { PedidosPendentesComponent } from './components/pedidos-pendentes/pedido
 import { CardsDashboardComponent } from "./components/cards-dashboard/cards-dashboard.component";
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { SubcategoryComponent } from './pages/subcategory/subcategory.component';
 
 
 @Component({
@@ -30,7 +31,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     PedidosPendentesComponent,
     CardsDashboardComponent,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SubcategoryComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

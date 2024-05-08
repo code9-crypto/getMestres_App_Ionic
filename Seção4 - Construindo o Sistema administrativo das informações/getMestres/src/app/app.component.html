@@ -4,33 +4,33 @@
     <button mat-icon-button color="dark" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <h1>GetMestres</h1>
+    <a href="/" style="text-decoration: none; color: white;"><h1>GetMestres</h1></a>
   </mat-toolbar>
 
-  <!-- Corpo da página -->
+  <!-- Corpo do sidenav -->
   <mat-sidenav-container class="getmestres___side-nav-container">    
     <mat-sidenav #sidenav mode="over">
       <mat-nav-list>
         <h3 class="mat-subheader">Cadastros</h3>
-        <a mat-list-item>
-          <mat-icon>bookmark</mat-icon>
+        <a mat-list-item href="/categories" (click)="sidenav.toggle()">
+            <mat-icon>bookmark</mat-icon>
           Categorias
         </a>
-        <a mat-list-item>
+        <a mat-list-item href="/subCategories">
           <mat-icon>bookmark_border</mat-icon>
           SubCategorias
         </a>
-        <a mat-list-item>
+        <a mat-list-item href="/questions">
           <mat-icon>assignment</mat-icon>
           Questões
         </a>
 
         <h3 class="mat-subheader">Pessoas</h3>
-        <a mat-list-item>
+        <a mat-list-item href="/serviceProvider">
           <mat-icon>person_pin</mat-icon>
           Profissionais
         </a>
-        <a mat-list-item>
+        <a mat-list-item href="/customer">
           <mat-icon>person</mat-icon>
           Clientes
         </a>
@@ -51,9 +51,7 @@
     <!-- A tag mat-sidenav-content é o corpo principal da tela -->
     <mat-sidenav-content>
       <!-- De acordo com a posição dos apps, assim será exibido para o usuário -->
-      <!-- Os apps aqui referenciados, foram importados para app.components.ts(este é o módulo principal) -->
-      <cards-dashboard></cards-dashboard>
-      <pedidos-pendentes></pedidos-pendentes>
+      <!-- Os apps aqui referenciados, foram importados para app.components.ts(este é o módulo principal) -->      
       <ngx-spinner></ngx-spinner>
       <router-outlet></router-outlet>
     </mat-sidenav-content>    

@@ -1,3 +1,5 @@
+@import './shared/global.scss';
+
 .getmestres___container-body{
     display: flex;
     flex-direction: column;
@@ -22,6 +24,7 @@
 mat-sidenav-content{
     margin-top: 20px;
     margin-bottom: 20px;
+    padding: 30px;
 }
 
 mat-sidenav mat-nav-list {

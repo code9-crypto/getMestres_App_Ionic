@@ -4,4 +4,10 @@ npm install -g ts-node
 2º instalar o typeORM
 npm install -g typeorm
 
-3º typeorm init --name nome_do_projeto --express --database mysql
+3º criar uma APP/API nova
+typeorm init --name nome_do_projeto --express --database mysql
+
+-------------------------------------------------------------------
+
+Instalando cors na API
+npm install --cors

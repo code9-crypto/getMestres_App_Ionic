@@ -21,19 +21,19 @@ export class HttpService {
       header = new HttpHeaders()
     }
 
-    header = header.append("Content-Type", "application/json")
-    header = header.append("Accept", "application/json")
+    header = header.append('Content-Type', 'application/json')
+    header = header.append('Accept', 'application/json')
 
-    let token: string = ""
+    const token = ""
     if( token ) {
-      header = header.append("x-token-access", token)
+      header = header.append('x-token-access', token)
     }
 
     return header
   }
 
   public get(url: string): Promise<IResultHttp>{
-    let header: any = this.createHeader()
+    const header = this.createHeader()
     return new Promise(async (resolve) => {
       //Método com padrão de Promise
       /*this.http.get(url, { headers: header })
@@ -49,7 +49,7 @@ export class HttpService {
       //Método com padrdão async/await
       try{
         this.spinner.show()
-        const res = await this.http.get(url, { headers: header })
+        const res = await this.http.get(url, { headers: header }).toPromise()
         resolve({ success: true, data: res, error: undefined })
         this.spinner.hide()
       }catch(err){        
@@ -79,7 +79,7 @@ export class HttpService {
     return new Promise(async (resolve) => {
       try{
         this.spinner.show()
-        const res = await this.http.post(url, model, { headers: header })
+        const res = await this.http.delete(url, { headers: header })
         resolve({ success: true, data: res, error: undefined })
         this.spinner.hide()
       }catch(err){
