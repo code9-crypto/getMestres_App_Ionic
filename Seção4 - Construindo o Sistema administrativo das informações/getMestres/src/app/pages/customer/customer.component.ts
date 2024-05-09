@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ICategories } from '../../interfaces/ICategories';
 import { CustomerService } from '../../services/customer.service';
+import { MatCard } from '@angular/material/card';
+import { MatCardTitle } from '@angular/material/card';
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [MatTableModule],
+  imports: [MatTableModule, MatCard, MatCardTitle],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss'
 })

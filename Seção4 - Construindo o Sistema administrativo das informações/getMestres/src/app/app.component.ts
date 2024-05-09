@@ -1,5 +1,5 @@
 //Todas imports mesmo que não tenha a extensão do arquivo explícita, mas elas fazem referência aos arquivos .ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,11 +12,14 @@ import { CardsDashboardComponent } from "./components/cards-dashboard/cards-dash
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SubcategoryComponent } from './pages/subcategory/subcategory.component';
+import { UserService } from './services/user.service';
+import { CommonModule } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-root',
-  standalone: true,  
+  standalone: true,
   imports: [    
     RouterOutlet, 
     //Componentes do toolbar
@@ -32,12 +35,28 @@ import { SubcategoryComponent } from './pages/subcategory/subcategory.component'
     CardsDashboardComponent,
     HttpClientModule,
     NgxSpinnerModule,
-    SubcategoryComponent
+    SubcategoryComponent,
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
+  isLogged: boolean = false
   title = 'getMestres';
+
+  constructor(
+    private userService: UserService
+  ){
+
+  }
+
+  ngOnInit(): void{
+    this.isLogged = this.userService.isStaticLogged
+    this.userService.isLogged.subscribe(logged => {
+      this.isLogged = logged
+      console.log(logged)
+    })  
+  }
 }

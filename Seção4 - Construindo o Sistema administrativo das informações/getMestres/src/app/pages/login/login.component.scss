@@ -1,0 +1,27 @@
+@import "../../shared/global.scss";
+
+mat-card{
+    max-width: 500px;
+    max-height: 300px;
+}
+
+mat-card-title{
+    text-align: center;
+    font-size: 1.6em;
+}
+
+mat-card-content{
+    padding-top: 10px;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+}

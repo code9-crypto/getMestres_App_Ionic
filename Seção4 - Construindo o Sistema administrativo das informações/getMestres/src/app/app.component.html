@@ -1,6 +1,6 @@
 <div class="getmestres___container-body">
   <!-- Cabeçalho do página -->
-  <mat-toolbar color="primary" class="getmestres___toolbar">
+  <mat-toolbar color="primary" class="getmestres___toolbar" *ngIf="isLogged">
     <button mat-icon-button color="dark" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -8,7 +8,7 @@
   </mat-toolbar>
 
   <!-- Corpo do sidenav -->
-  <mat-sidenav-container class="getmestres___side-nav-container">    
+  <mat-sidenav-container class="getmestres___side-nav-container" [ngClass]="{'clear-margin-top': !isLogged }">    
     <mat-sidenav #sidenav mode="over">
       <mat-nav-list>
         <h3 class="mat-subheader">Cadastros</h3>
