@@ -1,6 +1,6 @@
 //Todas imports mesmo que não tenha a extensão do arquivo explícita, mas elas fazem referência aos arquivos .ts
 import { Component, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -47,7 +47,8 @@ export class AppComponent implements OnInit {
   title = 'getMestres';
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ){
 
   }
@@ -57,6 +58,11 @@ export class AppComponent implements OnInit {
     this.userService.isLogged.subscribe(logged => {
       this.isLogged = logged
       console.log(logged)
-    })  
+    }) 
+  }
+
+  logout(){
+    localStorage.clear()
+    this.router.navigateByUrl('/home')
   }
 }

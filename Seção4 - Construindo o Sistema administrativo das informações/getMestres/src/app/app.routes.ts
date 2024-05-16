@@ -11,9 +11,9 @@ import { AdminGuard } from './shared/admin.guard';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
-    { path: 'home', component: HomeComponent, canActivate: [AdminGuard]},
+    { path: 'home', component: HomeComponent},
     { path: 'categories', component: CategoriesComponent, canActivate: [AdminGuard]},
-    { path: 'categories/:id', component: CategoryComponent, canActivate: [AdminGuard] },
+    { path: 'category/:id', component: CategoryComponent, canActivate: [AdminGuard] },
     { path: 'subCategories', component: SubcategoryComponent, canActivate: [AdminGuard] },
     { path: 'questions', component: QuestionsComponent, canActivate: [AdminGuard] },
     { path: 'serviceProvider', component: ServiceproviderComponent, canActivate: [AdminGuard] },

@@ -10,3 +10,51 @@
 .full-width{
     width: 100% !important;
 }
+
+.toolbar___form{
+    width: calc(100% - 20px);
+    text-align: right;
+    border: 1px solid #f2f2f2;
+    padding: 10px;
+    box-shadow: 5px 4px 10px rgba(220, 213, 213, 0.7);    
+    border-radius: 5px;
+
+    button{
+        margin-left: 10px;
+    }
+}
+
+.container-toolbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    mat-form-field{
+        flex: 1 auto;
+        margin-right: 10px;
+        margin-bottom: -15px;
+    }
+
+    button{
+        margin-bottom: 10px;
+        margin-top: 3px;
+        height: 50px;
+    }
+}
+
+@media(max-width: 560px){
+    mat-sidenav-content{
+        padding: 10px !important;
+    }
+
+    .toolbar___form{
+        display: flex;
+        flex-direction: column;
+        button{
+            margin-left: 0px;
+        }
+        button:last-child{
+            margin-top: 10px;
+        }
+    }
+}

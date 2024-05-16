@@ -1,3 +1,12 @@
+<div class="container-toolbar">
+    <mat-form-field appearance="outline">
+        <mat-label>Pesquisa</mat-label>
+        <input matInput placeholder="Descreva o dado que seja realizar a pesquisa" (keyup)="filter($any($event).target.value)">
+    </mat-form-field>
+    <a href="/category/new">
+        <button mat-raised-button color="primary">Nova Categoria</button>
+    </a>
+</div>
 <div class="div-table mat-elevation-z8">
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="Código">

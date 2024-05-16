@@ -20,3 +20,6 @@ ng add @angular/material(material este para os componentes)
 Criando novo componente na aplicação
 ng g component nome_do_componente
 OBS.: o paramêtro g é o mesmo que generate
+
+Instalando tipo personalizado de alert
+npm install sweetalert2
