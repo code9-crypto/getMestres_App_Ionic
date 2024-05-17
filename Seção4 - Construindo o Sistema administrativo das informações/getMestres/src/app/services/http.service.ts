@@ -68,20 +68,21 @@ export class HttpService {
         const res = await this.http.post(url, model, { headers: header }).toPromise()
         resolve({ success: true, data: res, error: undefined })
         this.spinner.hide()
-        //esta tipagemo no catch é para acessar qualquer atributo
+        //esta tipagem no catch é para acessar qualquer atributo
       }catch(err: any){
         this.spinner.hide()
         if( err.status === 400 ){
           let errosText = '<ul>'
           console.log(err.error)
-          /*if( Array.isArray(err.error) ) {
-            err.error.forEach(element => {
-            errosText += `<li style="text-align: center">${element.message || element}</li>`
+          if( Array.isArray(err.error) ) {
+            //Esta forma de usar o element quando apresenta erro
+            err.error.forEach((element:any) => {
+            errosText += `<li style="text-align: left">${element.message || element}</li>`
           })
           errosText += '</ul>'
           //este método alert é um tipo personalizado
           alert.fire('Atenção', errosText, 'warning')
-          }*/
+          }
         }
         resolve({ success: false, data: {},  error: err})
       }

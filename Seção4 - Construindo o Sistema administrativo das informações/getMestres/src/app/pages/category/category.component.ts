@@ -36,10 +36,9 @@ export class CategoryComponent {
   async save(): Promise<void>{    
     const result = await this.categoryService.post(this.category)    
     if( result.success ){
-      this.matSnack.open("Categoria salva com sucesso", undefined, { duration: 3000 })
+      this.matSnack.open("Categoria salva com sucesso", undefined, { duration: 4000 })
       this.router.navigateByUrl('/categories')
     }
     console.log(result)
   }
-  
 }

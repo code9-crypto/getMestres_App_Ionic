@@ -62,7 +62,8 @@ export class AppComponent implements OnInit {
   }
 
   logout(){
+    this.isLogged = false
     localStorage.clear()
-    this.router.navigateByUrl('/home')
+    this.router.navigateByUrl('/home')    
   }
 }

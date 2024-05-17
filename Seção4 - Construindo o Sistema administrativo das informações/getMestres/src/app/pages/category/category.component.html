@@ -1,11 +1,12 @@
 <div class="container">
-    <mat-form-field appearance="outline" class="full-width" [(ngModel)]="category.name">
+    <!-- <input matInput hidden="true" [(ngModel)]="category.uid"> -->
+    <mat-form-field appearance="outline" class="full-width" >
         <mat-label>Categoria</mat-label>
-        <input matInput placeholder="preencha o nome da categoria" required [(ngModel)]="form.categoria">
+        <input matInput placeholder="preencha o nome da categoria" required [(ngModel)]="category.name">
     </mat-form-field>
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Descrição</mat-label>
-        <textarea matInput placeholder="Descreva a descrição da categoria" rows="4" [(ngModel)]="category.description" [(ngModel)]="form.descricao"></textarea>
+        <textarea matInput placeholder="Descreva a descrição da categoria" rows="4" [(ngModel)]="category.description"></textarea>
     </mat-form-field>
     <div class="toolbar___form">
         <a href="/categories">

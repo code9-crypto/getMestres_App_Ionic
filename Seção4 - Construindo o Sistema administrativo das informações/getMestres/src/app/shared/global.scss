@@ -42,6 +42,21 @@
     }
 }
 
+td.actions{
+    width: 150px;
+    button{
+        min-width: 20px;
+        padding: 0px !important;
+        float: left;
+    }
+    button:first-child{
+        margin-right: 10px;        
+    }
+    button:last-child{
+        color: red;
+    }
+}
+
 @media(max-width: 560px){
     mat-sidenav-content{
         padding: 10px !important;

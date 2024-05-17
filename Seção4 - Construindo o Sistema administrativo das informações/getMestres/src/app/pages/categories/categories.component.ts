@@ -5,16 +5,25 @@ import { CategoryService } from '../../services/category.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
   standalone: true,
-  imports: [MatTableModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [
+    MatTableModule, 
+    MatFormFieldModule, 
+    MatInputModule, 
+    MatButtonModule,
+    MatIconModule,
+    RouterLink
+  ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent implements OnInit {
-  columns: string[] = ["Código", "Nome", "Descrição"]
+  columns: string[] = ["Código", "Nome", "Descrição", "uid"]
   dataSource!: MatTableDataSource<ICategories>
 
   constructor(
