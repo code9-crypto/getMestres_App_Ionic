@@ -3,9 +3,11 @@
         <mat-card-title>Login</mat-card-title>
         <mat-card-content>
             <mat-form-field class="full-width">
+                                                        <!-- recebendo o valor do email e já inserindo no form -->
                 <input matInput placeholder="E-mail" [(ngModel)]="form.email">
             </mat-form-field>
             <mat-form-field class="full-width">
+                                                                    <!-- recebendo o valor da senha e já inserindo no form -->
                 <input matInput placeholder="Senha" type="password" [(ngModel)]="form.password">
             </mat-form-field>
             <button style="margin-top: -10px;" mat-raised-button color="primary" class="full-width" (click)="login()">Logar</button>

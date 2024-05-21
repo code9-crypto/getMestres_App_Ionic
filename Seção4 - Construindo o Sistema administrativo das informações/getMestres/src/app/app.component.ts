@@ -11,9 +11,11 @@ import { PedidosPendentesComponent } from './components/pedidos-pendentes/pedido
 import { CardsDashboardComponent } from "./components/cards-dashboard/cards-dashboard.component";
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { SubcategoryComponent } from './pages/subcategory/subcategory.component';
+import { SubcategoriesComponent } from './pages/subcategories/subcategories.component';
 import { UserService } from './services/user.service';
 import { CommonModule } from '@angular/common';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { getPaginatorIntl } from './shared/paginator-intl';
 
 
 
@@ -35,9 +37,12 @@ import { CommonModule } from '@angular/common';
     CardsDashboardComponent,
     HttpClientModule,
     NgxSpinnerModule,
-    SubcategoryComponent,
+    SubcategoriesComponent,
     CommonModule,
   ],
+  providers: [{
+    provide: MatPaginatorIntl, useValue: getPaginatorIntl()
+  }],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
