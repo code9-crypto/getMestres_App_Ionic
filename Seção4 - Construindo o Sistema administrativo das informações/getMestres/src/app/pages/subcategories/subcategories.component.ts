@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ICategories } from '../../interfaces/ICategories';
-import { SubCategoryService } from '../../services/subCategory.service';
+import { SubCategoriesService } from '../../services/subCategories.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
@@ -21,7 +20,8 @@ import { MatInputModule } from '@angular/material/input';
     RouterModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginator
   ],
   templateUrl: './subcategories.component.html',
   styleUrl: './subcategories.component.scss'
@@ -32,7 +32,7 @@ export class SubcategoriesComponent implements OnInit{
   dataSource!: MatTableDataSource<SubCategoryModel>
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
-  constructor(private subCategorySrv: SubCategoryService){
+  constructor(private subCategoriesSrv: SubCategoriesService){
   }
 
   async ngOnInit(){
@@ -49,7 +49,7 @@ export class SubcategoriesComponent implements OnInit{
   }
 
   async bind(): Promise<void>{
-    const subCategories = await this.subCategorySrv.getAll()
+    const subCategories = await this.subCategoriesSrv.getAll()
     this.dataSource = new MatTableDataSource(subCategories.data)
     this.dataSource.paginator = this.paginator
   }
@@ -70,7 +70,7 @@ export class SubcategoriesComponent implements OnInit{
     }
     const { value } = await alert.fire(options)
     if( value ){
-      const result = await this.subCategorySrv.delete(subCategory.uid)
+      const result = await this.subCategoriesSrv.delete(subCategory.uid)
       if( result.success ){
         this.bind()
       }

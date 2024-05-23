@@ -1,1 +1,27 @@
-<p>subcategory works!</p>
+<div class="container">
+    <!-- <input matInput hidden="true" [(ngModel)]="category.uid"> -->
+    <mat-form-field appearance="outline" class="full-width" >
+        <mat-label>SubCategoria</mat-label>
+        <input matInput placeholder="preencha o nome da subcategoria" required [(ngModel)]="model.name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width" col-50>
+        <mat-label>Custo</mat-label>
+        <input type="number" matInput placeholder="preencha o custo da categoria"  [(ngModel)]="model.cost" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width" col-50>
+        <mat-label>Categoria</mat-label>
+        <mat-select [(ngModel)]="model.category.uid">
+            <mat-option *ngFor="let category of categories" [value]="category.uid">
+                {{ category.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Descrição</mat-label>
+        <textarea matInput placeholder="Descreva a descrição da categoria" rows="4" [(ngModel)]="model.description"></textarea>
+    </mat-form-field>
+    <div class="toolbar___form">        
+        <button mat-raised-button routerLink="/subCategories">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+    </div>
+</div>

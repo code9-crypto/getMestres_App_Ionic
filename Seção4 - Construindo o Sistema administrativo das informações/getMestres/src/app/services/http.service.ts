@@ -10,7 +10,7 @@ import alert from 'sweetalert2';
 export class HttpService {
 
   constructor(
-    private http: HttpClient,
+    private httpClient: HttpClient,
     private spinner: NgxSpinnerService
   ) { 
     
@@ -50,7 +50,7 @@ export class HttpService {
       //Método com padrdão async/await
       try{
         this.spinner.show()
-        const res = await this.http.get(url, { headers: header }).toPromise()
+        const res = await this.httpClient.get(url, { headers: header }).toPromise()
         console.log(res)
         resolve({ success: true, data: res, error: undefined })
         this.spinner.hide()
@@ -66,7 +66,7 @@ export class HttpService {
     return new Promise(async (resolve) => {
       try{
         this.spinner.show()
-        const res = await this.http.post(url, model, { headers: header }).toPromise()
+        const res = await this.httpClient.post(url, model, { headers: header }).toPromise()
         resolve({ success: true, data: res, error: undefined })
         this.spinner.hide()
         //esta tipagem no catch é para acessar qualquer atributo
@@ -95,7 +95,7 @@ export class HttpService {
     return new Promise(async (resolve) => {
       try{
         this.spinner.show()
-        const res = await this.http.delete(url, { headers: header }).toPromise()
+        const res = await this.httpClient.delete(url, { headers: header }).toPromise()
         resolve({ success: true, data: res, error: undefined })
         this.spinner.hide()
       }catch(err){

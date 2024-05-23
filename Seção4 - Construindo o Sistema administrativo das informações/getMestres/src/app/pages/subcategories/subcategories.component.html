@@ -21,7 +21,7 @@
         </ng-container>
         <ng-container matColumnDef="Categoria">
             <th mat-header-cell *matHeaderCellDef>Categoria</th>
-            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.category.name }}</td>
         </ng-container>
         <ng-container matColumnDef="uid">
             <th mat-header-cell *matHeaderCellDef></th>
@@ -37,5 +37,6 @@
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr mat-row *matRowDef="let row; columns: columns;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons=""></mat-paginator>
 </div>
 

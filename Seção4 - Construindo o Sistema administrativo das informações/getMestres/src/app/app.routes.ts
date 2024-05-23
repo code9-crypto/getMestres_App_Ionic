@@ -9,6 +9,7 @@ import { CustomerComponent } from './pages/customer/customer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AdminGuard } from './shared/admin.guard';
 import { SubcategoryComponent } from './pages/subcategory/subcategory.component';
+import { QuestionComponent } from './pages/question/question.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -18,6 +19,7 @@ export const routes: Routes = [
     { path: 'subCategories', component: SubcategoriesComponent, canActivate: [AdminGuard] },
     { path: 'subCategory/:id', component: SubcategoryComponent, canActivate: [AdminGuard] },
     { path: 'questions', component: QuestionsComponent, canActivate: [AdminGuard] },
+    { path: 'question/:id', component: QuestionComponent, canActivate: [AdminGuard] },
     { path: 'serviceProvider', component: ServiceproviderComponent, canActivate: [AdminGuard] },
     { path: 'customer', component: CustomerComponent, canActivate: [AdminGuard] },
     { path: 'login', component: LoginComponent }    

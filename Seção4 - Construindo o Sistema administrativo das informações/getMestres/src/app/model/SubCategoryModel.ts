@@ -11,5 +11,4 @@ export class SubCategoryModel extends BaseModel{
         super()
         this.category = new CategoryModel()
     }
-
 }

@@ -18,6 +18,7 @@
     padding: 10px;
     box-shadow: 5px 4px 10px rgba(220, 213, 213, 0.7);    
     border-radius: 5px;
+    float: left;
 
     button{
         margin-left: 10px;
@@ -72,4 +73,39 @@ td.actions{
             margin-top: 10px;
         }
     }
+}
+
+[col-25]{
+    width: 25%;
+    float: left;
+}
+
+[col-33]{
+    width: 33%;
+    float: left;
+}
+
+[col-50]{
+    width: calc(50% - 10px) !important;
+    float: left;
+    margin-left: 10px;
+}
+
+.no-margin-right[col-50]{
+    width: 50% !important;
+    margin-right: 0px !important;
+}
+
+.no-margin-right{
+    margin-right: 0px;
+}
+
+[col-75]{
+    width: 75%;
+    float: left;
+}
+
+[col-100]{
+    width: 100%;
+    float: left;
 }
