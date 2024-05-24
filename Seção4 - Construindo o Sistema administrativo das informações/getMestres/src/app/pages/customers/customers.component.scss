@@ -1,0 +1,11 @@
+@import '../../shared/global.scss';
+
+.cliente{
+    text-align: center;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-evenly;    
+}

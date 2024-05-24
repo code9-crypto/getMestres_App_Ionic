@@ -4,37 +4,48 @@
     <button mat-icon-button color="dark" (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <a href="/" style="text-decoration: none; color: white;"><h1>GetMestres</h1></a>
+    <a routerLink="/" style="text-decoration: none; color: white;"><h1>GetMestres</h1></a>
   </mat-toolbar>
 
   <mat-toolbar color="primary"  style="height: 70px;">
-    <a href="/login" style="text-decoration: none; color: white; text-align: right;"><h1>Entrar</h1></a>
+    <a routerLink="/login" style="text-decoration: none; color: white; text-align: right;"><h1>Entrar</h1></a>
   </mat-toolbar>
 
   <!-- Corpo do sidenav -->
   <mat-sidenav-container class="getmestres___side-nav-container" [ngClass]="{'clear-margin-top': !isLogged }">    
     <mat-sidenav #sidenav mode="over">
       <mat-nav-list>
-        <h3 class="mat-subheader">Cadastros</h3>
-        <a mat-list-item href="/categories" (click)="sidenav.toggle()">
+        <div *ngFor="let item of menu">
+          <h3 class="mat-subheader">{{item.group}}</h3>          
+          <a *ngFor="let option of item.items" mat-list-item [routerLink]="option.url" (click)="sidenav.toggle()">            
+            <mat-icon>{{option.icon}}</mat-icon>
+          {{option.label}}
+          </a>          
+        </div>
+        <a mat-list-item (click)="logout()" (click)="sidenav.toggle()">
+          <mat-icon>exit</mat-icon>
+          Sair
+        </a>
+        <!--<h3 class="mat-subheader">Cadastros</h3>
+        <a mat-list-item routerLink="/categories" (click)="sidenav.toggle()">
             <mat-icon>bookmark</mat-icon>
           Categorias
         </a>
-        <a mat-list-item href="/subCategories">
+        <a mat-list-item routerLink="/subCategories" (click)="sidenav.toggle()">
           <mat-icon>bookmark_border</mat-icon>
           SubCategorias
         </a>
-        <a mat-list-item href="/questions">
+        <a mat-list-item routerLink="/questions" (click)="sidenav.toggle()">
           <mat-icon>assignment</mat-icon>
           Questões
         </a>
 
         <h3 class="mat-subheader">Pessoas</h3>
-        <a mat-list-item href="/serviceProvider">
+        <a mat-list-item routerLink="/serviceProvider" (click)="sidenav.toggle()">
           <mat-icon>person_pin</mat-icon>
           Profissionais
         </a>
-        <a mat-list-item href="/customer">
+        <a mat-list-item routerLink="/customers" (click)="sidenav.toggle()">
           <mat-icon>person</mat-icon>
           Clientes
         </a>
@@ -50,10 +61,10 @@
           <mat-icon>format_list_bulleted</mat-icon>
           Pedidos
         </a>
-        <a mat-list-item (click)="logout()">
+        <a mat-list-item (click)="logout()" (click)="sidenav.toggle()">
           <mat-icon>exit</mat-icon>
           Sair
-        </a>
+        </a>-->
       </mat-nav-list>
     </mat-sidenav>
     <!-- A tag mat-sidenav-content é o corpo principal da tela -->

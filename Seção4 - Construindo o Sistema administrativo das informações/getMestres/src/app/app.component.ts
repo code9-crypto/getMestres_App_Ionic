@@ -1,6 +1,6 @@
 //Todas imports mesmo que não tenha a extensão do arquivo explícita, mas elas fazem referência aos arquivos .ts
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,6 +16,8 @@ import { UserService } from './services/user.service';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getPaginatorIntl } from './shared/paginator-intl';
+import { Subscription } from 'rxjs';
+import { IMenu } from './interfaces/IMenu';
 
 
 
@@ -39,6 +41,8 @@ import { getPaginatorIntl } from './shared/paginator-intl';
     NgxSpinnerModule,
     SubcategoriesComponent,
     CommonModule,
+    //Navegaçãp
+    RouterLink
   ],
   providers: [{
     provide: MatPaginatorIntl, useValue: getPaginatorIntl()
@@ -50,6 +54,11 @@ import { getPaginatorIntl } from './shared/paginator-intl';
 export class AppComponent implements OnInit {
   isLogged: boolean = false
   title = 'getMestres';
+  subScrip!: Subscription
+  //Este atributo foi criado para gerenciar, de forma centralizada, os menus
+  //Este atributo também está tipando um array com a inteface IMenu
+  menu: Array<IMenu> = new Array<IMenu>
+
 
   constructor(
     private userService: UserService,
@@ -58,12 +67,47 @@ export class AppComponent implements OnInit {
 
   }
 
+  //Este método faz com que, toda codificação dentro dele
+  //Carregará automaticamente assim que a aplicação for iniciada
   ngOnInit(): void{
     this.isLogged = this.userService.isStaticLogged
     this.userService.isLogged.subscribe(logged => {
       this.isLogged = logged
       console.log(logged)
-    }) 
+    })
+    
+    //Estes são os itens do menu gerenciados de forma centralizada(abaixo)
+    this.menu.push({
+      group: "Cadastros",
+      items:[
+        {icon: 'bookmark', label: 'Categorias', url:'/categories'},
+        {icon: 'bookmark_border', label: 'SubCategorias', url:'/SubCategories'},
+        {icon: 'assignment', label: 'Questões', url:'/questions'},
+      ]
+    })
+
+    this.menu.push({
+      group: 'Pessoas',
+      items:[
+        {icon: 'person', label: 'Prossionais', url:'/serviceProvider'},
+        {icon: 'person_ping', label: 'Cliente', url:'/customers'}
+      ]
+    })
+
+    this.menu.push({
+      group: 'Segurança',
+      items:[
+        {icon: 'security', label: 'Usuários', url:'/'}
+      ]
+    })
+
+    this.menu.push({
+      group: 'Gerenciamento',
+      items: [
+        {icon: 'format_list_bulleted', label: 'Pedidos', url:'/'}
+      ]
+    })
+    //Estes são os itens do menu gerenciados de forma centralizada(acima)
   }
 
   logout(){

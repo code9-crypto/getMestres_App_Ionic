@@ -1,36 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ICategories } from '../../interfaces/ICategories';
+import { CustomerModel } from '../../model/CustomerModel';
 import { CustomerService } from '../../services/customer.service';
-import { MatCard } from '@angular/material/card';
-import { MatCardTitle } from '@angular/material/card';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [MatTableModule, MatCard, MatCardTitle],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,    
+    FormsModule,
+    RouterLink,
+    MatButtonModule
+  ],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss'
 })
-export class CustomerComponent implements OnInit{
-  
-  columns: string[] = ['Código', 'Nome', 'Email', 'Telefone']
-  dataSource!: MatTableDataSource<ICategories>
+export class CustomerComponent implements OnInit {
 
-  constructor( private customerSrv: CustomerService){
-  }
+  model: CustomerModel = new CustomerModel()
+  constructor(
+    private customerSrv: CustomerService,
+    private matSnack: MatSnackBar,
+    private router: Router,
+    private active: ActivatedRoute
+
+  ){}
   
-  async ngOnInit(){
-    const customer = await this.customerSrv.getAll()
-    console.log('passei', customer);
-    this.dataSource = customer.data.map((it: ICategories) => {
-      return {
-        uid: it.uid,
-        name: it.name,
-        email: it.email,
-        phone: it.phone
-      };
-    });
+  ngOnInit(): void {
+    //este método fica ouvindo o que é recebido por paramêtro pela URL
+    //Caso o paramêtro no id seja igual a new, então será aberta a tela de com os campos vazios para cadastrar nova subcategoria
+    //Caso o paramêtro venha com um código, então a tela será aberta com os campos já preenchidos para apenas alteração
+    this.active.params.subscribe( p => this.getId(p['id']))
   }
 
+  //Este método que verifica se o vem com id new ou vem com o código
+  async getId(uid: string): Promise<void>{
+    if( uid == 'new' ){
+      return
+    }
+    const result = await this.customerSrv.getById(uid)
+    this.model = result.data as CustomerModel
+  }
+
+  async save(): Promise<void>{
+    const result = await this.customerSrv.post(this.model)
+    if( result.success ){
+      this.matSnack.open('Pergunta salva com sucesso', undefined, { duration: 3000 })
+      this.router.navigateByUrl('/questions')
+    }
+  }
 }
