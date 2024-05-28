@@ -7,6 +7,8 @@ import alert from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
+
+//Esta classe/service é aquela que se comunica direto com a API
 export class HttpService {
 
   constructor(

@@ -3,6 +3,8 @@
 //Isso também será válido para os outras configurações
 export default {
     port: process.env.PORT || 3000,
+    folderStorage: process.env.URL_STORAGE || 'app/src/storage',
+    pictureQuality: process.env.PICTURE_QUALITY || 80,
     secretKey: process.env.SECRETKEY || "minhachave",
     //Essas rotas são públicas, ou seja, não precisa do token para acessa-los
     publicRoutes: process.env.PUBLICROUTES || [

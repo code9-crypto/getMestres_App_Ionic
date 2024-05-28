@@ -19,6 +19,8 @@ export abstract class BaseController<T> extends BaseNotification{
         //Para evitar o erro no construtor, apenas declare o super() dentro do construtor
         //para chamar o construtor da super classe
         super()
+        //este atributo repository está recebendo o método AppDataSource.getRepository com generics padrão
+        //o que significa, quando uma entitade chama-lo, será atribuido a entidade que o chamou
         this.repository =  AppDataSource.getRepository<T>(entity)
         this.onlyRootController = onlyRoot
     }

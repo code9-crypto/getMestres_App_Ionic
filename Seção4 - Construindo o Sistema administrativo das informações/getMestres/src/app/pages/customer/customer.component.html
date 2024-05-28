@@ -12,7 +12,8 @@
         <mat-label>Telefone</mat-label>
         <input matInput placeholder="preencha o telefone do cliente" required [(ngModel)]="model.phone" required>
     </mat-form-field>
-    <input type="file" [(ngModel)]="model.photo">
+    <!-- Para chamar um HTML diferente, usa-se o selector deste dentro do arquivo component.ts -->
+    <app-input-file [image]="model.photo" (select)="selectedFile($event)"></app-input-file>
     <div class="toolbar___form">        
         <button mat-raised-button routerLink="/customers">Cancelar</button>
         <button mat-raised-button color="primary" (click)="save()">Salvar</button>

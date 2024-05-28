@@ -3,7 +3,7 @@ import { CategoryController } from "./controller/CategoryController"
 import { SubCategoryController } from "./controller/SubCategoryController"
 import { QuestionController } from "./controller/QuestionController"
 import { CustomerController } from "./controller/CustomerController"
-import { ServiceProviderController } from "./controller/ServiceProvider"
+import { ServiceProviderController } from "./controller/ServiceProviderController"
 import { RequestsOrderController } from "./controller/RequestsOrderController"
 import { RequestsOrderAnswersController } from "./controller/RequestsOrderAnswersController"
 

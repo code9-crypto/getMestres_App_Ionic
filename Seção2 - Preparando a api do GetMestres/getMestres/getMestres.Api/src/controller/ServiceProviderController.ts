@@ -1,4 +1,5 @@
 import { ServiceProvider } from "../entity/ServiceProvider";
+import { FileHelper } from "../helpers/fileHelper";
 import { BaseController } from "./BaseController";
 import { Request } from "express"
 import * as md5 from "md5"
@@ -25,6 +26,15 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
         //O super está sendo chamado, pois é para que a validação seja feita na superclasse, não na classe local
         this.validationDefault(serviceProvider)
 
+        if( serviceProvider.photo ){
+            let pictureCreatedResult = await FileHelper.writePicture( serviceProvider.photo )
+            if( pictureCreatedResult ){
+                serviceProvider.photo = pictureCreatedResult
+            }
+        }
+
+        delete serviceProvider.password
+
         return super.save(serviceProvider, request)
     }
 
@@ -36,6 +46,13 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
         super.isRequired(serviceProvider.password, "A senha é obrigatória")
         super.isRequired(confirmPassword, "A confirmação da senha é obrigatória")
         super.isTrue((serviceProvider.password != confirmPassword), "A senha e a confirmação de senha estão diferentes")
+
+        if( serviceProvider.photo ){
+            let pictureCreatedResult = await FileHelper.writePicture( serviceProvider.photo )
+            if( pictureCreatedResult ){
+                serviceProvider.photo = pictureCreatedResult
+            }
+        }
 
         if( serviceProvider.password ){
             serviceProvider.password = md5(serviceProvider.password)

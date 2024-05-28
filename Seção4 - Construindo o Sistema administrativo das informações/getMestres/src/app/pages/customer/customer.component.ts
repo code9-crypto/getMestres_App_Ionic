@@ -7,20 +7,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { FileManager, InputFileComponent } from "../../components/input-file/input-file.component";
 
 
 @Component({
-  selector: 'app-customer',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,    
-    FormsModule,
-    RouterLink,
-    MatButtonModule
-  ],
-  templateUrl: './customer.component.html',
-  styleUrl: './customer.component.scss'
+    selector: 'app-customer',
+    standalone: true,
+    templateUrl: './customer.component.html',
+    styleUrl: './customer.component.scss',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        RouterLink,
+        MatButtonModule,
+        InputFileComponent
+    ]
 })
 export class CustomerComponent implements OnInit {
 
@@ -54,6 +56,12 @@ export class CustomerComponent implements OnInit {
     if( result.success ){
       this.matSnack.open('Pergunta salva com sucesso', undefined, { duration: 3000 })
       this.router.navigateByUrl('/questions')
+    }
+  }
+
+  selectedFile(file: FileManager): void{
+    if( file.base64Data ){
+      this.model.photo = file.base64Data
     }
   }
 }
