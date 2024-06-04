@@ -1,4 +1,4 @@
-//Este é um modelo para todos os botões de cancelar
+//Este é um modelo para todos os botões de excluir
 //Herdando apenas esta constante, terá acesso a todas
 //propriedades contidas nela
 export const Constants = {

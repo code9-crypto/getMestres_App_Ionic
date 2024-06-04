@@ -24,7 +24,7 @@ export default async(req: Request, res: Response, next: NextFunction) => {
     let userRepository: Repository<User> = AppDataSource.getRepository(User)
     //Aqui está fazendo varrendo o array procurando se há uma rota pública
     publicRoutes.forEach(url => {
-        let isPublic = req.url.includes(url)
+        let isPublic = req.url.includes(url) || req.url.indexOf('storage') > -1
         if( isPublic ){
             isPublicRoute = true
         }

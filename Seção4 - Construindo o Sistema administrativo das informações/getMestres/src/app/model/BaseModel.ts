@@ -1,15 +1,16 @@
 export abstract class BaseModel{
     //Este atributo faz parte da codificação que gera UUID
-    ids: string[] = [];
+    //ids: string[] = [];
 
     //chamando o método para gerar o UUID e atrelando no atributo
-    uid: string = this.generate();
-    createAt: Date = new Date();
-    updateAt: Date = new Date()
+    uid!: string
+    createAt!: Date 
+    updateAt!: Date
 
     
     //Esta codificação gera o código UUID para cadastrar no banco de dados
-    public generate(): string {
+    //Esta pode ser usada para gerar código UUID automático
+    /*public generate(): string {
         let isUnique = false;
         let tempId = '';
 
@@ -41,5 +42,5 @@ export abstract class BaseModel{
     
     private S4(): string {
         return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-    }
+    }*/
 }

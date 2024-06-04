@@ -6,16 +6,26 @@ import * as md5  from "md5"
 
 export class CustomerController extends BaseController<Customer>{
     constructor(){
-        super(Customer, true)
+        super(Customer)
     }
 
     async save(request: Request){
         let customer = <Customer>request.body
+        let { confirmPassword } = request.body
         //O super está sendo chamado, pois é para que a validação seja feita na superclasse, não na classe local
         super.isRequired(customer.name, "O nome é obrigatório")
-        super.isRequired(customer.photo, "A foto é obrigatória")
+        //super.isRequired(customer.photo, "A foto é obrigatória")
         super.isRequired(customer.email, "O email é obrigatório")
-        super.isRequired(customer.phone, "Telefone é obrigatório")        
+        super.isRequired(customer.phone, "Telefone é obrigatório")
+
+        if( !customer.uid ){
+            super.isRequired(customer.password, "A senha é obrigatória")
+            super.isRequired(request.body.confirmPassword, "A confirmação da senha é obrigatória")
+            super.isTrue((customer.password != confirmPassword), "A senha e a confirmação de senha estão diferentes")    
+        }else{
+            delete customer.password
+        }
+
 
         if( customer.photo ){
             let pictureCreatedResult = await FileHelper.writePicture( customer.photo )
@@ -23,8 +33,6 @@ export class CustomerController extends BaseController<Customer>{
                 customer.photo = pictureCreatedResult
             }
         }
-
-        delete customer.password
 
         return super.save(customer , request)
     }

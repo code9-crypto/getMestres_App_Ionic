@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ICategories } from '../../interfaces/ICategories';
 import { CustomersService } from '../../services/customers.service';
 import { MatCard } from '@angular/material/card';
 import { MatCardTitle } from '@angular/material/card';

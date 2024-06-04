@@ -66,7 +66,7 @@ export class InputFileComponent implements OnInit, OnChanges{
 
   private _populatePreLoadImage(image: string): void{
     if( image ){
-      const ext = image.split(',')
+      const ext = image.split('.')
       const isBase64 = image.indexOf('base64') > -1
       if( isBase64 ){
         this._setPictureFromCamera(image)

@@ -6,5 +6,5 @@ export class CustomerModel extends BaseModel{
     photo!: string
     phone!: string
     password!: string
-    confirmPassword!: string 
+    confirmPassword!: string
 }

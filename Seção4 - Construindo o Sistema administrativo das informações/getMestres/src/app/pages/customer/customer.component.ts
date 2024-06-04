@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { FileManager, InputFileComponent } from "../../components/input-file/input-file.component";
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -21,18 +22,18 @@ import { FileManager, InputFileComponent } from "../../components/input-file/inp
         FormsModule,
         RouterLink,
         MatButtonModule,
-        InputFileComponent
+        InputFileComponent,
+        CommonModule
     ]
 })
 export class CustomerComponent implements OnInit {
 
-  model: CustomerModel = new CustomerModel()
+  model: CustomerModel = new CustomerModel()  
   constructor(
     private customerSrv: CustomerService,
     private matSnack: MatSnackBar,
     private router: Router,
     private active: ActivatedRoute
-
   ){}
   
   ngOnInit(): void {
@@ -44,19 +45,19 @@ export class CustomerComponent implements OnInit {
 
   //Este método que verifica se o vem com id new ou vem com o código
   async getId(uid: string): Promise<void>{
-    if( uid == 'new' ){
+    if( uid === 'new' ){
       return
     }
     const result = await this.customerSrv.getById(uid)
-    this.model = result.data as CustomerModel
+    this.model = result.data as CustomerModel        
   }
 
-  async save(): Promise<void>{
-    const result = await this.customerSrv.post(this.model)
+  async save(): Promise<void>{    
+    const result = await this.customerSrv.post(this.model)     
     if( result.success ){
-      this.matSnack.open('Pergunta salva com sucesso', undefined, { duration: 3000 })
-      this.router.navigateByUrl('/questions')
-    }
+      this.matSnack.open('Cliente salvo com sucesso', undefined, { duration: 3000 })
+      this.router.navigateByUrl('/customers')
+    }    
   }
 
   selectedFile(file: FileManager): void{

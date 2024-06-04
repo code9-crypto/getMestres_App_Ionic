@@ -4,7 +4,7 @@ import { Request } from "express"
 
 export class CategoryController extends BaseController<Category>{
     constructor(){
-        super(Category, true)
+        super(Category)
     }
 
     async save(req: Request){

@@ -5,6 +5,7 @@ import { IResultHttp } from "../interfaces/IResultHttp";
 import { enviroment } from "../enviroments/enviroment";
 import { Observable, Subject } from "rxjs";
 
+
 @Injectable({
     providedIn: 'root'
 })
@@ -33,6 +34,10 @@ export class UserService extends BaseService<any>{
 
     get isStaticLogged(): boolean{
         return !!localStorage.getItem('getMestres:token')
+    }
+
+    static get token(): string | null{
+        return localStorage.getItem('getMestres:token')
     }
 
 }

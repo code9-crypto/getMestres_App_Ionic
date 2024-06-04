@@ -23,12 +23,16 @@ export class HttpService {
     if( !header ){
       header = new HttpHeaders()
     }
-
+    //Criando os cabeçalhos padrões
     header = header.append('Content-Type', 'application/json')
     header = header.append('Accept', 'application/json')
 
-    const token = ""
+    //Pegando o token do usuário logado em localStorage e armazenando na constanten token
+    //OBS.: dentro da chave getmestres:token
+    const token = localStorage.getItem('getMestres:token')
+    //Caso tenha alguma valor dentro da constante token
     if( token ) {
+      //Então será criada um novo cabeçalho com o valor do token com a chave x-token-access
       header = header.append('x-token-access', token)
     }
 
@@ -36,7 +40,7 @@ export class HttpService {
   }
 
   public get(url: string): Promise<IResultHttp>{
-    const header = this.createHeader()
+    const header = this.createHeader()    
     return new Promise(async (resolve) => {
       //Método com padrão de Promise
       /*this.http.get(url, { headers: header })
@@ -52,8 +56,7 @@ export class HttpService {
       //Método com padrdão async/await
       try{
         this.spinner.show()
-        const res = await this.httpClient.get(url, { headers: header }).toPromise()
-        console.log(res)
+        const res = await this.httpClient.get(url, { headers: header }).toPromise()        
         resolve({ success: true, data: res, error: undefined })
         this.spinner.hide()
       }catch(err){        
@@ -73,10 +76,19 @@ export class HttpService {
         this.spinner.hide()
         //esta tipagem no catch é para acessar qualquer atributo
       }catch(err: any){
-        this.spinner.hide()
+        this.spinner.hide()        
+        /*//Esta mensagem será exibida ao usuário, caso a foto seje muito grande
+        if( err.status === 0 ){
+          let erroFoto = '<ul>'
+          erroFoto += `<li style="text-align: left">Foto muito grande para cadastrar</li>`
+          erroFoto += '</ul>'
+          alert.fire('Atenção', erroFoto, 'warning')
+        }*/
+        //Caso não seja enviado algum dos itens pedido
+        //Será exibido uma mensagem de alerta na tela para o usuário
         if( err.status === 400 ){
-          let errosText = '<ul>'
-          console.log(err.error)
+          //Será apresentado uma tela de alerta na tela caso haja campos em branco que são obrigatórios
+          let errosText = '<ul>'          
           if( Array.isArray(err.error) ) {
             //Esta forma de usar o element quando apresenta erro
             err.error.forEach((element:any) => {

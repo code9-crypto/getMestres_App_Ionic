@@ -9,11 +9,11 @@ import * as cors from "cors"
 
 // create express app
 const app = express()
-app.use(bodyParser.json())
+app.use(bodyParser.json({ limit: '50mb' }))
 app.use(cors())
 
 //Middleware que faz autenticação para acesso as rotas
-//app.use(auth)
+app.use(auth)
 
 // register express routes from defined application routes
 //Esta codificação está sendo usada para qualquer rota que estiver dentro do arquivo routes.ts
@@ -26,6 +26,8 @@ Routes.forEach(route => {
             result.then(d => {
                 if( d && d.status ){
                     res.status(d.status).send(d.message || d.errors)
+                }else if (d && d.file){
+                    res.sendFile(d.file)
                 }else{
                     res.json(d)
                 }

@@ -9,7 +9,7 @@ export class Customer extends BaseEntity{
     @Column({type: "varchar", length: 200})
     email: string
 
-    @Column({type: "varchar", length: 200})
+    @Column({type: "varchar", length: 200, default: "xxx--xxx"})
     photo: string
 
     @Column({type: "varchar", length: 100})

@@ -6,6 +6,7 @@ import { CustomerController } from "./controller/CustomerController"
 import { ServiceProviderController } from "./controller/ServiceProviderController"
 import { RequestsOrderController } from "./controller/RequestsOrderController"
 import { RequestsOrderAnswersController } from "./controller/RequestsOrderAnswersController"
+import { StorageController } from "./controller/StorageController"
 
 export const Routes = [
     //Rotas para usuário
@@ -65,5 +66,8 @@ export const Routes = [
     {method: "get", route: "/requestsAnswer/:orderUid/all", controller: RequestsOrderAnswersController, action: "all"},    
     {method: "post", route: "/requestsAnswer", controller: RequestsOrderAnswersController, action: "save"},    
     {method: "delete", route: "/requestsAnswer/:id", controller: RequestsOrderAnswersController, action: "remove"},
-    {method: "delete", route: "/requestsAnswer/disable/:id", controller: RequestsOrderAnswersController, action: "disable"}
+    {method: "delete", route: "/requestsAnswer/disable/:id", controller: RequestsOrderAnswersController, action: "disable"},
+
+    //Rota para o Storage
+    {method: "get", route: "/storage/:filename", controller: StorageController, action: "getFile"},
 ]

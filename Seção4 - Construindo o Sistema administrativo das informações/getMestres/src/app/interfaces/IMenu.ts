@@ -10,5 +10,5 @@ export interface IMenu{
 export interface IMenuItem{
     label: string
     url: string
-    icon: string
+    icon: string    
 }
