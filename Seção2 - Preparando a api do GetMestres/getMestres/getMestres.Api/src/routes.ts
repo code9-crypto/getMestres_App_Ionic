@@ -7,6 +7,7 @@ import { ServiceProviderController } from "./controller/ServiceProviderControlle
 import { RequestsOrderController } from "./controller/RequestsOrderController"
 import { RequestsOrderAnswersController } from "./controller/RequestsOrderAnswersController"
 import { StorageController } from "./controller/StorageController"
+import { AddressController } from "./controller/AddressController"
 
 export const Routes = [
     //Rotas para usuário
@@ -70,4 +71,7 @@ export const Routes = [
 
     //Rota para o Storage
     {method: "get", route: "/storage/:filename", controller: StorageController, action: "getFile"},
+
+    {method: "get", route: "/address", controller: AddressController, action: "getAllStates"},
+    {method: "get", route: "/address/:state", controller: AddressController, action: "getAllCities"},
 ]

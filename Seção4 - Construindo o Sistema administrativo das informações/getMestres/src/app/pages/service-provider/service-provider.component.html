@@ -1,0 +1,51 @@
+<div class="container">
+        <!-- Para chamar um HTML diferente, usa-se o selector deste dentro do arquivo component.ts -->
+        <app-input-file [image]="model.photo" (select)="selectedFile($event)"></app-input-file>
+    <!-- <input matInput hidden="true" [(ngModel)]="category.uid"> -->
+    <mat-form-field appearance="outline" class="full-width" >
+        <mat-label>Nome</mat-label>
+        <input matInput placeholder="preencha o nome do cliente" required [(ngModel)]="model.name" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width" col-50>
+        <mat-label>E-mail</mat-label>
+        <input matInput type="email" placeholder="preencha o emil do cliente" required [(ngModel)]="model.email" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width" col-50>
+        <mat-label>Telefone</mat-label>
+        <input matInput placeholder="preencha o telefone do cliente" required [(ngModel)]="model.phone" required>
+    </mat-form-field>
+
+    <!-- Este campo só irá aparecer quando o model.uid for vazio, caso tenham algum valor não irá aparecer -->    
+    <mat-form-field appearance="outline" class="full-width" *ngIf="!model.uid" col-50>
+        <mat-label>Senha</mat-label>
+        <input matInput type="password" placeholder="Informe sua nova senha" [(ngModel)]="model.password" required>
+    </mat-form-field>
+
+    <!-- Este campo só irá aparecer quando o model.uid for vazio, caso tenham algum valor não irá aparecer -->
+    <mat-form-field appearance="outline" class="full-width" *ngIf="!model.uid" col-50>
+        <mat-label>Confirmação de Senha</mat-label>
+        <input type="password" matInput placeholder="Digite novamente a senha informada acima" [(ngModel)]="model.confirmPassword" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Opções</mat-label>
+        <textarea matInput placeholder="Descreva descrição" rows="4" [(ngModel)]="model.description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Endereço</mat-label>
+        <input matInput placeholder="preencha o Endereço" required [(ngModel)]="model.address" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Complemento</mat-label>
+        <input matInput placeholder="preencha o complemento do enderço" required [(ngModel)]="model.addressComplement" required>
+    </mat-form-field>
+
+    <div class="toolbar___form">        
+        <button mat-raised-button routerLink="/serviceProviders">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="save()">Salvar</button>
+    </div>
+</div>

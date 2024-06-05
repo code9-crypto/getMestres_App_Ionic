@@ -7,8 +7,9 @@
     <a routerLink="/" style="text-decoration: none; color: white;"><h1>GetMestres</h1></a>
   </mat-toolbar>
 
-  <mat-toolbar color="primary"  style="height: 70px;">
-    <a routerLink="/login" style="text-decoration: none; color: white; text-align: right;"><h1>Entrar</h1></a>
+  <mat-toolbar color="primary"  style="height: 70px;" *ngIf="!isLogged">
+    <a style="text-decoration: none; color: white;"><h1>GetMestres</h1></a>
+    <a routerLink="/login" style="text-decoration: none; color: white; margin-left: 90%;"><h1>Entrar</h1></a>
   </mat-toolbar>
 
   <!-- Corpo do sidenav -->

@@ -1,4 +1,16 @@
+<div class="container-toolbar">
+    <mat-form-field appearance="outline">
+        <mat-label>Pesquisa</mat-label>                                                     <!-- Esta codificação pega o valor do campo e ja verifica se existe dentro do array -->
+        <input matInput placeholder="Descreva o dado que seja realizar a pesquisa" (keyup)="filter($any($event).target.value)">
+    </mat-form-field>
+    <button mat-raised-button color="primary" routerLink="/serviceProvider/new">Novo Prestador</button>
+</div>
 <div class="div-table mat-elevation-z8">
+    <mat-card>
+        <mat-card-title class="providers">
+            <h3>Prestadores de Serviço</h3>
+        </mat-card-title>    
+    </mat-card>
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="Código">
             <th mat-header-cell *matHeaderCellDef>Código</th>
@@ -23,9 +35,21 @@
         <ng-container matColumnDef="Telefone">
             <th mat-header-cell *matHeaderCellDef>Telefone</th>
             <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+        </ng-container>
+        <ng-container matColumnDef="uid">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element" class="actions">
+                <button mat-button routerLink="/serviceProvider/{{ element.uid }}">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-button (click)="delete(element)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
         </ng-container>        
         <tr mat-header-row *matHeaderRowDef="columns"></tr>
         <tr mat-row *matRowDef="let row; columns: columns;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons=""></mat-paginator>
 </div>
 

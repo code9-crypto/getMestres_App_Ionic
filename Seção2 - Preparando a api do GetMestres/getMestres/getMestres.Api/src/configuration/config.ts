@@ -12,6 +12,7 @@ export default {
         "/users/auth",
         "/customer/create",
         "/serviceProvider/create",
-        "/storage"
+        "/storage",
+        "/address"
     ]
 }

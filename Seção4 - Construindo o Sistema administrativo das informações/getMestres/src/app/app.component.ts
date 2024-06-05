@@ -89,7 +89,7 @@ export class AppComponent implements OnInit {
     this.menu.push({
       group: 'Pessoas',
       items:[
-        {icon: 'person', label: 'Prossionais', url:'/serviceProvider'},
+        {icon: 'person', label: 'Prossionais', url:'/serviceProviders'},
         {icon: 'person_ping', label: 'Cliente', url:'/customers'}
       ]
     })

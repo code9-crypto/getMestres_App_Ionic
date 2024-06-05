@@ -23,3 +23,6 @@ OBS.: o paramêtro g é o mesmo que generate
 
 Instalando tipo personalizado de alert
 npm install sweetalert2
+
+Criando novo serviço
+ng g service services/nome_servico
