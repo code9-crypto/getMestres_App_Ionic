@@ -21,6 +21,7 @@ export const Routes = [
 
     //Rotas para categorias
     {method: "get", route: "/category", controller: CategoryController, action: "all"},
+    {method: "get", route: "/category/:id/subcategories", controller: CategoryController, action: "getAllSubCategories"},
     {method: "get", route: "/category/:id", controller: CategoryController, action: "one"},
     {method: "post", route: "/category", controller: CategoryController, action: "save"},
     {method: "delete", route: "/category/:id", controller: CategoryController, action: "remove"},

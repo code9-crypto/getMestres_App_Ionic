@@ -34,6 +34,15 @@
         <textarea matInput placeholder="Descreva descrição" rows="4" [(ngModel)]="model.description"></textarea>
     </mat-form-field>
 
+    <div class="title-divider">
+        Endereço
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>CEP</mat-label>
+        <input matInput placeholder="CEP" required [(ngModel)]="model.zipCode" required>
+    </mat-form-field>
+
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Endereço</mat-label>
         <input matInput placeholder="preencha o Endereço" required [(ngModel)]="model.address" required>
@@ -44,6 +53,79 @@
         <input matInput placeholder="preencha o complemento do enderço" required [(ngModel)]="model.addressComplement" required>
     </mat-form-field>
 
+    <mat-form-field appearance="outline" class="full-width" col-50>
+        <mat-label>Estado</mat-label>
+        <mat-select [(ngModel)]="model.state" (selectionChange)="bindCities(model.state)">
+            <mat-option *ngFor="let state of states" [value]="state.sigla">
+                {{ state.nome }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width" col-50>
+        <mat-label>Cidade</mat-label>
+        <mat-select [(ngModel)]="model.city" [disabled]="!model.state">
+            <mat-option *ngFor="let city of cities" [value]="city">
+                {{ city }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="title-divider">
+        Configurações de atendimento
+    </div>
+    <div class="container-configuration">        
+        <div class="card">
+            <h4>Cidades Atendidas</h4>
+            <mat-form-field appearance="outline" class="full-width" col-50 style="clear: both;">
+                <mat-label>Cidade</mat-label>   <!-- Toda vez que é usado um change, sempre é gerado um evento, por isso está sendo passado como paramêtro -->
+                <mat-select [disabled]="!model.state" (selectionChange)="selectCitieCare($event.value)">
+                    <mat-option *ngFor="let city of cities" [value]="city">
+                        {{ city }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-list>
+                <mat-list-item *ngFor="let city of citiesCare; let i = index">
+                    <p mat-line style="display: inline;" >{{ city }}</p>
+                    <button mat-button (click)="removeCitiesCare(i)" style="float: right;">
+                        <mat-icon class="mat-24">delete</mat-icon>
+                    </button>
+                </mat-list-item>
+                <mat-list-item *ngIf="citiesCare.length === 0">
+                    Nenhuma cidade atendida
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="card">
+            <h4>SubCategorias atendidas</h4>
+            <mat-form-field appearance="outline" class="full-width" col-50>
+                <mat-label>Categoria</mat-label>
+                <mat-select [(ngModel)]="categorySelect" (selectionChange)="bindSubCategories(categorySelect)">
+                    <mat-option *ngFor="let categoria of categories" [value]="categoria.uid">
+                        {{ categoria.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width" col-50>
+                <mat-label>SubCategoria</mat-label>
+                <mat-select [(ngModel)]="subCategorySelect" [disabled]="!categorySelect" (selectionChange)="selectSubCategory(subCategorySelect)">
+                    <mat-option *ngFor="let subcatetoria of subCategories" [value]="subcatetoria">
+                        {{ subcatetoria.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-list>
+                <mat-list-item *ngFor="let subcategory of categoriesCare; let i = index">
+                <p mat-line>{{ subcategory }}</p>
+                <button mat-button (click)="removeCategoryCare(i)">
+                    <mat-icon class="mat-24">delete</mat-icon>
+                </button>
+                </mat-list-item>
+                <mat-list-item *ngIf="categoriesCare.length === 0">Nenhum subCategoria atendida</mat-list-item>
+            </mat-list>
+        </div>
+    </div>
     <div class="toolbar___form">        
         <button mat-raised-button routerLink="/serviceProviders">Cancelar</button>
         <button mat-raised-button color="primary" (click)="save()">Salvar</button>

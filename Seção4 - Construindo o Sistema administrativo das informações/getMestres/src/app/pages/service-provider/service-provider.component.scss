@@ -1,1 +1,13 @@
 @import url('../../shared/global.scss');
+.container{    
+    overflow: auto;
+}
+
+.toolbar___form{
+    margin-bottom: 30px;    
+}
+
+.card{
+    width: 50%;
+    padding-right: 10px;
+}
