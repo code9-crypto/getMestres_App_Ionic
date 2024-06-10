@@ -21,11 +21,15 @@ export class CategoryController extends BaseController<Category>{
         return super.save(categoria, req)
     }
 
+    //Este método pega todos os subcategories referentes àqueles categories informados
+    //Por isso, que a claúsula where está sendo feita daquele jeito
     getAllSubCategories(req: Request){
-        const { id: categoryId } = req.params
+        const { id: categoryId } = req.params        
         return this.subCategoryRepository.find({
             where:{
-                category: categoryId,
+                category: {
+                    uid: categoryId
+                },
                 deleted: false
             }
         })
