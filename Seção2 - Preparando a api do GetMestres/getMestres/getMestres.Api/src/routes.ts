@@ -18,6 +18,7 @@ export const Routes = [
     {method: "delete", route: "/users/disable/:id", controller: UserController, action: "disable"},
     {method: "post", route: "/users/create", controller: UserController, action: "createUser"},
     {method: "post", route: "/users/auth", controller: UserController, action: "auth"},
+    {method: "post", route: "/users", controller: UserController, action: "save"},
 
     //Rotas para categorias
     {method: "get", route: "/category", controller: CategoryController, action: "all"},

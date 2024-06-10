@@ -65,7 +65,7 @@ export class UserController extends BaseController<User> {
     async createUser(request: Request){
         let {name, photo, email, password, confirmPassword, isRoot} = request.body
         super.isRequired(name, "Informe o nome")
-        super.isRequired(photo, "Informe a foto")
+        //super.isRequired(photo, "Informe a foto")
         super.isRequired(email, "Informe o email")
         super.isRequired(password, "Informe a senha")
         super.isRequired(confirmPassword, "Informe a confirmação da senha")
@@ -97,7 +97,7 @@ export class UserController extends BaseController<User> {
         let _user = <User>request.body
         //O super está sendo chamado, pois é para que a validação seja feita na superclasse, não na classe local
         super.isRequired(_user.name, "O nome do usuário é obrigatório")
-        super.isRequired(_user.photo, "A foto do usuário é obrigatória")
+        //super.isRequired(_user.photo, "A foto do usuário é obrigatória")
         super.isRequired(_user.email, "O email do usuário é obrigatório")
         super.isRequired(_user.password, "A senha do usuário é obrigatória")
         return super.save(_user, request)

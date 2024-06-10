@@ -10,7 +10,7 @@ export class User extends BaseEntity{
     name: string
 
     //@Column é notação para criar a tabela no banco
-    @Column({type: "varchar", length: 200})
+    @Column({type: "varchar", length: 200, default: "xxx--xxx"})
     photo: string
 
     @Column({type: "varchar", length: 200})

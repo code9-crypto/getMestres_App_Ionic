@@ -12,6 +12,8 @@ import { SubcategoryComponent } from './pages/subcategory/subcategory.component'
 import { QuestionComponent } from './pages/question/question.component';
 import { CustomerComponent } from './pages/customer/customer.component';
 import { ServiceProviderComponent } from './pages/service-provider/service-provider.component';
+import { UsersComponent } from './pages/users/users.component';
+import { UserComponent } from './pages/user/user.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: '/home' },
@@ -26,5 +28,7 @@ export const routes: Routes = [
     { path: 'serviceProviders', component: ServiceprovidersComponent, canActivate: [AdminGuard] },
     { path: 'customers', component: CustomersComponent, canActivate: [AdminGuard] },
     { path: 'customer/:id', component: CustomerComponent, canActivate: [AdminGuard] },
-    { path: 'login', component: LoginComponent }    
+    { path: 'login', component: LoginComponent },
+    { path: 'Users', component: UsersComponent, canActivate: [AdminGuard] },
+    { path: 'User/:id', component: UserComponent, canActivate: [AdminGuard] }
 ];
