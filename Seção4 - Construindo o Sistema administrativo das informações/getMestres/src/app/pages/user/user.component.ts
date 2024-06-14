@@ -9,8 +9,6 @@ import { FileManager, InputFileComponent } from '../../components/input-file/inp
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox'
-import { UserCreateService } from '../../services/user-create-service.service';
-import { UserGetAllService } from '../../services/user-get-all.service';
 import { UserService } from '../../services/user.service';
 
 
@@ -33,8 +31,7 @@ import { UserService } from '../../services/user.service';
 export class UserComponent implements OnInit {
 
   model: UserModel = new UserModel()  
-  constructor(
-    private userCreateSrv: UserCreateService,    
+  constructor(    
     private userSrv: UserService,
     private matSnack: MatSnackBar,
     private router: Router,
@@ -60,7 +57,7 @@ export class UserComponent implements OnInit {
   async salvar(): Promise<void>{
     let uid =  this.model.uid
     if( uid == undefined ){
-      const result = await this.userCreateSrv.post(this.model)     
+      const result = await this.userSrv.post(this.model)     
       if( result.success ){
         this.matSnack.open('Usuário salvo com sucesso', undefined, { duration: 3000 })
         this.router.navigateByUrl('/Users')
@@ -68,7 +65,7 @@ export class UserComponent implements OnInit {
     }else{
       const result = await this.userSrv.post(this.model)     
       if( result.success ){
-        this.matSnack.open('Usuário salvo com sucesso', undefined, { duration: 3000 })
+        this.matSnack.open('Usuário alterado com sucesso', undefined, { duration: 3000 })
         this.router.navigateByUrl('/Users')
       }
     }   

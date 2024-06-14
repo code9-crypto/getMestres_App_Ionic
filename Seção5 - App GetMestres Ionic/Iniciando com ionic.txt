@@ -1,0 +1,30 @@
+Instalando CLI do IONIC
+npm install -g @ionic/cli
+
+Instalando o IONIC(versão recente)
+npm install @ionic/angular@latest
+
+Instalando o IONIC(v4)
+(OBS.: Sempre recomendável instalar a versão mais estável, ou seja, LTS)
+npm uninstall ionic-angular -> caso tenha alguma versão que não seja LTS
+npm install @ionic/angular@v4-lts -> esta versão até o momento é LTS
+(ref.: https://ionicframework.com/docs/updating/4-0)
+
+
+Iniciando novo projeto
+ionic start nome_projeto *** **
+{
+*** tabs -> "layout com abas embaixo da tela"
+*** sidemenu -> "com menu lateral padrão"
+*** blank -> "tela totalmente em branco"
+}
+
+{
+** --cordova -> "inicia o projeto para acesso nativo em cordova"
+** --capacitor -> 
+}
+
+Iniciando o projeto
+ionic serve
+OU
+ng.cmd run app:serve --host=localhost --port=8100
