@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
       group: "Cadastros",
       items:[
         {icon: 'bookmark', label: 'Categorias', url:'/categories'},
-        {icon: 'bookmark_border', label: 'SubCategorias', url:'/SubCategories'},
+        {icon: 'bookmark_border', label: 'SubCategorias', url:'/subCategories'},
         {icon: 'assignment', label: 'Questões', url:'/questions'},
       ]
     })

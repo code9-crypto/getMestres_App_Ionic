@@ -1,0 +1,30 @@
+//Esta é a parte onde ficam as abas na parte inferior da tela
+<ion-tabs>
+  <ion-tab-bar slot="bottom" color="primary">
+    <!-- 
+      O atributo tab faz referência ao path da chave children em tabs.routes.ts
+      O atributo href faz referência ao PRIMEIRO path, e em seguida ao SEGUNDO path tabs.routes.ts
+      Ex.: href="/primeiroPath/segundoPath"
+    -->
+    <ion-tab-button tab="tabDisponiveis" href="/tabs/tabDisponiveis">
+      <ion-icon aria-hidden="true" name="book-Outline"></ion-icon>
+      <ion-label>Disponíveis</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabAceito" href="/tabs/tabAceito">
+      <ion-icon aria-hidden="true" name="checkmark"></ion-icon>
+      <ion-label>Aceitos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabConcluido" href="/tabs/tabConcluido">
+      <ion-icon aria-hidden="true" name="copy"></ion-icon>
+      <ion-label>Concluídos</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tabPerfil" href="/tabs/perfil">
+      <ion-icon aria-hidden="true" name="person"></ion-icon>
+      <ion-label>Perfil</ion-label>
+    </ion-tab-button>
+
+  </ion-tab-bar>
+</ion-tabs>

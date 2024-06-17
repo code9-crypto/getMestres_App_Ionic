@@ -1,0 +1,2 @@
+Criando componentes
+ionic g

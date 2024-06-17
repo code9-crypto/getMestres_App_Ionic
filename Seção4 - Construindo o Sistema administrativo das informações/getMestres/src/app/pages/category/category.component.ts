@@ -43,7 +43,7 @@ export class CategoryComponent implements OnInit {
       return
     }
     //esta constante result, irá receber os dados
-    //referentes ao uid informado
+    //referente ao uid informado
     const result = await this.categoryService.getById(uid)
     //Após isso o atributo category, irá receber os dados da constante result
     //Já tipando-os como CategoryModel

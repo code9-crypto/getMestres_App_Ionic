@@ -28,7 +28,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit{
-  //este é um método que pega as informações dos campos de texto da tela
+  //este é uma forma que pega as informações dos campos de texto da tela
   //é criado um form como objeto, pois quando for acessa-los, será pela sua chave
   form: any = {}
 
@@ -48,12 +48,12 @@ export class LoginComponent implements OnInit{
 
   async login():Promise<void>{
     //pegando os valores pelo formulário
+    //Fazendo o destructing dos valores recebidos dentro do form
     const { email, password } = this.form
     const result = await this.userService.login(email, password)    
     if( result.success ){
       this.userService.configureLogin(result)
-      this.router.navigateByUrl('/home')
-      console.log(result)
+      this.router.navigateByUrl('/home')      
     }else{
       this.matSnack.open("Email ou senha incorreta", undefined, { duration: 2000 })
     }
