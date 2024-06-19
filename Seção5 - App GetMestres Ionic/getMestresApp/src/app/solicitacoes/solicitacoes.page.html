@@ -1,0 +1,42 @@
+<ion-header [translucent]="true" class="ion-text-center">
+
+  <ion-toolbar color="primary">
+    <ion-title>Solicitações</ion-title>
+  </ion-toolbar>
+
+  <!-- Este ion-fab é o botão flutuante
+    e com esses atributos podemos deixar em qualquer posição da tela
+   -->
+  <ion-fab horizontal="end" vertical="top">
+    <ion-fab-button color="secondary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card *ngFor="let request of list">
+    <ion-card-title>
+      {{ request.title }}
+    </ion-card-title>
+    <ion-card-subtitle>
+      {{ request.subCategory.name }}
+    </ion-card-subtitle>
+    <ion-card-content>
+      <!-- O truncate está sendo usado para limitar o texto -->
+      <!-- OBS.: ele só pode ser usado dentro de {{}} -->
+      {{ request.description | truncate:50}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="list.length == 0">
+    <ion-card-content>
+      <!-- O truncate está sendo usado para limitar o texto -->
+      <!-- OBS.: ele só pode ser usado dentro de {{}} -->
+    {{ 'Você ainda não fez nenhuma solicitação, clique no botão + acima para comerçar :D' | truncate: 100 }}
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -1,1 +1,5 @@
-
+.tab-selected{
+    //para fazer referência a uma variável de cor dentro de themes
+    //fazemos deste jeito
+    color: var(--ion-color-secondary)
+}

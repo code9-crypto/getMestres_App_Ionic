@@ -1,2 +1,5 @@
 Criando componentes
-ionic g
+ionic g nome_component
+
+Criando serviços
+ionic g service nome_servico
