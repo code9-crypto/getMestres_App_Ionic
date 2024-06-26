@@ -1,8 +1,13 @@
+import { AppDataSource } from "../data-source";
+import { Question } from "../entity/Question";
 import { SubCategory } from "../entity/SubCategory";
 import { BaseController } from "./BaseController";
 import { Request } from "express"
 
 export class SubCategoryController extends BaseController<SubCategory>{
+
+    private questionRespository = AppDataSource.getRepository(Question)
+
     constructor(){
         super(SubCategory)
     }
@@ -17,5 +22,18 @@ export class SubCategoryController extends BaseController<SubCategory>{
         super.isTrue(subCategoria.cost < 0, "O custo deve ser maior do que 0")
 
         return super.save(subCategoria, req)
+    }
+
+    async getAllQuestions(req: Request){
+        const { id } = req.params
+        return this.questionRespository.find({
+            where:{
+               subCategory:{
+                uid: id
+               },
+               deleted: false,
+               active: true     
+            }
+        })
     }
 }

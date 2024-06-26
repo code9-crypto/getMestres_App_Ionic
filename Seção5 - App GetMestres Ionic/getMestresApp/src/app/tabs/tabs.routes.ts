@@ -38,9 +38,22 @@ export const routes: Routes = [
           import('../solicitacoes/solicitacoes.page').then((m) => m.SolicitacoesPage),
       },
       {
+        path: 'nova-solicitacao-sub-categoria',
+        loadComponent: () => import('../nova-solicitacao-sub-categoria/nova-solicitacao-sub-categoria.page').then( m => m.NovaSolicitacaoSubCategoriaPage)
+      },
+      {
         path: 'tabAtendidas',
         loadComponent: () =>
           import('../atendidas/atendidas.page').then((m) => m.AtendidasPage),
+      },
+      {
+        path: 'nova-solicitacao',
+        loadComponent: () => 
+          import('../nova-solicitacao/nova-solicitacao.page').then( m => m.NovaSolicitacaoPage)
+      },
+      {
+        path: 'nova-solicitacao-perguntas',
+        loadComponent: () => import('../nova-solicitacao-perguntas/nova-solicitacao-perguntas.page').then( m => m.NovaSolicitacaoPerguntasPage)
       },
       {
         path: '',

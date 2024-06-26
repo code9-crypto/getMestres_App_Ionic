@@ -6,6 +6,7 @@ import { addIcons } from 'ionicons';
 import { add } from 'ionicons/icons';
 import { RequestOrderModel } from '../models/RequestOrderModel';
 import { PipesModule } from 'src/pipes/pipe.module';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-solicitacoes',
@@ -26,7 +27,8 @@ import { PipesModule } from 'src/pipes/pipe.module';
     IonFabButton, 
     IonIcon, 
     IonFab,
-    PipesModule    
+    PipesModule,
+    RouterLink    
   ]
 })
 export class SolicitacoesPage implements OnInit {

@@ -13,7 +13,7 @@ app.use(bodyParser.json({ limit: '50mb' }))
 app.use(cors())
 
 //Middleware que faz autenticação para acesso as rotas
-app.use(auth)
+//app.use(auth)
 
 // register express routes from defined application routes
 //Esta codificação está sendo usada para qualquer rota que estiver dentro do arquivo routes.ts

@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ion-text-center" color="primary">
+      <ion-button slot="start" (click)="voltar()">
+        <ion-icon name="arrow-Back"></ion-icon>    
+      </ion-button>      
+    <ion-title>{{ category.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let item of subCategories" (click)="selectSubCategory(item)">
+        <div style="color: black">
+        {{ item.name }}
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="empty" *ngIf="subCategories.length == 0" style="color: black">
+    Não existem SubCategorias na categoria {{ category.name }}
+  </div>
+  
+</ion-content>
