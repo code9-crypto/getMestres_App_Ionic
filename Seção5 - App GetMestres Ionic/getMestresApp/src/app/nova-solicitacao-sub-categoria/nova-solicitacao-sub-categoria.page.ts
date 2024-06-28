@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonCol, IonRow, IonButton, IonIcon, NavController } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonGrid, IonCol, IonRow, IonButtons, IonButton, IonIcon, NavController } from '@ionic/angular/standalone';
 import { CategoryModel } from '../models/CategoryModel';
 import { SubCategoryModel } from '../models/SubCategoryModel';
 import { SubCategoryService } from 'src/services/sub-category.service';
@@ -26,6 +26,7 @@ import { arrowBack } from 'ionicons/icons';
     IonGrid, 
     IonCol, 
     IonRow,
+    IonButtons,
     IonButton,     
     IonIcon
   ]

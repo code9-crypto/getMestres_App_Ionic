@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonGrid, IonRow, IonCol, IonHeader, IonTitle, IonToolbar, IonButton, IonBackButton, NavController, IonIcon} from '@ionic/angular/standalone';
+import { IonContent, IonGrid, IonRow, IonCol, IonHeader, IonTitle, IonToolbar, IonButtons, IonButton, IonBackButton, NavController, IonIcon} from '@ionic/angular/standalone';
 import { CategoryModel } from '../models/CategoryModel';
 import { CategoryService } from 'src/services/category.service';
 import { Router } from '@angular/router';
@@ -24,6 +24,7 @@ import { arrowBack } from 'ionicons/icons';
     IonGrid,
     IonRow, 
     IonCol,
+    IonButtons,
     IonButton,
     IonBackButton,
     IonIcon

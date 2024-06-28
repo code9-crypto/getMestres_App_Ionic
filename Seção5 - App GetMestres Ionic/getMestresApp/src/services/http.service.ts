@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IResultHttp } from 'src/interfaces/IResultHttp';
 import { AlertService } from './alert.service';
 import { SpinnerService } from './spinner.service';
+import { Constants } from 'src/shared/constants';
 
 
 @Injectable({
@@ -30,7 +31,7 @@ export class HttpService {
 
     //Pegando o token do usuário logado em localStorage e armazenando na constanten token
     //OBS.: dentro da chave getmestres:token
-    const token = localStorage.getItem('getMestres:token')
+    const token = localStorage.getItem(Constants.keyStore.token)
     //Caso tenha alguma valor dentro da constante token
     if( token ) {
       //Então será criada um novo cabeçalho com o valor do token com a chave x-token-access

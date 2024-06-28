@@ -4,6 +4,7 @@ import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angu
 //Para adicionar os ícones, deve-se importar essas duas libs abaixo
 import { addIcons } from 'ionicons';
 import { bookOutline, copy, person, checkmark, book } from 'ionicons/icons';
+import { Constants } from 'src/shared/constants';
 
 @Component({
   selector: 'app-tabs',
@@ -22,7 +23,7 @@ import { bookOutline, copy, person, checkmark, book } from 'ionicons/icons';
 export class TabsPage {
   public environmentInjector = inject(EnvironmentInjector);
   //As variáveis contidas neste arquivo, também são acessíveis na página HTML
-  perfil = localStorage.getItem('getMestres:perfil')
+  perfil = localStorage.getItem(Constants.keyStore.profile)
 
   constructor() {
     //Para adicionar os ícones é desta forma

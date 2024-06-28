@@ -1,8 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar class="ion-text-center" color="primary">
-      <ion-button slot="start" (click)="voltar()">
-        <ion-icon name="arrow-Back"></ion-icon>    
-      </ion-button>      
+      <ion-buttons slot="start">
+        <ion-button (click)="voltar()">
+          <ion-icon name="arrow-Back"></ion-icon>  
+        </ion-button>
+      </ion-buttons>      
     <ion-title>{{ category.name }}</ion-title>
   </ion-toolbar>
 </ion-header>

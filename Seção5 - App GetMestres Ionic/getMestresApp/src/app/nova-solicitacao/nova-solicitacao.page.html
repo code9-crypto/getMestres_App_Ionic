@@ -1,9 +1,19 @@
 <ion-header [translucent]="true">
   <!-- A função click deve ficar dentro da tag ion-button -->
   <ion-toolbar class="ion-text-center" color="primary">
-    <ion-button slot="start" (click)="voltar()" >
-      <ion-icon fill="clear" name="arrow-Back"></ion-icon>
-    </ion-button>
+    <!-- Para deixar um botão mais estilizado, sem ter um alto relevo, a estrutura correta é desta forma
+    <ion-buttons>
+      <ion-button>
+        Se for texto VEM AQUI DENTRO
+        <ion-icon name="SE FOR ÍCONE, VEM AQUI DENTRO"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    -->
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon fill="clear" name="arrow-Back"></ion-icon>  
+      </ion-button>
+    </ion-buttons>
     <ion-title>Selecione a categoria</ion-title>
   </ion-toolbar>
 </ion-header>

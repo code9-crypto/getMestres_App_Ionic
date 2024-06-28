@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { Constants } from 'src/shared/constants';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 //Seja qual tela for
 export class AppComponent {
   constructor() {
-    const perfil = localStorage.setItem("getMestres:perfil", "cliente")
+    const perfil = localStorage.setItem(Constants.keyStore.profile, 'cliente')
   }
 }
 

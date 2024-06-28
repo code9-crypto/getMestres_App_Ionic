@@ -1,13 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>novaSolicitacaoPerguntas</ion-title>
-  </ion-toolbar>
+  <ion-toolbar class="ion-text-center" color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="voltar()">
+        <ion-icon name="arrow-Back"></ion-icon>  
+      </ion-button>
+    </ion-buttons>      
+  <ion-title>{{ subCategory.name }}</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="send()">
+      Enviar  
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">novaSolicitacaoPerguntas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list lines="none" class="ion-padding">
+    <ion-item>
+      Preencha o formulário abaixo para finalizar sua solicitação
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Título da Solicitação</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Descreva com detalhes sua solicitação</ion-label>
+      <ion-textarea rows="3" [(ngModel)]="request.description"></ion-textarea>
+    </ion-item>
+    <ion-item *ngFor="let q of questions">
+
+      <ion-label class="ion-text-wrap" position="stacked">{{ q.question }}</ion-label>
+
+      <ion-input *ngIf="q.type == 1" type="text" [(ngModel)]="answers[q.uid]"></ion-input>
+      
+      <ion-datetime *ngIf="q.type == 2" doneText="Ok" cancelText="Cancelar" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="answers[q.uid]"></ion-datetime>
+      
+      <ion-select [(ngModel)]="answers[q.uid]" placeholder="Selecione" *ngIf="q.type == 3">
+        <ion-select-option *ngFor="let op of getOptions(q)" [value]="op">{{ op }}</ion-select-option>
+      </ion-select>
+
+      <ion-textarea rows="6" placeholder="Descreva melhor..." *ngIf="q.type == 4" [(ngModel)]="answers[q.uid]"></ion-textarea>
+
+    </ion-item>
+  </ion-list>
+
 </ion-content>

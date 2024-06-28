@@ -56,7 +56,7 @@ export const routes: Routes = [
         loadComponent: () => import('../nova-solicitacao-perguntas/nova-solicitacao-perguntas.page').then( m => m.NovaSolicitacaoPerguntasPage)
       },
       {
-        path: '',
+        path: 'tabs',
         //Caso a constante perfil tenha o valor profissional
         //então cairá aqui '/tabs/tabDisponiveis' que é do profissional
         //Se não, cairá aqui '/tabs/tabSolicitacoes' que é do cliente
@@ -66,7 +66,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: '',
+    path: 'tabs',
     //Caso a constante perfil tenha o valor profissional
     //então cairá aqui '/tabs/tabDisponiveis' que é do profissional
     //Se não, cairá aqui '/tabs/tabSolicitacoes' que é do cliente
