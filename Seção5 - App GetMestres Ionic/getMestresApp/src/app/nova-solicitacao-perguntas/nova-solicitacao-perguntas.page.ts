@@ -47,7 +47,7 @@ export class NovaSolicitacaoPerguntasPage implements OnInit {
     private router: Router,
     private questionSrv: QuestionsService,
     private navCtrl: NavController,
-    private geolocation: Geolocation
+    private geolocation: GeolocationCoordinates
     
   ) { addIcons({ arrowBack })  }
 
@@ -80,8 +80,11 @@ export class NovaSolicitacaoPerguntasPage implements OnInit {
     return questions.options.split(",").map(o => o.trim())
   }
 
-  send(){
-    console.log(this.answers)
+  async send(){
+    const long = await this.geolocation.longitude
+    const lat = await this.geolocation.latitude
+    this.request.longlat = `${long};${lat}`
+    this.request.subCategory = this.subCategory.uid
   }
 
 }

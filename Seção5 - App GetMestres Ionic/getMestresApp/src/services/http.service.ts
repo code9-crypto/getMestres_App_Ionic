@@ -101,6 +101,9 @@ export class HttpService {
           this.alertSrv.alert("Atenção", errosText)          
           }
         }
+        if( err.status === 404 ){
+          this.alertSrv.alert("Atenção", err.error)
+        }
         resolve({ success: false, data: {},  error: err})
       }
     })

@@ -27,5 +27,6 @@ export class RequestsOrder extends BaseEntity{
 
     @ManyToOne(() => ServiceProvider, { eager: true, nullable: true})
     serviceProvider: ServiceProvider
+    userAuth: any;
 
 }

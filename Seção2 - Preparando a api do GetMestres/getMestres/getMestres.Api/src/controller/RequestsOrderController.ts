@@ -10,11 +10,13 @@ export class RequestsOrderController extends BaseController<RequestsOrder>{
 
     async save(req: Request){
         let request = <RequestsOrder>req.body
+        request.customer.uid = request.userAuth.uid
 
         super.isRequired(request.title, "Informe o título do seu pedido")
         super.isRequired(request.description, "Informe o que precisa")
         super.isRequired(request.customer, "Preciso saber quem é você")
         super.isRequired(request.longlat, "Preciso saber onde você está")
+        super.isRequired(request.subCategory, "Informe a subCategoria do pedido")
 
         //Verificando se o usuário já não tem uma requisição
         //Se não tiver, então o status da requisição será 1(pendente)

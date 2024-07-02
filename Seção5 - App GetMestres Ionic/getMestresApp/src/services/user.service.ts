@@ -5,23 +5,54 @@ import { UserAuthModel } from 'src/app/models/UserAuth';
 import { IUserAuth } from 'src/interfaces/IUserAuth';
 import { Constants } from 'src/shared/constants';
 import { IUser } from 'src/interfaces/IUser';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
+
+    private subProfile: Subject<string> = new Subject<string>();
+    private subUserData: Subject<IUser> = new Subject<IUser>();
+
     constructor(public http: HttpService){
         
     }
 
     //Fazendo login na API
     login(user: UserAuthModel){
-        return this.http.post(`${environment.url_api}/users/auth`, user)
+        return this.http.post(`${environment.url_api}/${user.profile == "customer" ? "customer" : "serviceProvider"}/auth`, user)
     }
 
-    saveDataLoginInfo(data: IUserAuth){
-        localStorage.setItem(Constants.keyStore.user, JSON.stringify(data.user))
-        localStorage.setItem(Constants.keyStore.token, JSON.stringify(data.token))
+    saveDataLoginInfo(data: IUserAuth, profile: string){
+        localStorage.setItem(Constants.keyStore.user, JSON.stringify(data.user));
+        localStorage.setItem(Constants.keyStore.token, data.token);
+        localStorage.setItem(Constants.keyStore.profile, profile);
+        this.subUserData.next(this.UserData);
+        this.subProfile.next(profile);
+    }
+
+    get IsAuth(): boolean {
+        const user = this.UserData;
+        return (user && !!user.uid);
+    }
+    
+    get Profile(): string {
+        try {
+            return localStorage.getItem(Constants.keyStore.profile) || '';
+        } catch (error) {
+            return '';
+        }
+    }
+
+    get UserDataAsync(): Observable<IUser> {
+        setTimeout(() => { this.subUserData.next(this.UserData); }, 100);
+        return this.subUserData.asObservable();
+    }
+
+    get ProfileAsync(): Observable<string> {
+        setTimeout(() => { this.subProfile.next(this.Profile); }, 100);
+        return this.subProfile.asObservable();
     }
 
     get UserData(): IUser{

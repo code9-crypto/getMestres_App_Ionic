@@ -13,7 +13,7 @@ import { Constants } from 'src/shared/constants';
 //Seja qual tela for
 export class AppComponent {
   constructor() {
-    const perfil = localStorage.setItem(Constants.keyStore.profile, 'cliente')
+    
   }
 }
 

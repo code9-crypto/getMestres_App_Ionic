@@ -7,25 +7,25 @@
       Ex.: href="/primeiroPath/segundoPath"
     -->
     <!-- Essas abas só aparecerá apenas para o profissional, o ngIf está fazendo essa verificação -->
-    <ion-tab-button tab="tabDisponiveis" href="/tabs/tabDisponiveis" *ngIf="perfil == 'profissional'">
+    <ion-tab-button tab="tabDisponiveis" href="/tabs/tabDisponiveis" *ngIf="perfil == 'serviceProvider'">
       <ion-icon aria-hidden="true" name="book-Outline"></ion-icon>
       <ion-label>Disponíveis</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="tabAceito" href="/tabs/tabAceito" *ngIf="perfil == 'profissional'">
+    <ion-tab-button tab="tabAceito" href="/tabs/tabAceito" *ngIf="perfil == 'serviceProvider'">
       <ion-icon aria-hidden="true" name="checkmark"></ion-icon>
       <ion-label>Aceitos</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="tabConcluido" href="/tabs/tabConcluido" *ngIf="perfil == 'profissional'">
+    <ion-tab-button tab="tabConcluido" href="/tabs/tabConcluido" *ngIf="perfil == 'serviceProvider'">
       <ion-icon aria-hidden="true" name="copy"></ion-icon>
       <ion-label>Concluídos</ion-label>
     </ion-tab-button>
     
     <!-- Essas abas só aparecerá apenas para o cliente, o ngIf está fazendo essa verificação -->
-    <ion-tab-button tab="tabSolicitacoes" href="/tabs/tabSolicitacoes" *ngIf="perfil == 'cliente'">
+    <ion-tab-button tab="tabSolicitacoes" href="/tabs/tabSolicitacoes" *ngIf="perfil == 'customer'">
       <ion-icon aria-hidden="true" name="book"></ion-icon>
       <ion-label>Minhas Solicitações</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="tabAtendidas" href="/tabs/tabAtendidas" *ngIf="perfil == 'cliente'">
+    <ion-tab-button tab="tabAtendidas" href="/tabs/tabAtendidas" *ngIf="perfil == 'customer'">
       <ion-icon aria-hidden="true" name="copy"></ion-icon>
       <ion-label>Atendidas</ion-label>
     </ion-tab-button>

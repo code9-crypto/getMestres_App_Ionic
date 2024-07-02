@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
+import { Constants } from 'src/shared/constants';
 
 //Pegando o valor da chave getMestres:perfil no localStorage
 //E atribuindo a constante perfil
-const perfil = localStorage.getItem('getMestres:perfil')
-
+const perfil = localStorage.getItem(Constants.keyStore.profile)
 
 export const routes: Routes = [
   {
@@ -56,21 +56,21 @@ export const routes: Routes = [
         loadComponent: () => import('../nova-solicitacao-perguntas/nova-solicitacao-perguntas.page').then( m => m.NovaSolicitacaoPerguntasPage)
       },
       {
-        path: 'tabs',
+        path: '',
         //Caso a constante perfil tenha o valor profissional
         //então cairá aqui '/tabs/tabDisponiveis' que é do profissional
         //Se não, cairá aqui '/tabs/tabSolicitacoes' que é do cliente
-        redirectTo: perfil == 'profissional' ? '/tabs/tabDisponiveis' : '/tabs/tabSolicitacoes',
+        redirectTo: perfil == 'serviceProvider' ? '/tabs/tabDisponiveis' : '/tabs/tabSolicitacoes',
         pathMatch: 'full',
       },
     ],
   },
   {
-    path: 'tabs',
+    path: '',
     //Caso a constante perfil tenha o valor profissional
     //então cairá aqui '/tabs/tabDisponiveis' que é do profissional
     //Se não, cairá aqui '/tabs/tabSolicitacoes' que é do cliente
-    redirectTo: perfil == 'profissional' ? '/tabs/tabDisponiveis' : '/tabs/tabSolicitacoes',
+    redirectTo: perfil == 'serviceProvider' ? '/tabs/tabDisponiveis' : '/tabs/tabSolicitacoes',
     pathMatch: 'full',
   },
 ];

@@ -3,10 +3,62 @@ import { FileHelper } from "../helpers/fileHelper";
 import { BaseController } from "./BaseController";
 import { Request } from "express"
 import * as md5 from "md5"
+import { sign } from "jsonwebtoken"
+import config from "../configuration/config"
 
 export class ServiceProviderController extends BaseController<ServiceProvider>{
     constructor(){
         super(ServiceProvider)
+    }
+
+    //Método que faz a validação do usuário
+    async auth(req: Request){
+        //Pega os valores recebidos no corpo da requisição
+        //Este destructing está sendo feito por meio de um objeto, por isso o uso das {}(chaves)
+        //Case tenha sido feito por meior de array, seria usado [](colchetes)
+        let { email, password } = req.body
+        //faz um validação se foi informado email ou senha
+        if( !email || !password ){
+            return {
+                status: 400,
+                message: "Informe o email e a senha para efetuar o login"
+            }
+        }
+        //Caso tenha informado login e senha
+        //será feito uma busca no banco de dados com as informões de email e senha
+        let user = await this.repositoryMethod.findOne({
+            where: {
+                email:email, 
+                password:md5(password)
+            }
+        })
+        //Se for encontrado um usuário válido
+        if( user ){
+            //Então será montado um objeto com esses dados
+            let payload = {
+                uid: user.uid,
+                name: user.name,
+                photo: user.photo,
+                email: user.email
+            }
+            //Depois será retornado para este com os valores abaixo
+            //Inclusive o token
+            return{
+                status: 200,
+                message: {
+                    user: payload,
+                    token: sign({
+                        ...payload,
+                        tm: new Date().getTime()
+                    }, config.secretKey)
+                }
+            }
+        }else{
+            return {
+                status: 404,
+                message: "E-mail ou senha inválidos"
+            }
+        }
     }
 
     private validationDefault(serviceProvider: ServiceProvider): void{
