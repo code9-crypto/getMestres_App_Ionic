@@ -1,0 +1,32 @@
+1º Instalar o geolocation plugin do capacitor
+npm install @capacitor/geolocation
+
+2º (dentro do projeto ionic)
+Executar o comando ionic build(irá criar o pasta www)
+
+(Detalhe - dentro do projeto: Caso não tenha instalado o @capacitor/cli, instale-o
+usando o comando: npm install --save @capacitor/core @capacitor/cli)
+
+3º (dentro do projeto ionic)
+Execute o comando: ionic cap add ios e ionic cap add ios
+
+4º Passar as permissões de uso dentro das variaveis
+Entre no arquivo variables.gradles:
+	playServicesLocationVersion = '21.1.0' 
+
+5º Passar as permissões para o android
+Entre no arquivo AndroidManifest.xml:
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-feature android:name="android.hardware.location.gps" /> 
+
+6º Passar as permissões para o ios
+Entre no arquivo info.plist:
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Para melhor atende-lo, por favor utilize o GPS</string>
+
+7º Sincronize os dados
+Execute o comando npx cap sync
+	
+
+

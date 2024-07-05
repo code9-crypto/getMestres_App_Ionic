@@ -1,8 +1,10 @@
+import { AppDataSource } from "../data-source";
 import { RequestsOrderAnswers } from "../entity/RequestsOrderAnswers";
 import { BaseController } from "./BaseController";
 import { Request }  from "express"
 
 export class RequestsOrderAnswersController extends BaseController<RequestsOrderAnswers>{
+
     constructor(){
         super(RequestsOrderAnswers)
     }
@@ -22,7 +24,7 @@ export class RequestsOrderAnswersController extends BaseController<RequestsOrder
             }
         })
     }
-
+    
     async save(req: Request){
         let requestOrderAnswer = <RequestsOrderAnswers>req.body
         let { orderUid } = req.params
@@ -31,7 +33,7 @@ export class RequestsOrderAnswersController extends BaseController<RequestsOrder
 
         super.isRequired(requestOrderAnswer.answer, "Informe a resposta da pergunta")
         super.isRequired(requestOrderAnswer.question, "A questão precisa ser informada")
-        super.isRequired(requestOrderAnswer.requestOrder, "Informe a requisição")
+        //super.isRequired(requestOrderAnswer.requestOrder, "Informe a requisição")
 
         return super.save(requestOrderAnswer, req)
     }

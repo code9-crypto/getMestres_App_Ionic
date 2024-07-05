@@ -2,13 +2,12 @@ import { BaseModel } from "./BaseModel";
 import { CategoryModel } from "./CategoryModel";
 
 export class SubCategoryModel extends BaseModel{
-    name: string = ''
-    cost: number = 0
-    description: string = ''
-    category: CategoryModel = new CategoryModel()
+    name!: string
+    cost!: number
+    description!: string
+    category!: CategoryModel
 
     constructor(){
         super()
-        this.category = new CategoryModel()
     }
 }

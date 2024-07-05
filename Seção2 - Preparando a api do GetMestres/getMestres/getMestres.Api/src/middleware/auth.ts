@@ -39,20 +39,19 @@ export default async(req: Request, res: Response, next: NextFunction) => {
             try{
                 //Aqui está fazendo a verificação no token, se foi feito com a chave correta
                 //Caso não, cairá no catch()
-                let _userAuth = verify(token, config.secretKey)
+                const _userAuth = verify(token, config.secretKey)
                 req.userAuth = _userAuth
-
                 //Fazendo a verificação se o usuário é root
-                let userDB = await userRepository.findOne({
+                const userDB = await userRepository.findOne({
                     where:{
-                        uid: _userAuth.uid
+                        uid: req.userAuth.uid
                     }
                 })
-                req.IsRoot = userDB.isRoot
-
+                //req.IsRoot = userDB.isRoot || false                
                 next()
             }catch(err){
-                res.status(401).send({message: "Token informado inválido"})
+                console.log(err)                
+                res.status(401).send({message: "Token informado inválido"})                
             }
         }else{
             res.status(401).send({message: "Para acessar esse recurso você precisa estar autenticado"})

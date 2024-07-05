@@ -42,6 +42,7 @@ export abstract class BaseController<T> extends BaseNotification{
             }
         })
     }
+    
 
     //Este controlador está acionando o GET com o paramêtro id
     async one(req: Request) {

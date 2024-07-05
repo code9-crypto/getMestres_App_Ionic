@@ -5,10 +5,31 @@ import { BaseController } from "./BaseController";
 import { Request } from "express"
 import * as md5  from "md5"
 import { sign } from "jsonwebtoken"
+import { AppDataSource } from "../data-source";
+import { RequestsOrder } from "../entity/RequestsOrder";
 
 export class CustomerController extends BaseController<Customer>{
+
+    private requestOrder = AppDataSource.getRepository(RequestsOrder)
+
     constructor(){
         super(Customer)
+    }
+
+    //Método para listar todas as Orders(pedidos/solicitações)
+    async getMyAllOrders(req: Request){
+        const { status } = req.query
+        const where = {
+            customer: {
+                uid: req.userAuth.uid
+            },
+            deleted: false,
+            statusOrder: !status ? 1 : status
+        }
+
+        return this.requestOrder.find({
+            where
+        })
     }
 
     //Método que faz a validação do usuário

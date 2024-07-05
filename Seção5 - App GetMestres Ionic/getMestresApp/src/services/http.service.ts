@@ -76,7 +76,10 @@ export class HttpService {
         const res = await this.httpClient.post(url, model, { headers: header }).toPromise()
         resolve({ success: true, data: res, error: undefined })
         this.spinnerSrv.Hide()
-        //esta tipagem no catch é para acessar qualquer atributo
+        //Aprentando mensagem de sucesso ao cadastrar
+        let success = `Informação cadastrada com sucesso`
+        this.alertSrv.alert('Sucesso', success)
+        //esta tipagem no catch é para acessar qualquer atributo                
       }catch(err: any){
         this.spinnerSrv.Hide()        
         /*//Esta mensagem será exibida ao usuário, caso a foto seje muito grande
@@ -90,19 +93,20 @@ export class HttpService {
         //Será exibido uma mensagem de alerta na tela para o usuário
         if( err.status === 400 ){
           //Será apresentado uma tela de alerta na tela caso haja campos em branco que são obrigatórios
-          let errosText = '<ul>'          
+          let errosText = ''
           if( Array.isArray(err.error) ) {
             //Esta forma de usar o element quando apresenta erro
             err.error.forEach((element:any) => {
-            errosText += `<li style="text-align: left">${element.message || element}</li>`
+            errosText += `${element.message || element}`
           })
-          errosText += '</ul>'
+          errosText += ''
           //Este alert está sendo usado do alert.service
           this.alertSrv.alert("Atenção", errosText)          
           }
         }
         if( err.status === 404 ){
-          this.alertSrv.alert("Atenção", err.error)
+          let msgError = 'Não foi possível salvar sua informaçao'
+          this.alertSrv.alert("Atenção", msgError)
         }
         resolve({ success: false, data: {},  error: err})
       }

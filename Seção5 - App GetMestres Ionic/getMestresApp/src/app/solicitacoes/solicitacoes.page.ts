@@ -7,6 +7,8 @@ import { add } from 'ionicons/icons';
 import { RequestOrderModel } from '../models/RequestOrderModel';
 import { PipesModule } from 'src/pipes/pipe.module';
 import { RouterLink } from '@angular/router';
+import { OrderService } from 'src/services/order.service';
+import { IOrders } from 'src/interfaces/IOrders';
 
 @Component({
   selector: 'app-solicitacoes',
@@ -33,13 +35,23 @@ import { RouterLink } from '@angular/router';
 })
 export class SolicitacoesPage implements OnInit {
 
-  list: Array<RequestOrderModel> = new Array<RequestOrderModel>()
+  list: IOrders[] = []
 
-  constructor() { 
+  constructor(
+    private orderSrv: OrderService
+  ) { 
     addIcons({ add })
   }
 
   ngOnInit() {
+    this.loadData()
+  }
+
+  async loadData(){
+    const { success, data } = await this.orderSrv.customerGetMyOrders()
+    if( success ){
+      this.list = data as IOrders[]
+    }
   }
 
 }

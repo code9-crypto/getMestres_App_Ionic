@@ -26,7 +26,6 @@ export class RequestsOrder extends BaseEntity{
     subCategory: SubCategory
 
     @ManyToOne(() => ServiceProvider, { eager: true, nullable: true})
-    serviceProvider: ServiceProvider
-    userAuth: any;
+    serviceProvider: ServiceProvider    
 
 }

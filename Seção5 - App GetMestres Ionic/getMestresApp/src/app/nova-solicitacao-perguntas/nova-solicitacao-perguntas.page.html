@@ -21,25 +21,25 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Título da Solicitação</ion-label>
-      <ion-input></ion-input>
+      <ion-input id="titulo" name="titulo" [(ngModel)]="request.title"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Descreva com detalhes sua solicitação</ion-label>
-      <ion-textarea rows="3" [(ngModel)]="request.description"></ion-textarea>
+      <ion-textarea id="description" name="description" rows="3" [(ngModel)]="request.description"></ion-textarea>
     </ion-item>
     <ion-item *ngFor="let q of questions">
 
       <ion-label class="ion-text-wrap" position="stacked">{{ q.question }}</ion-label>
 
-      <ion-input *ngIf="q.type == 1" type="text" [(ngModel)]="answers[q.uid]"></ion-input>
+      <ion-input id="question" name="question" *ngIf="q.type == 1" type="text" [(ngModel)]="answers[q.uid]"></ion-input>
       
-      <ion-datetime *ngIf="q.type == 2" doneText="Ok" cancelText="Cancelar" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="answers[q.uid]"></ion-datetime>
+      <ion-datetime id="date" name="date" *ngIf="q.type == 2" doneText="Ok" cancelText="Cancelar" displayFormat="DD/MM/YYYY" pickerFormat="DD MM YYYY" [(ngModel)]="answers[q.uid]"></ion-datetime>
       
-      <ion-select [(ngModel)]="answers[q.uid]" placeholder="Selecione" *ngIf="q.type == 3">
+      <ion-select id="option" name="option" [(ngModel)]="answers[q.uid]" placeholder="Selecione" *ngIf="q.type == 3">
         <ion-select-option *ngFor="let op of getOptions(q)" [value]="op">{{ op }}</ion-select-option>
       </ion-select>
 
-      <ion-textarea rows="6" placeholder="Descreva melhor..." *ngIf="q.type == 4" [(ngModel)]="answers[q.uid]"></ion-textarea>
+      <ion-textarea id="descreva" name="descreva" rows="6" placeholder="Descreva melhor..." *ngIf="q.type == 4" [(ngModel)]="answers[q.uid]"></ion-textarea>
 
     </ion-item>
   </ion-list>

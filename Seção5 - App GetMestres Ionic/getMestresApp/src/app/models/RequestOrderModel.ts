@@ -9,6 +9,6 @@ export class RequestOrderModel{
     description!: string
     statusOrder!: RequestStatus
     customer!: UserModel
-    subCategory!: SubCategoryModel | string
+    subCategory!: any
     serviceProvider!: ServiceProviderModel
 }

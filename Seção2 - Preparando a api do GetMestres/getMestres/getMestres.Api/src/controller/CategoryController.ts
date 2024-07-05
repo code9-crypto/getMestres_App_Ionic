@@ -42,7 +42,8 @@ export class CategoryController extends BaseController<Category>{
                 category: {
                     uid: categoryId
                 },
-                deleted: false
+                deleted: false,
+                active: true
             }
         })
     }
