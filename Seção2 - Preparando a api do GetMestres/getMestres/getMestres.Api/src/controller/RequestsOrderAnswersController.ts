@@ -18,9 +18,12 @@ export class RequestsOrderAnswersController extends BaseController<RequestsOrder
                 message: "Informe o código da requisição"
             }
         }
-        this.repositoryMethod.find({
+        
+        return this.repositoryMethod.find({
             where:{
-                requestOrder: orderUid
+                requestOrder: {
+                    uid: orderUid
+                }
             }
         })
     }

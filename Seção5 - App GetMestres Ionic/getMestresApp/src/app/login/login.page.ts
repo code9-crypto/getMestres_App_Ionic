@@ -56,7 +56,9 @@ export class LoginPage implements OnInit {
     const { success, data } = await this.userSrv.login(this.userForm)
     if( success ){
       this.userSrv.saveDataLoginInfo(data, this.userForm.profile);
-      this.router.navigateByUrl('/tabs')
+      setTimeout(() => {
+        this.router.navigateByUrl('/tabs')  
+      }, 200)      
     }
 
   }

@@ -13,7 +13,8 @@ ion-card{
     ion-card-title{
         font-size: 1.2em;
         line-height: 30px;
-        color: var(--ion-color-dark);        
+        color: var(--ion-color-dark); 
+        text-transform: uppercase;       
     }
     ion-card-subtitle{
         line-height: 20px;
@@ -22,5 +23,6 @@ ion-card{
     ion-card-content{
         padding-inline-start: 0px;
         padding-inline-end: 0px;
+        text-transform: uppercase;
     }    
 }

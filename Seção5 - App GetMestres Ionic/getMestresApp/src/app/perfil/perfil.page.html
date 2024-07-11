@@ -1,13 +1,40 @@
-<ion-header [translucent]="true" class="ion-text-center">
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Perfil</ion-title>
+    <ion-title class="ion-text-center">Perfil</ion-title>
+    <!-- para manter o preenchimento correto do botão junto com o texto
+      deve-se ser usado esses atributos que estão dentro de ion-buttons
+     -->
+    <ion-buttons fill="clear" slot="end">
+        <ion-button (click)="save()">
+          Salvar
+        </ion-button>
+      </ion-buttons>          
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">perfil</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-list>
+    <div class="photo-container">
+      <img [src]="form.photo || 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F5%2FUser-Profile-PNG-Clipart.png&f=1&nofb=1&ipt=7b3422ca6e19878fc8cd1694844bee7f59dd5f9599b97efd42a297e0bcddd45a&ipo=images'">
+    </div>
+    <ion-item lines="none">
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input inputmode="text" type="text" placeholder="Hadassa Caetano" [(ngModel)]="form.name"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">E-mail</ion-label>
+      <ion-input inputmode="email" type="email" placeholder="hadassa@gmail.com" [(ngModel)]="form.email"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Telefone</ion-label>
+      <ion-input inputmode="tel" type="text" placeholder="(00) 00000-0000" [(ngModel)]="form.phone"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="ion-padding">
+    <ion-buttons color="primary" >
+      <ion-button (click)="changePassword()" expand="block" fill="clear" style="margin-left: 26%;">
+        Trocar senha
+      </ion-button>
+    </ion-buttons>
+  </div>
 </ion-content>

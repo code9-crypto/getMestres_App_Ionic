@@ -6,6 +6,7 @@ import { IUserAuth } from 'src/interfaces/IUserAuth';
 import { Constants } from 'src/shared/constants';
 import { IUser } from 'src/interfaces/IUser';
 import { Observable, Subject } from 'rxjs';
+import { BaseService } from './base.service';
 
 @Injectable({
     providedIn: 'root'

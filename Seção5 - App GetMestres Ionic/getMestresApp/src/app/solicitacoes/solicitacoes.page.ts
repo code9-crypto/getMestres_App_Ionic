@@ -43,11 +43,17 @@ export class SolicitacoesPage implements OnInit {
     addIcons({ add })
   }
 
-  ngOnInit() {
+  ionViewDidEnter(){
     this.loadData()
   }
 
-  async loadData(){
+  ngOnInit() {
+    setTimeout(() => {
+      this.loadData()  
+    }, 200)    
+  }
+
+  async loadData(){    
     const { success, data } = await this.orderSrv.customerGetMyOrders()
     if( success ){
       this.list = data as IOrders[]

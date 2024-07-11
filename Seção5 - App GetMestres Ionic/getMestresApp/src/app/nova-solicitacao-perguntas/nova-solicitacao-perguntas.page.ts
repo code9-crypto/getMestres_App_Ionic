@@ -11,6 +11,7 @@ import { arrowBack } from 'ionicons/icons';
 import { RequestOrderModel } from '../models/RequestOrderModel';
 import { OrderService } from 'src/services/order.service';
 import { Geolocation } from '@capacitor/geolocation';
+import { AlertService } from 'src/services/alert.service';
 
 
 @Component({
@@ -49,7 +50,8 @@ export class NovaSolicitacaoPerguntasPage implements OnInit {
     private router: Router,
     private questionSrv: QuestionsService,
     private navCtrl: NavController,    
-    private orderSrv: OrderService
+    private orderSrv: OrderService,
+    private alertSrv: AlertService
     
   ) { addIcons({ arrowBack })  }
 
@@ -58,7 +60,7 @@ export class NovaSolicitacaoPerguntasPage implements OnInit {
       const { extras } : any = this.router.getCurrentNavigation()
       if( extras && extras.state){
         this.subCategory = extras.state as SubCategoryModel
-        this.loadData()
+        this.loadData()        
       }else{
         this.navCtrl.navigateRoot('/tabs')
       }
@@ -96,10 +98,14 @@ export class NovaSolicitacaoPerguntasPage implements OnInit {
             answer: this.answers[key],
             question: key,
             requestOrder: data.uid
-          })
+          })          
         }
         //Pegando os valores do campos para depois deixa-los em branco
         //let titulo: any = document.querySelector('ion-input[name="titulo"]')
+
+        //Apresentando mensagem de sucesso ao cadastrar
+        let success = `Informação cadastrada com sucesso`
+        this.alertSrv.alert('Sucesso', success)
       }
     }catch(error){
       console.log('erro', error)

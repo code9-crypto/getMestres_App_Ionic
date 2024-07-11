@@ -40,8 +40,12 @@ export class NovaSolicitacaoPage implements OnInit {
     private navCtrl: NavController
   ) { addIcons({ arrowBack }) }
 
-  ngOnInit() {
+  ionViewDidEnter(){
     this.loadData()
+  } 
+
+  ngOnInit() {
+    
   }
 
   async loadData(): Promise<void>{

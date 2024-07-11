@@ -45,9 +45,11 @@ export abstract class BaseController<T> extends BaseNotification{
     
 
     //Este controlador está acionando o GET com o paramêtro id
-    async one(req: Request) {
-        if( this.checkPermission(req) ){
-            return this.erroRoot
+    async one(req: Request, ignorePermission: boolean = false) {
+        if( !ignorePermission ) {
+            if( this.checkPermission(req) ){
+                return this.erroRoot
+            }
         }
         //O paramêtro vem como id, mas a busca no banco de dados a chave primaria está como uid
         const uid = req.params.id

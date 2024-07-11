@@ -7,13 +7,15 @@ import * as md5  from "md5"
 import { sign } from "jsonwebtoken"
 import { AppDataSource } from "../data-source";
 import { RequestsOrder } from "../entity/RequestsOrder";
+import { In } from "typeorm";
+import { request } from "http";
 
 export class CustomerController extends BaseController<Customer>{
 
     private requestOrder = AppDataSource.getRepository(RequestsOrder)
 
     constructor(){
-        super(Customer)
+        super(Customer, true)
     }
 
     //Método para listar todas as Orders(pedidos/solicitações)
@@ -24,7 +26,7 @@ export class CustomerController extends BaseController<Customer>{
                 uid: req.userAuth.uid
             },
             deleted: false,
-            statusOrder: !status ? 1 : status
+            statusOrder: In(!status ? [1,2] : [status])
         }
 
         return this.requestOrder.find({
@@ -80,6 +82,14 @@ export class CustomerController extends BaseController<Customer>{
                 message: "E-mail ou senha inválidos"
             }
         }
+    }
+
+    async one(req: Request){
+        const uid = req.params.id as string
+        const userId = req.userAuth.uid
+        const customer = await super.one(req, uid == userId)
+        delete customer['password']
+        return customer
     }
 
     async save(request: Request){

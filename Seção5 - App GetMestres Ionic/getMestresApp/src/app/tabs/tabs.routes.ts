@@ -56,7 +56,7 @@ export const routes: Routes = [
         loadComponent: () => import('../nova-solicitacao-perguntas/nova-solicitacao-perguntas.page').then( m => m.NovaSolicitacaoPerguntasPage)
       },
       {
-        path: 'visualizar-minha-solicitacao',
+        path: 'visualizar-minha-solicitacao/:id',
         loadComponent: () => import('../visualizar-minha-solicitacao/visualizar-minha-solicitacao.page').then(m => m.VisualizarMinhaSolicitacaoPage)
       },
       {

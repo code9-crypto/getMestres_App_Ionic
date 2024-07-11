@@ -75,10 +75,7 @@ export class HttpService {
         this.spinnerSrv.Show()
         const res = await this.httpClient.post(url, model, { headers: header }).toPromise()
         resolve({ success: true, data: res, error: undefined })
-        this.spinnerSrv.Hide()
-        //Aprentando mensagem de sucesso ao cadastrar
-        let success = `Informação cadastrada com sucesso`
-        this.alertSrv.alert('Sucesso', success)
+        this.spinnerSrv.Hide()        
         //esta tipagem no catch é para acessar qualquer atributo                
       }catch(err: any){
         this.spinnerSrv.Hide()        
@@ -97,7 +94,7 @@ export class HttpService {
           if( Array.isArray(err.error) ) {
             //Esta forma de usar o element quando apresenta erro
             err.error.forEach((element:any) => {
-            errosText += `${element.message || element}`
+            errosText += `${element.message || element}\n`
           })
           errosText += ''
           //Este alert está sendo usado do alert.service

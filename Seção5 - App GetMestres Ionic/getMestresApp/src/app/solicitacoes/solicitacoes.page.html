@@ -17,7 +17,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-card *ngFor="let request of list">
+  <ion-card *ngFor="let request of list" [routerLink]="['/tabs/visualizar-minha-solicitacao', request.uid]">
     <ion-card-title>
       {{ request.title }}
     </ion-card-title>
