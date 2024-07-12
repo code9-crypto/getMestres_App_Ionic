@@ -100,11 +100,7 @@ export class HttpService {
           //Este alert está sendo usado do alert.service
           this.alertSrv.alert("Atenção", errosText)          
           }
-        }
-        if( err.status === 404 ){
-          let msgError = 'Não foi possível salvar sua informaçao'
-          this.alertSrv.alert("Atenção", msgError)
-        }
+        }        
         resolve({ success: false, data: {},  error: err})
       }
     })

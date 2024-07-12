@@ -49,6 +49,7 @@ export const Routes = [
     {method: "get", route: "/customer/my/orders", controller: CustomerController, action: "getMyAllOrders"},
     {method: "post", route: "/customer", controller: CustomerController, action: "save"},
     {method: "post", route: "/customer/create", controller: CustomerController, action: "createCustomer"},
+    {method: "post", route: "/customer/changePassword", controller: CustomerController, action: "changePassword"},
     {method: "delete", route: "/customer/:id", controller: CustomerController, action: "remove"},
     {method: "delete", route: "/customer/disable/:id", controller: CustomerController, action: "disable"},
     {method: "post", route: "/customer/auth", controller: CustomerController, action: "auth"},    

@@ -85,16 +85,50 @@ export class CustomerController extends BaseController<Customer>{
     }
 
     async one(req: Request){
-        const uid = req.params.id as string
-        const userId = req.userAuth.uid
-        const customer = await super.one(req, uid == userId)
+        const customer = await super.one(req, this.isMe(req))
         delete customer['password']
         return customer
     }
 
+    async changePassword(req: Request){
+        const userId = req.userAuth.uid
+        const { currentPassword, newPassword, confirmNewPassword } = req.body
+
+        this.isRequired(currentPassword, 'A senha atual é obrigatória')
+        this.isRequired(newPassword, 'A nova senha é obrigatória')
+        this.isRequired(confirmNewPassword, 'A confirmação da nova senha é obrigatória')
+        this.isTrue(newPassword != confirmNewPassword, 'A senha e a confirmação de senha não são iguais')
+        console.log(`senha atual: ${currentPassword}\n Nova senha: ${newPassword}\n confirmação de senha: ${confirmNewPassword}\n `)
+        
+        if( !this.valid() ){
+            return {
+                status: 400,
+                errors: this.allNotifications
+            }
+        }
+
+        const customer = await this.repositoryMethod.findOne({
+            where:{
+                uid: userId
+            }
+        })
+        if( customer ){
+            if( customer.password != md5(currentPassword) ){
+                return { 
+                    status: 400,
+                    message: 'A senha atual é inválida'
+                }
+            }
+            customer.password = md5(newPassword)
+            this.repositoryMethod.save(customer)
+        }else{
+            return { status: 404, message: 'Usuário não encontrado' }
+        }
+    }
+
     async save(request: Request){
-        let customer = <Customer>request.body
-        let { confirmPassword } = request.body
+        const customer = <Customer>request.body
+        const { confirmPassword } = request.body
         //O super está sendo chamado, pois é para que a validação seja feita na superclasse, não na classe local
         super.isRequired(customer.name, "O nome é obrigatório")
         //super.isRequired(customer.photo, "A foto é obrigatória")
@@ -117,7 +151,7 @@ export class CustomerController extends BaseController<Customer>{
             }
         }
 
-        return super.save(customer , request)
+        return super.save(customer, request, this.isMe(request))
     }
 
     //Método para fazer a validação de criar o novo cliente
@@ -144,5 +178,15 @@ export class CustomerController extends BaseController<Customer>{
         }
 
         return super.save(customer , req, true)
+    }
+
+    isMe(req: Request): boolean{
+        try{
+            const uid = req.params.id as string
+            const userId = req.userAuth.uid
+            return (uid == userId)
+        }catch(error){
+            return false
+        }
     }
 }

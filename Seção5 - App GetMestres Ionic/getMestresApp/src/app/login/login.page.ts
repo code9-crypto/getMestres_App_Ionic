@@ -53,12 +53,14 @@ export class LoginPage implements OnInit {
       this.alertSrv.alert('Atenção','Preencha todos os dados para efetuar o login')
       return
     }
-    const { success, data } = await this.userSrv.login(this.userForm)
+    const { success, data, error } = await this.userSrv.login(this.userForm)
     if( success ){
       this.userSrv.saveDataLoginInfo(data, this.userForm.profile);
       setTimeout(() => {
         this.router.navigateByUrl('/tabs')  
       }, 200)      
+    }else if( error.status == 404 ){
+      this.alertSrv.alert('Atenção', 'Login ou senha inválidos')
     }
 
   }

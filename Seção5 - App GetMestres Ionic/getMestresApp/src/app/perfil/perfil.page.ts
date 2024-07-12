@@ -56,24 +56,43 @@ export class PerfilPage implements OnInit {
     }
   }
 
-  save(){
+  async save(){
+    const { success, data, error } = await this.customerSrv.post(this.form)
+    if( success ){
+      this.form = data
+      this.alertSrv.toast('Perfil atualizado com sucesso')
+    }else if(error.status == 401){
+      this.alertSrv.toast('Você não está autorizado para esta funcionalidade')
+    }
+  }
 
+  async changePasswordHandle(currentPassword: string,  newPassword: string, confirmNewPassword: string){
+    const { success } = await this.customerSrv.changePassword(currentPassword, newPassword, confirmNewPassword)
+    if( success ){
+      this.alertSrv.toast('Senha alterada com sucesso')
+    }
   }
 
   //Este método irá abrir um alerta na tela do usuário
   //com os campos para alterar a senha
   async changePassword(){
+    //currentPassword, newPassword, confirmNewPassword
     (await this.alertCtrl.create({
       header: 'Trocar Senha',
       inputs: [
-        { placeholder: 'Digite a nova senha', type: 'password', name: 'inputPassword' }
+        { placeholder: 'Digite sua senha atual', type: 'password', name: 'currentPassword' },
+        { placeholder: 'Digite a nova senha', type: 'password', name: 'newPassword' },
+        { placeholder: 'Digite a confirmação da senha', type: 'password', name: 'confirmNewPassword' }
       ],
       buttons: [
         { text: 'Cancelar', handler: () => { } },
-        { text: 'Salvar', handler: (data) => {
-            if( !data.inputPassword ){
-              this.alertSrv.toast('Digite a nova senha antes de continuar')
-              return
+        { text: 'Salvar', handler: ({ currentPassword,  newPassword, confirmNewPassword}) => {
+            if( !newPassword || !confirmNewPassword || !currentPassword ){
+              this.alertSrv.toast('Digite todas as informações antes de continuar')
+              return 
+            }else{              
+              this.changePasswordHandle(currentPassword, newPassword, confirmNewPassword)
+
             }
           } 
         }        
