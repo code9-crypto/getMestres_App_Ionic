@@ -31,6 +31,7 @@ import { AlertService } from 'src/services/alert.service';
 })
 export class LoginPage implements OnInit {
 
+  //Estes atributos estão fora do construtor, pois serão usados no arquivo HTML
   userForm: UserAuthModel = new UserAuthModel()
   profiles: ISelect[] = [
     { value: 'customer', label: 'Cliente' },
@@ -44,7 +45,18 @@ export class LoginPage implements OnInit {
     private alertSrv: AlertService
   ) { }
 
+  //Este método carregará a página toda vez que a página for carregada
+  ionViewDidEnter(){
+    let email: any = document.querySelector('ion-input[name="email"]')
+    let password: any = document.querySelector('ion-input[name="password"]')
+    let perfil: any = document.querySelector('ion-select[name="profile"]')
+    email.value = ''
+    password.value = ''
+    perfil.value = ''
+  }
+
   ngOnInit() {
+    
   }
 
   async login(){

@@ -5,10 +5,54 @@ import { Request } from "express"
 import * as md5 from "md5"
 import { sign } from "jsonwebtoken"
 import config from "../configuration/config"
+import { AppDataSource } from "../data-source";
+import { RequestsOrder } from "../entity/RequestsOrder";
+import { In } from "typeorm";
+import { SubCategory } from "../entity/SubCategory";
 
 export class ServiceProviderController extends BaseController<ServiceProvider>{
+
+    private requestOrder = AppDataSource.getRepository(RequestsOrder)
+    private subCategory = AppDataSource.getRepository(SubCategory)
+
     constructor(){
         super(ServiceProvider)
+    }
+
+    //Método para listar todas as Orders(pedidos/solicitações)
+    async getAllOrdersAvailables(req: Request){
+        const { status } = req.query
+
+        const where = {
+            customer: {
+                uid: req.userAuth.uid
+            },
+            deleted: false,
+            statusOrder: In(!status ? [1,2] : [status])
+        }
+        
+        const myData = await this.repositoryMethod.findOne({
+            where: {
+                uid: req.userAuth.uid
+            }
+        })
+
+        const categories = myData.categoriesCare.split(',').map( c => c.trim())
+
+        const subCategories = await this.subCategory.find({
+            where:{
+                name: In(categories)
+            }
+        })
+        
+        if( Array.isArray(subCategories) ){
+            where['subCategory'] = In(subCategories.map( s => s.uid ))
+        }
+        
+
+        return this.requestOrder.find({
+            where
+        })
     }
 
     //Método que faz a validação do usuário
@@ -118,5 +162,40 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
         }
 
         return super.save(serviceProvider , req, true)
+    }
+
+    async changePassword(req: Request){
+        const userId = req.userAuth.uid
+        const { currentPassword, newPassword, confirmNewPassword } = req.body
+
+        this.isRequired(currentPassword, 'A senha atual é obrigatória')
+        this.isRequired(newPassword, 'A nova senha é obrigatória')
+        this.isRequired(confirmNewPassword, 'A confirmação da nova senha é obrigatória')
+        this.isTrue(newPassword != confirmNewPassword, 'A senha e a confirmação de senha não são iguais')        
+        
+        if( !this.valid() ){
+            return {
+                status: 400,
+                errors: this.allNotifications
+            }
+        }
+
+        const customer = await this.repositoryMethod.findOne({
+            where:{
+                uid: userId
+            }
+        })
+        if( customer ){
+            if( customer.password != md5(currentPassword) ){
+                return { 
+                    status: 400,
+                    message: 'A senha atual é inválida'
+                }
+            }
+            customer.password = md5(newPassword)
+            this.repositoryMethod.save(customer)
+        }else{
+            return { status: 404, message: 'Usuário não encontrado' }
+        }
     }
 }

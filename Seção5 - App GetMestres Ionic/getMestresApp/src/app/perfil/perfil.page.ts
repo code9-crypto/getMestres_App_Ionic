@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonInput, IonButtons, IonButton } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonInput, IonButtons, IonButton, IonItemDivider } from '@ionic/angular/standalone';
 import { CustomerService } from 'src/services/customer.service';
 import { UserService } from 'src/services/user.service';
 import { CustomerModel } from '../models/CustomerModel';
 import { AlertController } from '@ionic/angular';
 import { AlertService } from 'src/services/alert.service';
+import { ServiceProviderService } from 'src/services/serviceProvider.service';
+import { ServiceProviderModel } from '../models/ServiceProviderModel';
 
 
 @Component({
@@ -26,7 +28,8 @@ import { AlertService } from 'src/services/alert.service';
     IonItem, 
     IonInput,
     IonButtons, 
-    IonButton   
+    IonButton,
+    IonItemDivider   
   ]
 })
 export class PerfilPage implements OnInit { 
@@ -38,7 +41,8 @@ export class PerfilPage implements OnInit {
     private customerSrv: CustomerService,
     private userSrv: UserService,
     private alertCtrl: AlertController,
-    private alertSrv: AlertService
+    private alertSrv: AlertService,
+    private serviceProviderSrv: ServiceProviderService    
   ) { }
 
   ionViewDidEnter(){
@@ -50,26 +54,50 @@ export class PerfilPage implements OnInit {
   }
 
   async loadData(){
-    const { success, data } = await this.customerSrv.getById(this.userSrv.UserData.uid)
-    if( success ){
-      this.form = data as CustomerModel
+    if( localStorage.getItem('getMestres:perfil') == 'customer' ){
+      const { success, data } = await this.customerSrv.getById(this.userSrv.UserData.uid)
+      if( success ){
+        this.form = data as CustomerModel
+      }
+    }else if( localStorage.getItem('getMestres:perfil') == 'serviceProvider' ){
+      const { success, data } = await this.serviceProviderSrv.getById(this.userSrv.UserData.uid)
+      if( success ){
+        this.form = data as ServiceProviderModel
+      }
     }
   }
 
   async save(){
-    const { success, data, error } = await this.customerSrv.post(this.form)
-    if( success ){
-      this.form = data
-      this.alertSrv.toast('Perfil atualizado com sucesso')
-    }else if(error.status == 401){
-      this.alertSrv.toast('Você não está autorizado para esta funcionalidade')
+    if( localStorage.getItem('getMestres:perfil') == 'customer' ){
+      const { success, data, error } = await this.customerSrv.post(this.form)
+      if( success ){
+        this.form = data
+        this.alertSrv.toast('Perfil atualizado com sucesso')
+      }else if(error.status == 401){
+        this.alertSrv.toast('Você não está autorizado para esta funcionalidade')
+      }
+    }else if( localStorage.getItem('getMestres:perfil') == 'serviceProvider' ){
+      const { success, data, error } = await this.serviceProviderSrv.post(this.form as ServiceProviderModel)
+      if( success ){
+        this.form = data
+        this.alertSrv.toast('Perfil atualizado com sucesso')
+      }else if(error.status == 401){
+        this.alertSrv.toast('Você não está autorizado para esta funcionalidade')
+      }
     }
   }
 
   async changePasswordHandle(currentPassword: string,  newPassword: string, confirmNewPassword: string){
-    const { success } = await this.customerSrv.changePassword(currentPassword, newPassword, confirmNewPassword)
-    if( success ){
-      this.alertSrv.toast('Senha alterada com sucesso')
+    if( localStorage.getItem('getMestres:perfil') == 'customer' ){
+      const { success } = await this.customerSrv.changePassword(currentPassword, newPassword, confirmNewPassword)
+      if( success ){
+        this.alertSrv.toast('Senha alterada com sucesso')
+      }
+    }else if( localStorage.getItem('getMestres:perfil') == 'serviceProvider' ){
+      const { success } = await this.serviceProviderSrv.changePassword(currentPassword, newPassword, confirmNewPassword)
+      if( success ){
+        this.alertSrv.toast('Senha alterada com sucesso')
+      }
     }
   }
 
@@ -99,4 +127,7 @@ export class PerfilPage implements OnInit {
       ]
     })).present()  }
 
+  logout(){
+    this.userSrv.logout()
+  }
 }

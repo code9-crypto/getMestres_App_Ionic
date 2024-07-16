@@ -60,6 +60,10 @@ export const routes: Routes = [
         loadComponent: () => import('../visualizar-minha-solicitacao/visualizar-minha-solicitacao.page').then(m => m.VisualizarMinhaSolicitacaoPage)
       },
       {
+        path: 'visualizar-solicitacao/:id',
+        loadComponent: () => import('../visualizar-solicitacao/visualizar-solicitacao.page').then( m => m.VisualizarSolicitacaoPage)
+      },
+      {
         path: '',
         //Caso a constante perfil tenha o valor profissional
         //então cairá aqui '/tabs/tabDisponiveis' que é do profissional

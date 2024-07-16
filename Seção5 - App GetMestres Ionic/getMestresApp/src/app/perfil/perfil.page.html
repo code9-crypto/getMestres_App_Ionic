@@ -17,6 +17,9 @@
     <div class="photo-container">
       <img [src]="form.photo || 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F5%2FUser-Profile-PNG-Clipart.png&f=1&nofb=1&ipt=7b3422ca6e19878fc8cd1694844bee7f59dd5f9599b97efd42a297e0bcddd45a&ipo=images'">
     </div>
+    <ion-item-divider>
+      <ion-label>Dados do usuário</ion-label>
+    </ion-item-divider>
     <ion-item lines="none">
       <ion-label position="stacked">Nome</ion-label>
       <ion-input inputmode="text" type="text" placeholder="Hadassa Caetano" [(ngModel)]="form.name"></ion-input>
@@ -30,11 +33,22 @@
       <ion-input inputmode="tel" type="text" placeholder="(00) 00000-0000" [(ngModel)]="form.phone"></ion-input>
     </ion-item>
   </ion-list>
-  <div class="ion-padding">
+  <ion-list lines="none">
+    <ion-item-divider>
+      <ion-label>Aplicativo</ion-label>
+    </ion-item-divider>
+    <ion-item (click)="changePassword()">
+      <ion-label>Trocar senha</ion-label>
+    </ion-item>
+    <ion-item (click)="logout()">    
+      <ion-label>Logout</ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- <div class="ion-padding">
     <ion-buttons color="primary" >
       <ion-button (click)="changePassword()" expand="block" fill="clear" style="margin-left: 26%;">
         Trocar senha
       </ion-button>
     </ion-buttons>
-  </div>
+  </div> -->
 </ion-content>

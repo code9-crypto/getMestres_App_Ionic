@@ -97,8 +97,7 @@ export class CustomerController extends BaseController<Customer>{
         this.isRequired(currentPassword, 'A senha atual é obrigatória')
         this.isRequired(newPassword, 'A nova senha é obrigatória')
         this.isRequired(confirmNewPassword, 'A confirmação da nova senha é obrigatória')
-        this.isTrue(newPassword != confirmNewPassword, 'A senha e a confirmação de senha não são iguais')
-        console.log(`senha atual: ${currentPassword}\n Nova senha: ${newPassword}\n confirmação de senha: ${confirmNewPassword}\n `)
+        this.isTrue(newPassword != confirmNewPassword, 'A senha e a confirmação de senha não são iguais')        
         
         if( !this.valid() ){
             return {

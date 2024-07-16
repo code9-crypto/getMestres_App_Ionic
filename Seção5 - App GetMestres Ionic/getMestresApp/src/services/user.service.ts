@@ -7,6 +7,7 @@ import { Constants } from 'src/shared/constants';
 import { IUser } from 'src/interfaces/IUser';
 import { Observable, Subject } from 'rxjs';
 import { BaseService } from './base.service';
+import { NavController } from '@ionic/angular';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,10 @@ export class UserService {
     private subProfile: Subject<string> = new Subject<string>();
     private subUserData: Subject<IUser> = new Subject<IUser>();
 
-    constructor(public http: HttpService){
+    constructor(
+        public http: HttpService,
+        private navCtrl: NavController
+    ){
         
     }
 
@@ -31,6 +35,13 @@ export class UserService {
         localStorage.setItem(Constants.keyStore.profile, profile);
         this.subUserData.next(this.UserData);
         this.subProfile.next(profile);
+    }
+
+    logout(){
+        localStorage.removeItem(Constants.keyStore.user);
+        localStorage.removeItem(Constants.keyStore.token);
+        localStorage.removeItem(Constants.keyStore.profile);
+        this.navCtrl.navigateRoot('/login')
     }
 
     get IsAuth(): boolean {

@@ -57,11 +57,13 @@ export const Routes = [
     //Rotas para ServiceProvider
     {method: "get", route: "/serviceProvider", controller: ServiceProviderController, action: "all"},
     {method: "get", route: "/serviceProvider/:id", controller: ServiceProviderController, action: "one"},
+    {method: "get", route: "/serviceProvider/orders/availables", controller: ServiceProviderController, action: "getAllOrdersAvailables"},
     {method: "post", route: "/serviceProvider", controller: ServiceProviderController, action: "save"},
     {method: "post", route: "/serviceProvider/create", controller: ServiceProviderController, action: "createServiceProvider"},
     {method: "delete", route: "/serviceProvider/:id", controller: ServiceProviderController, action: "remove"},
     {method: "delete", route: "/serviceProvider/disable/:id", controller: ServiceProviderController, action: "disable"},
     {method: "post", route: "/serviceProvider/auth", controller: ServiceProviderController, action: "auth"},
+    {method: "post", route: "/serviceProvider/changePassword", controller: ServiceProviderController, action: "changePassword"},
 
     //Rotas para Requests
     {method: "get", route: "/requests", controller: RequestsOrderController, action: "all"},
