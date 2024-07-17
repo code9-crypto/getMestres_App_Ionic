@@ -66,8 +66,8 @@ export class CustomersComponent implements OnInit{
   }
 
   async bind(): Promise<void>{
-    const questions = await this.customersSrv.getAll()
-    this.dataSource = new MatTableDataSource(questions.data)
+    const customer = await this.customersSrv.getAll()
+    this.dataSource = new MatTableDataSource(customer.data)
     this.dataSource.paginator = this.paginator
   }
 

@@ -40,7 +40,8 @@ export class UserController extends BaseController<User> {
                 uid: user.uid,
                 name: user.name,
                 photo: user.photo,
-                email: user.email
+                email: user.email,
+                isRoot: user.isRoot
             }
             //Depois será retornado para este com os valores abaixo
             //Inclusive o token

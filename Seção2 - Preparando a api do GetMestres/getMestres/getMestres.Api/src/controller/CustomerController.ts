@@ -8,7 +8,6 @@ import { sign } from "jsonwebtoken"
 import { AppDataSource } from "../data-source";
 import { RequestsOrder } from "../entity/RequestsOrder";
 import { In } from "typeorm";
-import { request } from "http";
 
 export class CustomerController extends BaseController<Customer>{
 

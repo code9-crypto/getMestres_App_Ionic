@@ -115,7 +115,7 @@ export class ServiceProviderComponent implements OnInit {
   async save(): Promise<void>{
     this.model.citiesCare = this.citiesCare.join(', ')
     this.model.categoriesCare = this.categoriesCare.join(', ')
-    const result = await this.serviceSrv.post(this.model)     
+    const result = await this.serviceSrv.createServiceProvider(this.model)
     if( result.success ){
       this.matSnack.open('Prestador salvo com sucesso', undefined, { duration: 3000 })
       this.router.navigateByUrl('/serviceProviders')

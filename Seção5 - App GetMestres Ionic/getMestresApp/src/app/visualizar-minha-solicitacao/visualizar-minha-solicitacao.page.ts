@@ -33,7 +33,7 @@ import { arrowBack } from 'ionicons/icons';
 export class VisualizarMinhaSolicitacaoPage implements OnInit {
 
   order!: IOrders
-  answers: IOrderAnswers[] = []
+  answers: IOrderAnswers[] = []  
 
   constructor(
     private active: ActivatedRoute,
@@ -42,7 +42,7 @@ export class VisualizarMinhaSolicitacaoPage implements OnInit {
   ) { addIcons ({ arrowBack }) }
 
   ngOnInit() {
-    this.active.params.subscribe(p => this.getOrder(p['id']))
+    this.active.params.subscribe(p => this.getOrder(p['id']))    
   }
 
   async getOrder(uid: string){

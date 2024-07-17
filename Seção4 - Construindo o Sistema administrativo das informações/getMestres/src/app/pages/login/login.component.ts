@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit{
     const result = await this.userService.login(email, password)    
     if( result.success ){
       this.userService.configureLogin(result)
-      this.router.navigateByUrl('/home')      
+      this.router.navigateByUrl('/home')
     }else{
       this.matSnack.open("Email ou senha incorreta", undefined, { duration: 2000 })
     }

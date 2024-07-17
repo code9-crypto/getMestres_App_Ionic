@@ -28,14 +28,15 @@ export abstract class BaseController<T> extends BaseNotification{
     //Este método irá verificar se o usuário é root ou não
     //Caso seja, retornará true, caso não, retornará false e não deixará executar a função
     private checkPermission(req: Request){
-        return this.onlyRootController && !req.IsRoot
+        return this.onlyRootController
     }
 
     //Este controlador está acionando o GET
-    async all(req: Request) {
-       if( this.checkPermission(req) ){
-        return this.erroRoot
-       }
+    async all(req: Request, ignorePermission: boolean = false) {               
+        if( this.checkPermission(req) ){
+            return this.erroRoot
+        }
+    
         return this.repository.find({
             where: {
                 deleted: false

@@ -28,4 +28,16 @@ export class OrderService extends BaseService<RequestOrderModel>{
     getAllAnswers(orderUid: string){
         return this.http.get(`${environment.url_api}/requestsAnswer/${orderUid}/all`)
     }
+
+    getMyOrders(status: number = 2){
+        return this.http.get(`${environment.url_api}/serviceProvider/orders/my?status=${status}`)
+    }
+
+    accept(uid: string){
+        return this.http.put(`${environment.url_api}/${uid}/accept`, {})
+    }
+
+    done(uid: string){
+        return this.http.put(`${environment.url_api}/${uid}/done`, {})
+    }
 }

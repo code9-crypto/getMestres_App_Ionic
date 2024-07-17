@@ -33,11 +33,15 @@ export class DisponiveisPage implements OnInit {
 
   constructor(
     private orderSrv: OrderService
-  ) { 
+  ) { }
+
+  ngOnInit() {
     
   }
 
-  ngOnInit() {
+  //Este método é executado toda vez que entrar na página
+  //em questão
+  ionViewWillEnter(){
     this.loadData()
   }
 

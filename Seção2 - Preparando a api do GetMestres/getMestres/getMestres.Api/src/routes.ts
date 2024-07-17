@@ -58,6 +58,7 @@ export const Routes = [
     {method: "get", route: "/serviceProvider", controller: ServiceProviderController, action: "all"},
     {method: "get", route: "/serviceProvider/:id", controller: ServiceProviderController, action: "one"},
     {method: "get", route: "/serviceProvider/orders/availables", controller: ServiceProviderController, action: "getAllOrdersAvailables"},
+    {method: "get", route: "/serviceProvider/orders/my", controller: ServiceProviderController, action: "getMyOrders"},
     {method: "post", route: "/serviceProvider", controller: ServiceProviderController, action: "save"},
     {method: "post", route: "/serviceProvider/create", controller: ServiceProviderController, action: "createServiceProvider"},
     {method: "delete", route: "/serviceProvider/:id", controller: ServiceProviderController, action: "remove"},
@@ -71,6 +72,8 @@ export const Routes = [
     {method: "post", route: "/requests", controller: RequestsOrderController, action: "save"},    
     {method: "delete", route: "/requests/:id", controller: RequestsOrderController, action: "remove"},
     {method: "delete", route: "/requests/disable/:id", controller: RequestsOrderController, action: "disable"},
+    {method: "put", route: "/request/:id/accept", controller: RequestsOrderController, action: "accept" },
+    {method: "put", route: "/request/:id/done", controller: RequestsOrderController, action: "done" },
 
     //Rotas para RequestsAnswers
     {method: "get", route: "/requestsAnswer/:orderUid/all", controller: RequestsOrderAnswersController, action: "all"},    

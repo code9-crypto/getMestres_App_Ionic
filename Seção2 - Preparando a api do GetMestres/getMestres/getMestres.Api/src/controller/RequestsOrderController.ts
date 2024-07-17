@@ -3,6 +3,7 @@ import { RequetsStatus } from "../entity/enum/RequestsStatus";
 import { BaseController } from "./BaseController";
 import { Request } from "express"
 import { Customer } from "../entity/Customer"
+import { ServiceProvider } from "../entity/ServiceProvider";
 
 export class RequestsOrderController extends BaseController<RequestsOrder>{
     constructor(){
@@ -27,5 +28,55 @@ export class RequestsOrderController extends BaseController<RequestsOrder>{
         }
 
         return super.save(order, req)
+    }
+
+    async accept(req: Request){
+        const  uid = req.params.uid as string
+        const order = await this.repositoryMethod.findOne({
+            where:{
+                uid: uid
+            }
+        })
+        if( !order ){
+            return {
+                status: 404,
+                erros: [
+                    'Solicitação não encontrada'
+                ]
+            }
+        }else{
+            order.serviceProvider = new ServiceProvider()
+            order.serviceProvider.uid = req.userAuth.uid
+            order.statusOrder = RequetsStatus.accepted
+            this.repositoryMethod.save(order)
+            return {
+                status: 202,
+                message: 'Solicitação aceita com sucesso'                
+            }
+        }
+    }
+
+    async done(req: Request){
+        const  uid = req.params.uid as string
+        const order = await this.repositoryMethod.findOne({
+            where:{
+                uid: uid
+            }
+        })
+        if( !order ){
+            return {
+                status: 404,
+                erros: [
+                    'Solicitação não encontrada'
+                ]
+            }
+        }else{
+            order.statusOrder = RequetsStatus.finish
+            this.repositoryMethod.save(order)
+            return {
+                status: 202,
+                message: 'Solicitação finalizada com sucesso'                
+            }
+        }
     }
 }

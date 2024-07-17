@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderService } from 'src/services/order.service';
 import { arrowBack } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
+import { AlertService } from 'src/services/alert.service';
 
 declare var google: any
 
@@ -33,18 +34,22 @@ declare var google: any
   ]
 })
 export class VisualizarSolicitacaoPage implements OnInit {
+  //Estes atributos são acessados pela página HTML
   order!: IOrders
   answers: IOrderAnswers[] = []
   map: any
+  view!: string
 
   constructor(
     private active: ActivatedRoute,
     private orderSrv: OrderService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private alertSrv: AlertService
   ) { addIcons ({ arrowBack }) }
 
   ngOnInit() {
     this.active.params.subscribe(p => this.getOrder(p['id']))
+    this.active.queryParams.subscribe(p => this.view = p['view'] || 'disponiveis')
   }
 
   async getOrder(uid: string){
@@ -80,6 +85,26 @@ export class VisualizarSolicitacaoPage implements OnInit {
         map: this.map
       })
     }, 1000)
+  }
+
+  async accept(){
+    const { success, data } = await this.orderSrv.accept(this.order.uid)
+    if( success ){
+      this.alertSrv.toast(data.message)
+      let btnAceitar = document.querySelector('ion-button[name="aceitar"]')
+      btnAceitar?.ariaDisabled
+      this.navCtrl.pop() //este método volta para uma tela anterior
+    }
+  }
+
+  async done(){
+    const { success, data } = await this.orderSrv.done(this.order.uid)
+    if( success ){
+      this.alertSrv.toast(data.message)
+      let btnFinalizar = document.querySelector('ion-button[name="finalizar"]')
+      btnFinalizar?.ariaDisabled
+      this.navCtrl.pop() //este método volta para uma tela anterior
+    }
   }
 
 }

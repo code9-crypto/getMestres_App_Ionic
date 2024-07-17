@@ -55,5 +55,15 @@
       </ion-label>
     </ion-item>
   </ion-list>
+  <div class="ion-padding" *ngIf="view === 'disponiveis' && order.statusOrder === 1">
+    <ion-button (click)="accept()" name="aceitar" expand="block" fill="solid">
+      Aceita
+    </ion-button>
+  </div>
+  <div class="ion-padding" *ngIf="order?.statusOrder === 2">
+    <ion-button color="secondary" name="finalizar" (click)="done()" name="aceitar" expand="block" fill="solid">
+      Finalizar
+    </ion-button>
+  </div>
   
 </ion-content>

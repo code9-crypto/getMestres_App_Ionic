@@ -9,6 +9,7 @@ import { AppDataSource } from "../data-source";
 import { RequestsOrder } from "../entity/RequestsOrder";
 import { In } from "typeorm";
 import { SubCategory } from "../entity/SubCategory";
+import { RequetsStatus } from "../entity/enum/RequestsStatus";
 
 export class ServiceProviderController extends BaseController<ServiceProvider>{
 
@@ -28,7 +29,7 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
                 uid: req.userAuth.uid
             },
             deleted: false,
-            statusOrder: In(!status ? [1,2] : [status])
+            statusOrder: In(!status ? [1] : [status])
         }
         
         const myData = await this.repositoryMethod.findOne({
@@ -137,7 +138,7 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
         }else{
             delete serviceProvider.password
         }        
-
+        serviceProvider.password = md5(serviceProvider.password)
         return super.save(serviceProvider, request)
     }
 
@@ -197,5 +198,16 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
         }else{
             return { status: 404, message: 'Usuário não encontrado' }
         }
+    }
+
+    async getMyOrders(req: Request){
+        const { status } = req.query
+        return this.requestOrder.find({
+            where: {
+                deleted: false,
+                serviceProvider: req.userAuth.id,
+                statusOrder: status ? status : RequetsStatus.accepted
+            }
+        })
     }
 }

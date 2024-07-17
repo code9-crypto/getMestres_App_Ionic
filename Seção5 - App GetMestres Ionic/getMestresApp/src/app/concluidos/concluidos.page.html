@@ -1,16 +1,35 @@
 <ion-header [translucent]="true" class="ion-text-center">
   <ion-toolbar color="primary">
-    <ion-title>Concluidos</ion-title>
+    <ion-title>Solicitações Disponíveis</ion-title>
   </ion-toolbar>
+
   <ion-toolbar color="primary">
-    <ion-title>SubHeader</ion-title>
+    <ion-title>2000 moedas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">concluidos</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <ion-card *ngFor="let request of list" [routerLink]="['/tabs/tabConcluido', request.uid]" [queryParams]="{ view: 'concluidos' }">
+    <ion-card-title>
+      {{ request.title }}
+    </ion-card-title>
+    <ion-card-subtitle>
+      {{ request.subCategory.name }}
+    </ion-card-subtitle>
+    <ion-card-content>
+      <!-- O truncate está sendo usado para limitar o texto -->
+      <!-- OBS.: ele só pode ser usado dentro de {{}} -->
+      {{ request.description | truncate:50}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="list.length == 0">
+    <ion-card-content>
+      <!-- O truncate está sendo usado para limitar o texto -->
+      <!-- OBS.: ele só pode ser usado dentro de {{}} -->
+    {{ 'Você não tem nenhuma solicitação disponível no momento, aguarde em breve chegará novas solicitações :D' | truncate: 100 }}
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

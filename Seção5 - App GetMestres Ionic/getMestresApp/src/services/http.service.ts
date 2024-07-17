@@ -106,6 +106,44 @@ export class HttpService {
     })
   }
 
+  public put(url: string, model: any): Promise <IResultHttp>{
+    let header = this.createHeader()
+    return new Promise(async (resolve) => {
+      try{
+        this.spinnerSrv.Show()
+        const res = await this.httpClient.put(url, model, { headers: header }).toPromise()
+        resolve({ success: true, data: res, error: undefined })
+        this.spinnerSrv.Hide()        
+        //esta tipagem no catch é para acessar qualquer atributo                
+      }catch(err: any){
+        this.spinnerSrv.Hide()        
+        /*//Esta mensagem será exibida ao usuário, caso a foto seje muito grande
+        if( err.status === 0 ){
+          let erroFoto = '<ul>'
+          erroFoto += `<li style="text-align: left">Foto muito grande para cadastrar</li>`
+          erroFoto += '</ul>'
+          alert.fire('Atenção', erroFoto, 'warning')
+        }*/
+        //Caso não seja enviado algum dos itens pedido
+        //Será exibido uma mensagem de alerta na tela para o usuário
+        if( err.status === 400 ){
+          //Será apresentado uma tela de alerta na tela caso haja campos em branco que são obrigatórios
+          let errosText = ''
+          if( Array.isArray(err.error) ) {
+            //Esta forma de usar o element quando apresenta erro
+            err.error.forEach((element:any) => {
+            errosText += `${element.message || element}\n`
+          })
+          errosText += ''
+          //Este alert está sendo usado do alert.service
+          this.alertSrv.alert("Atenção", errosText)          
+          }
+        }        
+        resolve({ success: false, data: {},  error: err})
+      }
+    })
+  }
+
   public delete(url: string): Promise<IResultHttp>{
     const header = this.createHeader()
     return new Promise(async (resolve) => {

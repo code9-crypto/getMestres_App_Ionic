@@ -84,6 +84,7 @@ export class ServiceprovidersComponent implements OnInit {
       if( result.success ){
         this.matSnack.open('Deletado com sucesso', undefined, { duration: 3000 })
         this.bind()
+        location.reload()
       }
     }
   }
