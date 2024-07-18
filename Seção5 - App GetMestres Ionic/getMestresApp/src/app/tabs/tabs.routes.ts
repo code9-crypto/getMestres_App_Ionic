@@ -19,8 +19,9 @@ export const routes: Routes = [
       },            
       {
         path: 'tabPerfil',
-        loadComponent: () =>
-          import('../perfil/perfil.page').then((m) => m.PerfilPage),
+        loadComponent: () => perfil == 'serviceProvider' ? 
+        import('../perfil-profissional/perfil-profissional.page').then( m => m.PerfilProfissionalPage) :
+        import('../perfil/perfil.page').then( (n) => n.PerfilPage) 
       },
       {
         path: 'tabAceito',
@@ -62,7 +63,7 @@ export const routes: Routes = [
       {
         path: 'visualizar-solicitacao/:id',
         loadComponent: () => import('../visualizar-solicitacao/visualizar-solicitacao.page').then( m => m.VisualizarSolicitacaoPage)
-      },
+      },      
       {
         path: '',
         //Caso a constante perfil tenha o valor profissional

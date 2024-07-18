@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonInput, IonButtons, IonButton, IonItemDivider } from '@ionic/angular/standalone';
-import { CustomerService } from 'src/services/customer.service';
-import { UserService } from 'src/services/user.service';
-import { CustomerModel } from '../models/CustomerModel';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonTitle, IonToolbar, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
 import { AlertService } from 'src/services/alert.service';
 import { ServiceProviderService } from 'src/services/serviceProvider.service';
+import { UserService } from 'src/services/user.service';
 import { ServiceProviderModel } from '../models/ServiceProviderModel';
-
+import { AddressService } from 'src/services/Address.service';
+import { IAddressState } from 'src/interfaces/IAddressState';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.page.html',
-  styleUrls: ['./perfil.page.scss'],
+  selector: 'app-perfil-profissional',
+  templateUrl: './perfil-profissional.page.html',
+  styleUrls: ['./perfil-profissional.page.scss'],
   standalone: true,
   imports: [
     IonContent, 
@@ -29,38 +27,44 @@ import { ServiceProviderModel } from '../models/ServiceProviderModel';
     IonInput,
     IonButtons, 
     IonButton,
-    IonItemDivider   
+    IonItemDivider,
+    IonSelect,
+    IonSelectOption
   ]
 })
-export class PerfilPage { 
+export class PerfilProfissionalPage {
+
   //Obs.: os atributos que ficam fora do construtor, são usados pela página HTML
-  form: CustomerModel = new CustomerModel()
-  userProfile: string = this.userSrv.Profile
+  form: ServiceProviderModel = new ServiceProviderModel()
+  cities: Array<string> = new Array<string>()
+  citiesCare: Array<string> = new Array<string>()
+  states: Array<IAddressState> = new Array<IAddressState>()
 
   constructor(
     //Enquanto os atributos que ficam dentro do construtor, são usados dentro da lógica do arquivo .ts
-    private customerSrv: CustomerService,
     private userSrv: UserService,
     private alertCtrl: AlertController,
     private alertSrv: AlertService,
-    private serviceProviderSrv: ServiceProviderService    
+    private serviceProviderSrv: ServiceProviderService,    
+    private citySrv: AddressService
   ) { }
 
   //Este método fará com que seja carregado toda vez
   //que a tela for carregada
   ionViewDidEnter(){
     this.loadData()
+    this.loadStates()
   }
 
-  async loadData(){
-    const { success, data } = await this.customerSrv.getById(this.userSrv.UserData.uid)
+  async loadData(){    
+    const { success, data } = await this.serviceProviderSrv.getById(this.userSrv.UserData.uid)
     if( success ){
-      this.form = data as CustomerModel
+      this.form = data as ServiceProviderModel
     }
   }
 
-  async save(){
-    const { success, data, error } = await this.customerSrv.post(this.form)
+  async save(){    
+    const { success, data, error } = await this.serviceProviderSrv.post(this.form as ServiceProviderModel)
     if( success ){
       this.form = data
       this.alertSrv.toast('Perfil atualizado com sucesso')
@@ -70,7 +74,7 @@ export class PerfilPage {
   }
 
   async changePasswordHandle(currentPassword: string,  newPassword: string, confirmNewPassword: string){    
-    const { success } = await this.customerSrv.changePassword(currentPassword, newPassword, confirmNewPassword)
+    const { success } = await this.serviceProviderSrv.changePassword(currentPassword, newPassword, confirmNewPassword)
     if( success ){
       this.alertSrv.toast('Senha alterada com sucesso')
     }
@@ -105,4 +109,20 @@ export class PerfilPage {
   logout(){
     this.userSrv.logout()
   }
+
+  async loadStates(){
+    const { success, data } = await this.citySrv.getAllStates()
+    if( success ){
+      this.states = data as IAddressState[]
+    }
+  }
+
+  async selectState(evt: any){
+    const state = evt.detail.value
+    const { success, data } = await this.citySrv.getAllCities(state) 
+    if( success ){
+      this.cities = data as string[]
+    }
+  }
+
 }

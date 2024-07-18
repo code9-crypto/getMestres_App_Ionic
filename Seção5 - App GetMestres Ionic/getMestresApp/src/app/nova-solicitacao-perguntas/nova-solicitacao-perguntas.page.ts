@@ -106,6 +106,8 @@ export class NovaSolicitacaoPerguntasPage implements OnInit {
         //Apresentando mensagem de sucesso ao cadastrar
         let success = `Informação cadastrada com sucesso`
         this.alertSrv.alert('Sucesso', success)
+        this.navCtrl.back()
+        this.navCtrl.back()
       }
     }catch(error){
       console.log('erro', error)

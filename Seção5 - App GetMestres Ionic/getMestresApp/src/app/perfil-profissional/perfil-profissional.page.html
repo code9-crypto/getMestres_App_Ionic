@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Perfil</ion-title>
+    <ion-title class="ion-text-center">Perfil do Profissional</ion-title>
     <!-- para manter o preenchimento correto do botão junto com o texto
       deve-se ser usado esses atributos que estão dentro de ion-buttons
      -->
@@ -31,6 +31,35 @@
     <ion-item lines="none">
       <ion-label position="stacked">Telefone</ion-label>
       <ion-input inputmode="tel" type="text" placeholder="(00) 00000-0000" [(ngModel)]="form.phone"></ion-input>
+    </ion-item>
+  </ion-list>  
+  <ion-list lines="none">
+    <ion-item-divider>
+      <ion-label>Endereço</ion-label>
+    </ion-item-divider>
+    <ion-item lines="none">
+      <ion-label position="stacked">CEP</ion-label>
+      <ion-input inputmode="text" type="text" placeholder="00000-000" [(ngModel)]="form.zipCode"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Endereço</ion-label>
+      <ion-input inputmode="text" type="text" placeholder="Rua São Judas" [(ngModel)]="form.address"></ion-input>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label position="stacked">Complemento</ion-label>
+      <ion-input inputmode="text" type="text" placeholder="Perto da padaria do Juca" [(ngModel)]="form.addressComplement"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Estado</ion-label>
+      <ion-select [value]="form.state" placeholder="Selecione" (ionChange)="selectState($event)">
+        <ion-select-option *ngFor="let state of states" [value]="state.sigla">{{ state.nome }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Cidade</ion-label>
+      <ion-select [disabled]="cities.length == 0" [value]="form.state" placeholder="Selecione">
+        <ion-select-option *ngFor="let city of cities" [value]="city">{{ city }}</ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>  
   <ion-list lines="none">

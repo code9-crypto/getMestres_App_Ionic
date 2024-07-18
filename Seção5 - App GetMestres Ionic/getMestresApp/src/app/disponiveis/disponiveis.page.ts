@@ -36,7 +36,7 @@ export class DisponiveisPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    this.loadData()
   }
 
   //Este método é executado toda vez que entrar na página
