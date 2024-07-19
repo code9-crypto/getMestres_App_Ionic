@@ -41,6 +41,7 @@ export class UserService {
         localStorage.removeItem(Constants.keyStore.user);
         localStorage.removeItem(Constants.keyStore.token);
         localStorage.removeItem(Constants.keyStore.profile);
+        this.navCtrl.pop()
         this.navCtrl.navigateRoot('/login')
     }
 

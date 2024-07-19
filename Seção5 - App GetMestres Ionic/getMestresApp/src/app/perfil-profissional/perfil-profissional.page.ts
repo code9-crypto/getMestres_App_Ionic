@@ -8,6 +8,10 @@ import { UserService } from 'src/services/user.service';
 import { ServiceProviderModel } from '../models/ServiceProviderModel';
 import { AddressService } from 'src/services/Address.service';
 import { IAddressState } from 'src/interfaces/IAddressState';
+import { ICategory } from 'src/interfaces/ICategory';
+import { ISubCategory } from 'src/interfaces/ISubCategory';
+import { CategoryService } from 'src/services/category.service';
+import { SubCategoryService } from 'src/services/sub-category.service';
 
 @Component({
   selector: 'app-perfil-profissional',
@@ -38,7 +42,11 @@ export class PerfilProfissionalPage {
   form: ServiceProviderModel = new ServiceProviderModel()
   cities: Array<string> = new Array<string>()
   citiesCare: Array<string> = new Array<string>()
-  states: Array<IAddressState> = new Array<IAddressState>()
+  states: Array<IAddressState> = new Array<IAddressState>()  
+  categories: ICategory[] = new Array<ICategory>()
+  subCategories: ISubCategory[] = new Array<ISubCategory>()
+  subCategoriesCare: string[] = new Array<string>()
+  categorySelected!: string
 
   constructor(
     //Enquanto os atributos que ficam dentro do construtor, são usados dentro da lógica do arquivo .ts
@@ -46,7 +54,9 @@ export class PerfilProfissionalPage {
     private alertCtrl: AlertController,
     private alertSrv: AlertService,
     private serviceProviderSrv: ServiceProviderService,    
-    private citySrv: AddressService
+    private citySrv: AddressService,
+    private categoryArv: CategoryService,
+    private subCategorySrv: SubCategoryService
   ) { }
 
   //Este método fará com que seja carregado toda vez
@@ -54,6 +64,7 @@ export class PerfilProfissionalPage {
   ionViewDidEnter(){
     this.loadData()
     this.loadStates()
+    this.loadCategories()
   }
 
   async loadData(){    
@@ -63,7 +74,26 @@ export class PerfilProfissionalPage {
     }
   }
 
-  async save(){    
+  async loadCategories(){
+    const { success, data } = await this.categoryArv.getAll()
+    if( success ){
+      this.categories = data as ICategory[]
+    }
+  }
+
+  async loadSubCategory(categoryUid: string){
+    const { success, data } = await this.subCategorySrv.getAllByCategory(categoryUid)
+    if( success ){
+      this.subCategories = data as ISubCategory[]
+    }else{
+      this.subCategories = []
+    }
+
+  }
+
+  async save(){  
+    this.form.categoriesCare = this.subCategoriesCare.join(', ')  
+    this.form.citiesCare = this.citiesCare.join(', ')
     const { success, data, error } = await this.serviceProviderSrv.post(this.form as ServiceProviderModel)
     if( success ){
       this.form = data

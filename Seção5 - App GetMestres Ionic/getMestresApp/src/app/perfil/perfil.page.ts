@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonList, IonLabel, IonItem, IonInput, IonButtons, IonButton, IonItemDivider } from '@ionic/angular/standalone';
@@ -7,8 +7,6 @@ import { UserService } from 'src/services/user.service';
 import { CustomerModel } from '../models/CustomerModel';
 import { AlertController } from '@ionic/angular';
 import { AlertService } from 'src/services/alert.service';
-import { ServiceProviderService } from 'src/services/serviceProvider.service';
-import { ServiceProviderModel } from '../models/ServiceProviderModel';
 
 
 @Component({
@@ -42,8 +40,7 @@ export class PerfilPage {
     private customerSrv: CustomerService,
     private userSrv: UserService,
     private alertCtrl: AlertController,
-    private alertSrv: AlertService,
-    private serviceProviderSrv: ServiceProviderService    
+    private alertSrv: AlertService       
   ) { }
 
   //Este método fará com que seja carregado toda vez

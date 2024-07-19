@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+
   <ion-toolbar color="primary">
     <ion-title class="ion-text-center">Perfil do Profissional</ion-title>
     <!-- para manter o preenchimento correto do botão junto com o texto
@@ -10,9 +11,11 @@
         </ion-button>
       </ion-buttons>          
   </ion-toolbar>
+  
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-list>
     <div class="photo-container">
       <img [src]="form.photo || 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngall.com%2Fwp-content%2Fuploads%2F5%2FUser-Profile-PNG-Clipart.png&f=1&nofb=1&ipt=7b3422ca6e19878fc8cd1694844bee7f59dd5f9599b97efd42a297e0bcddd45a&ipo=images'">
@@ -59,6 +62,34 @@
       <ion-label position="stacked">Cidade</ion-label>
       <ion-select [disabled]="cities.length == 0" [value]="form.state" placeholder="Selecione">
         <ion-select-option *ngFor="let city of cities" [value]="city">{{ city }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list lines="none">
+    <ion-item-divider>
+      <ion-label>Cidades Atendidas</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label position="stacked">Cidades que eu atendo</ion-label>
+      <ion-select [disabled]="cities.length == 0" [(ngModel)]="citiesCare" multiple placeholder="Selecione">
+        <ion-select-option *ngFor="let city of cities" [value]="city">{{ city }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list lines="none">
+    <ion-item-divider>
+      <ion-label>Categorias atendidas</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label position="stacked">Categorias</ion-label>
+      <ion-select [(ngModel)]="categorySelected" (ionChange)="loadSubCategory($event.detail.value)" placeholder="Selecione">
+        <ion-select-option *ngFor="let category of categories" [value]="category.uid">{{ category.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">SubCategorias</ion-label>
+      <ion-select [disabled]="categories.length == 0" [value]="subCategories" placeholder="Selecione" multiple>
+        <ion-select-option *ngFor="let subCategory of subCategories" [value]="subCategory.uid">{{ subCategory.name }}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>  

@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
     let perfil: any = document.querySelector('ion-select[name="profile"]')
     email.value = ''
     password.value = ''
-    perfil.value = ''
+    perfil.value = ''    
   }
 
   ngOnInit() {

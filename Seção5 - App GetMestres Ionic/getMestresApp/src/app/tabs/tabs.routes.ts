@@ -19,9 +19,13 @@ export const routes: Routes = [
       },            
       {
         path: 'tabPerfil',
-        loadComponent: () => perfil == 'serviceProvider' ? 
-        import('../perfil-profissional/perfil-profissional.page').then( m => m.PerfilProfissionalPage) :
-        import('../perfil/perfil.page').then( (n) => n.PerfilPage) 
+        loadComponent: () =>         
+          import('../perfil/perfil.page').then( (n) => n.PerfilPage)         
+      },
+      {
+        path: 'tabPerfilProfissional',
+        loadComponent: () => 
+          import('../perfil-profissional/perfil-profissional.page').then( m => m.PerfilProfissionalPage) 
       },
       {
         path: 'tabAceito',
