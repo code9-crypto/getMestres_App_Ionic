@@ -14,7 +14,7 @@ export class AlertService {
 
   //Este é o método de mensagem usando toast
   async toast(title: string, position: any = 'top'): Promise<void>{
-    const toast = await this.toastController.create({ message: title, position, duration: 3000})
+    const toast = await this.toastController.create({ message: title, position, duration: 5000})
     await toast.present()
   }
 

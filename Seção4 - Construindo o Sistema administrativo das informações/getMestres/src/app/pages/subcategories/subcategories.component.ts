@@ -32,6 +32,8 @@ export class SubcategoriesComponent implements OnInit{
   dataSource!: MatTableDataSource<SubCategoryModel>
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
+  privilege = localStorage.getItem('privilege')
+
   constructor(private subCategoriesSrv: SubCategoriesService){
   }
 

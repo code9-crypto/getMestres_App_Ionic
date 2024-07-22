@@ -57,11 +57,12 @@ export class HttpService {
       try{
         this.spinner.show()
         const res = await this.httpClient.get(url, { headers: header }).toPromise()        
-        resolve({ success: true, data: res, error: undefined })
-        this.spinner.hide()
+        resolve({ success: true, data: res, error: undefined })        
+        this.spinner.hide()        
       }catch(err){        
         this.spinner.hide()
         resolve({ success: false, data: {}, error: err })
+        alert.fire('Atenção', 'Esta tela é acessada exclusivamente pelo administrador')
       }
     })
   }

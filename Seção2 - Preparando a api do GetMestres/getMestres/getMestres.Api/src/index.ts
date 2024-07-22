@@ -33,7 +33,8 @@ Routes.forEach(route => {
                 }
             })
         } else if (result !== null && result !== undefined) {
-            res.json(result)
+            res.send(result)
+
         }
     })
 })

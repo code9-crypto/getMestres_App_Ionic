@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
 
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">Perfil do Profissional</ion-title>
+    <ion-title class="ion-text-center">Perfil</ion-title>
     <!-- para manter o preenchimento correto do botão junto com o texto
       deve-se ser usado esses atributos que estão dentro de ion-buttons
      -->
@@ -54,13 +54,13 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Estado</ion-label>
-      <ion-select [value]="form.state" placeholder="Selecione" (ionChange)="selectState($event)">
+      <ion-select [(ngModel)]="form.state" placeholder="Selecione" (ionChange)="selectState($event)">
         <ion-select-option *ngFor="let state of states" [value]="state.sigla">{{ state.nome }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Cidade</ion-label>
-      <ion-select [disabled]="cities.length == 0" [value]="form.state" placeholder="Selecione">
+      <ion-select [(ngModel)]="form.city" placeholder="Selecione">
         <ion-select-option *ngFor="let city of cities" [value]="city">{{ city }}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -88,7 +88,7 @@
     </ion-item>
     <ion-item>
       <ion-label position="stacked">SubCategorias</ion-label>
-      <ion-select [disabled]="categories.length == 0" [value]="subCategories" placeholder="Selecione" multiple>
+      <ion-select [disabled]="categories.length == 0" [(ngModel)]="subCategoriesCare" placeholder="Selecione" multiple>
         <ion-select-option *ngFor="let subCategory of subCategories" [value]="subCategory.uid">{{ subCategory.name }}</ion-select-option>
       </ion-select>
     </ion-item>

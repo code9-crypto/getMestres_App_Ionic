@@ -9,7 +9,7 @@ export class UserController extends BaseController<User> {
 
     constructor(){
         //O segundo paramêtro será necessário caso a classe seja usada apenas pelo ROOT
-        super(User)
+        super(User, true)
     }
 
     //Método que faz a validação do usuário

@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import alert from 'sweetalert2';
 import { Constants } from '../../shared/constants';
 import { MatPaginator } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-categories',
@@ -21,7 +22,8 @@ import { MatPaginator } from '@angular/material/paginator';
     MatButtonModule,
     MatIconModule,
     RouterLink,
-    MatPaginator
+    MatPaginator,
+    CommonModule
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
@@ -33,6 +35,8 @@ export class CategoriesComponent implements OnInit {
   dataSource!: MatTableDataSource<ICategories>
   @ViewChild(MatPaginator) paginator!: MatPaginator
 
+  privilege = localStorage.getItem('privilege')
+
   constructor(
     private categorySrv: CategoryService,        
     ){
@@ -41,6 +45,7 @@ export class CategoriesComponent implements OnInit {
 
   async ngOnInit(){
     this.bind()
+    console.log(this.privilege)
   }
 
   //Este método filtra e traz apenas os valores que faz referência

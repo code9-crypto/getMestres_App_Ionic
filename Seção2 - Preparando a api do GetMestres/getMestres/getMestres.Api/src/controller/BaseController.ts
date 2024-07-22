@@ -28,11 +28,11 @@ export abstract class BaseController<T> extends BaseNotification{
     //Este método irá verificar se o usuário é root ou não
     //Caso seja, retornará true, caso não, retornará false e não deixará executar a função
     private checkPermission(req: Request){
-        return this.onlyRootController
+        return this.onlyRootController && !req.IsRoot
     }
 
     //Este controlador está acionando o GET
-    async all(req: Request, ignorePermission: boolean = false) {               
+    async all(req: Request) {        
         if( this.checkPermission(req) ){
             return this.erroRoot
         }
@@ -46,12 +46,11 @@ export abstract class BaseController<T> extends BaseNotification{
     
 
     //Este controlador está acionando o GET com o paramêtro id
-    async one(req: Request, ignorePermission: boolean = false) {
-        if( !ignorePermission ) {
-            if( this.checkPermission(req) ){
-                return this.erroRoot
-            }
+    async one(req: Request) {        
+        if( this.checkPermission(req) ){
+            return this.erroRoot
         }
+        
         //O paramêtro vem como id, mas a busca no banco de dados a chave primaria está como uid
         const uid = req.params.id
         //para que a função findOne() funcione, será necessário incluir a claúsula where conforme abaixo        

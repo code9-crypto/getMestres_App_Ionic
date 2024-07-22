@@ -20,9 +20,14 @@
           <h3 class="mat-subheader">{{item.group}}</h3>          
           <a *ngFor="let option of item.items" mat-list-item [routerLink]="option.url" (click)="sidenav.toggle()">            
             <mat-icon>{{option.icon}}</mat-icon>
-          {{option.label}}
-          </a>          
+            {{option.label}}
+          </a>
         </div>
+        <h3 class="mat-subheader">Gerenciamento</h3>
+        <a mat-list-item>
+          <mat-icon>format_list_bulleted</mat-icon>
+          Pedidos
+        </a>
         <a mat-list-item (click)="logout()" (click)="sidenav.toggle()">
           <mat-icon>exit</mat-icon>
           Sair

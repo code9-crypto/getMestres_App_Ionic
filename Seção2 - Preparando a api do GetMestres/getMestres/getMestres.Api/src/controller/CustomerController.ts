@@ -84,7 +84,7 @@ export class CustomerController extends BaseController<Customer>{
     }
 
     async one(req: Request){
-        const customer = await super.one(req, this.isMe(req))
+        const customer = await super.one(req)
         delete customer['password']
         return customer
     }

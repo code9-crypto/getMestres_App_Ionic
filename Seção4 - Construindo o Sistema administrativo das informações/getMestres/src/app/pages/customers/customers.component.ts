@@ -37,6 +37,8 @@ export class CustomersComponent implements OnInit{
   columns: string[] = ['Código', 'Nome', 'Email', 'Telefone', 'uid']
   dataSource!: MatTableDataSource<CustomerModel>
   @ViewChild(MatPaginator) paginator!: MatPaginator
+
+  privilege = localStorage.getItem('privilege')
   
 
   constructor( 

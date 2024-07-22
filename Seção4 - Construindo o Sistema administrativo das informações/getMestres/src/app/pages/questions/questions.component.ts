@@ -36,7 +36,8 @@ export class QuestionsComponent implements OnInit {
   dataSource!: MatTableDataSource<QuestionModel>
   //Este é responsável por fazer a páginação na tela
   @ViewChild(MatPaginator) paginator!: MatPaginator
-  
+
+  privilege = localStorage.getItem('privilege')  
   
   constructor( 
     private questionSrv: QuestionsService,

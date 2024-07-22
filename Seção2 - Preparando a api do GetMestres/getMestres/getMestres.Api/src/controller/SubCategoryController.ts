@@ -9,7 +9,7 @@ export class SubCategoryController extends BaseController<SubCategory>{
     private questionRespository = AppDataSource.getRepository(Question)
 
     constructor(){
-        super(SubCategory)
+        super(SubCategory, true)
     }
 
     async save(req: Request){

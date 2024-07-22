@@ -38,6 +38,7 @@ export class ServiceprovidersComponent implements OnInit {
   dataSource!: MatTableDataSource<ServiceProviderModel>  
   @ViewChild(MatPaginator) paginator!: MatPaginator
   matSnack!: MatSnackBar  
+  privilege = localStorage.getItem('privilege')
 
   constructor(private serviceProvidersSrv: ServiceProvidersService){}
 
@@ -66,8 +67,7 @@ export class ServiceprovidersComponent implements OnInit {
   async bind(): Promise<void>{
     const service = await this.serviceProvidersSrv.getAll()
     this.dataSource = new MatTableDataSource(service.data)
-    this.dataSource.paginator = this.paginator
-    console.log(this.dataSource)    
+    this.dataSource.paginator = this.paginator        
   }
 
   //Este função irá fazer a deleção

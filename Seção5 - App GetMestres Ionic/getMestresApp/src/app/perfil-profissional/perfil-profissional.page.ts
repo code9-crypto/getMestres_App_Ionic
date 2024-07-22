@@ -70,7 +70,7 @@ export class PerfilProfissionalPage {
   async loadData(){    
     const { success, data } = await this.serviceProviderSrv.getById(this.userSrv.UserData.uid)
     if( success ){
-      this.form = data as ServiceProviderModel
+      this.form = data as ServiceProviderModel      
     }
   }
 
@@ -93,7 +93,7 @@ export class PerfilProfissionalPage {
 
   async save(){  
     this.form.categoriesCare = this.subCategoriesCare.join(', ')  
-    this.form.citiesCare = this.citiesCare.join(', ')
+    this.form.citiesCare = this.citiesCare.join(', ')    
     const { success, data, error } = await this.serviceProviderSrv.post(this.form as ServiceProviderModel)
     if( success ){
       this.form = data

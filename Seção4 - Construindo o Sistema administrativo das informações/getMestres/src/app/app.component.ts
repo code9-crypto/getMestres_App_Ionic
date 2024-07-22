@@ -58,6 +58,7 @@ export class AppComponent implements OnInit {
   //Este atributo foi criado para gerenciar, de forma centralizada, os menus
   //Este atributo também está tipando um array com a inteface IMenu
   menu: Array<IMenu> = new Array<IMenu>
+  privilege = localStorage.getItem('privilege')
 
 
   constructor(
@@ -72,8 +73,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void{
     this.isLogged = this.userService.isStaticLogged
     this.userService.isLogged.subscribe(logged => {
-      this.isLogged = logged
-      console.log(logged)
+      this.isLogged = logged            
     })
     
     //Estes são os itens do menu gerenciados de forma centralizada(abaixo)
@@ -98,13 +98,6 @@ export class AppComponent implements OnInit {
       group: 'Segurança',
       items:[
         {icon: 'security', label: 'Usuários', url:'Users'}
-      ]
-    })
-
-    this.menu.push({
-      group: 'Gerenciamento',
-      items: [
-        {icon: 'format_list_bulleted', label: 'Pedidos', url:'/'}
       ]
     })
     //Estes são os itens do menu gerenciados de forma centralizada(acima)

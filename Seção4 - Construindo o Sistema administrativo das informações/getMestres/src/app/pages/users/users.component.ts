@@ -34,8 +34,7 @@ export class UsersComponent implements OnInit{
   
   columns: string[] = ['Código', 'Nome', 'Email', 'isRoot', 'uid']
   dataSource!: MatTableDataSource<UserModel>
-  @ViewChild(MatPaginator) paginator!: MatPaginator
-  
+  @ViewChild(MatPaginator) paginator!: MatPaginator  
 
   constructor( 
     private usersGetAllSrv: UserGetAllService,

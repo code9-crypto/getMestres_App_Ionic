@@ -17,7 +17,7 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
     private subCategory = AppDataSource.getRepository(SubCategory)
 
     constructor(){
-        super(ServiceProvider)
+        super(ServiceProvider, true)
     }
 
     //Método para listar todas as Orders(pedidos/solicitações)
@@ -138,7 +138,7 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
         }else{
             delete serviceProvider.password
         }        
-        serviceProvider.password = md5(serviceProvider.password)
+        
         return super.save(serviceProvider, request)
     }
 

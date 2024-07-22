@@ -3,7 +3,7 @@ import { MatCard, MatCardTitle, MatCardContent } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import {  MatButtonModule } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -54,6 +54,8 @@ export class LoginComponent implements OnInit{
     if( result.success ){
       this.userService.configureLogin(result)
       this.router.navigateByUrl('/home')
+      localStorage.setItem('privilege', result.data.user.isRoot)
+      console.log(result.data.user.isRoot)      
     }else{
       this.matSnack.open("Email ou senha incorreta", undefined, { duration: 2000 })
     }

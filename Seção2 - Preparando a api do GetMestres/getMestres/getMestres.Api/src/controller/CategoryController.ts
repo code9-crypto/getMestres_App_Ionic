@@ -24,13 +24,13 @@ export class CategoryController extends BaseController<Category>{
     }
 
     //Sobrescrita do método all
-    async all(req: Request){
-        return this.categoryRepository.find({
-            where: {
-                deleted: false
-            }
-        })
-    }
+    // async all(req: Request){
+    //     return this.categoryRepository.find({
+    //         where: {
+    //             deleted: false
+    //         }
+    //     })
+    // }
 
     //Este método pega todos os subcategories referente àqueles categories informados
     //Por isso, que a claúsula where está sendo feita daquele jeito

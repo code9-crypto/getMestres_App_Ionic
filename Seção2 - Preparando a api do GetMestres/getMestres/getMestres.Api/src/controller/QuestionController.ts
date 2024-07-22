@@ -5,7 +5,7 @@ import { Request } from "express"
 
 export class QuestionController extends BaseController<Question>{
     constructor(){
-        super(Question)
+        super(Question, true)
     }
 
     async save(request: Request){

@@ -47,7 +47,7 @@ export default async(req: Request, res: Response, next: NextFunction) => {
                         uid: req.userAuth.uid
                     }
                 })
-                //req.IsRoot = userDB.isRoot || false                
+                req.IsRoot = userDB.isRoot || false                
                 next()
             }catch(err){
                 console.log(err)                
