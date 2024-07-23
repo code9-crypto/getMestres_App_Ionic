@@ -8,6 +8,7 @@ export class QuestionController extends BaseController<Question>{
         super(Question, true)
     }
 
+    //Sobrescrita de método
     async save(request: Request){
         let question = <Question>request.body
 
@@ -24,4 +25,13 @@ export class QuestionController extends BaseController<Question>{
 
         return super.save(question, request)
     }
+
+    //Sobrescrita de método
+    // async all(req: Request){
+    //     return this.repositoryMethod.find({
+    //         where: {
+    //             deleted: false
+    //         }
+    //     })
+    // }
 }

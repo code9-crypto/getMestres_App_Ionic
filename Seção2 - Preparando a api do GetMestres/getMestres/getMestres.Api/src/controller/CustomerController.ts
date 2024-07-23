@@ -83,10 +83,16 @@ export class CustomerController extends BaseController<Customer>{
         }
     }
 
-    async one(req: Request){
-        const customer = await super.one(req)
-        delete customer['password']
-        return customer
+    //Sobrescrita do método    
+    async one(req: Request){        
+        const userUid = req.params.id
+        const user = await this.repositoryMethod.findOne({
+            where: {
+                uid: userUid
+            }
+        })
+        delete user['password']        
+        return user
     }
 
     async changePassword(req: Request){
@@ -177,6 +183,15 @@ export class CustomerController extends BaseController<Customer>{
 
         return super.save(customer , req, true)
     }
+
+    //Sobrescrito do método
+    // async all(req: Request){
+    //     return this.repositoryMethod.find({
+    //         where: {
+    //             deleted: false
+    //         }
+    //     })
+    // }
 
     isMe(req: Request): boolean{
         try{

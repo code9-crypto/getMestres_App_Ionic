@@ -10,6 +10,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import alert from 'sweetalert2';
 import { Constants } from '../../shared/constants';
 import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import { MatCard } from '@angular/material/card';
+import { MatCardTitle } from '@angular/material/card';
 
 @Component({
   selector: 'app-subcategories',
@@ -21,7 +24,10 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginator
+    MatPaginator,
+    CommonModule,
+    MatCard,
+    MatCardTitle
   ],
   templateUrl: './subcategories.component.html',
   styleUrl: './subcategories.component.scss'

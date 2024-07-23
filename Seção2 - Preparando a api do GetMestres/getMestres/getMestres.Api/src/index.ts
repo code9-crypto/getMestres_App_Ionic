@@ -29,7 +29,7 @@ Routes.forEach(route => {
                 }else if (d && d.file){
                     res.sendFile(d.file)
                 }else{
-                    res.json(d)
+                    res.send(d)
                 }
             })
         } else if (result !== null && result !== undefined) {

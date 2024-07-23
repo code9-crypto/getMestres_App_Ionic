@@ -8,8 +8,7 @@ export class CategoryController extends BaseController<Category>{
 
     //O AppDataSource é o padrão do typoORM que há métodos para fazer acesso ao banco de dados
     //como o exemplo abaixo, getRepository()
-    private subCategoryRepository = AppDataSource.getRepository(SubCategory)
-    private categoryRepository = AppDataSource.getRepository(Category)
+    private subCategoryRepository = AppDataSource.getRepository(SubCategory)    
 
     constructor(){
         super(Category, true)
@@ -25,7 +24,7 @@ export class CategoryController extends BaseController<Category>{
 
     //Sobrescrita do método all
     // async all(req: Request){
-    //     return this.categoryRepository.find({
+    //     return this.repositoryMethod.find({
     //         where: {
     //             deleted: false
     //         }

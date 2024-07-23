@@ -1,4 +1,4 @@
-<div class="container-toolbar" *ngIf="privilege">
+<div class="container-toolbar">
     <mat-form-field appearance="outline">
         <mat-label>Pesquisa</mat-label>                                                     <!-- Esta codificação pega o valor do campo e ja verifica se existe dentro do array -->
         <input matInput placeholder="Descreva o dado que seja realizar a pesquisa" (keyup)="filter($any($event).target.value)">
@@ -6,6 +6,11 @@
     <button mat-raised-button color="primary" routerLink="/question/new">Nova Pergunta</button>
 </div>
 <div class="div-table mat-elevation-z8">
+    <mat-card>
+        <mat-card-title class="titulo-card">
+            <h3>Questões</h3>
+        </mat-card-title>    
+    </mat-card>
     <table mat-table [dataSource]="dataSource">
         <ng-container matColumnDef="Código">
             <th mat-header-cell *matHeaderCellDef>Código</th>

@@ -12,6 +12,10 @@ import { QuestionModel } from '../../model/QuestionModel';
 import { Constants } from '../../shared/constants';
 import { QuestionTypePipe } from "../../pipes/question-type.pipe";
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
+import { MatCard } from '@angular/material/card';
+import { MatCardTitle } from '@angular/material/card';
+
 
 @Component({
     selector: 'app-questions',
@@ -27,7 +31,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
       MatPaginatorModule,
       MatIconModule,
       QuestionTypePipe,
-      MatSnackBarModule
+      MatSnackBarModule,
+      CommonModule,
+      MatCard,
+      MatCardTitle
     ]
 })
 export class QuestionsComponent implements OnInit {

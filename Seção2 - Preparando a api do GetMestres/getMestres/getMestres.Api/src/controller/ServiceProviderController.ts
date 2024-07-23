@@ -210,4 +210,26 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
             }
         })
     }
+
+    //Sobrescrita de método
+    async one(req: Request){
+        const provId = req.params.id
+        const servProv = await this.repositoryMethod.findOne({
+            where:{
+                uid: provId
+            }
+        })
+        delete servProv['password']
+        console.log(servProv)
+        return servProv
+    }
+
+    //Sobrescrita do método
+    // async all(req: Request){
+    //     return this.repositoryMethod.find({
+    //         where: {
+    //             deleted: false
+    //         }
+    //     })
+    // }
 }

@@ -1,4 +1,4 @@
-<div class="container-toolbar" *ngIf="privilege">
+<div class="container-toolbar">
     <mat-form-field appearance="outline">
         <mat-label>Pesquisa</mat-label>                                                     <!-- Esta codificação pega o valor do campo e ja verifica se existe dentro do array -->
         <input matInput placeholder="Descreva o dado que seja realizar a pesquisa" (keyup)="filter($any($event).target.value)">

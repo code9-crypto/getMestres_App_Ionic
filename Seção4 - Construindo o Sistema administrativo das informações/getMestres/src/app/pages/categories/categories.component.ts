@@ -11,6 +11,8 @@ import alert from 'sweetalert2';
 import { Constants } from '../../shared/constants';
 import { MatPaginator } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
+import { MatCard } from '@angular/material/card';
+import { MatCardTitle } from '@angular/material/card';
 
 @Component({
   selector: 'app-categories',
@@ -23,7 +25,9 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     RouterLink,
     MatPaginator,
-    CommonModule
+    CommonModule,
+    MatCard,
+    MatCardTitle
   ],
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'

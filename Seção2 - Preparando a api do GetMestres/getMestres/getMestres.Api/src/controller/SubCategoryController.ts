@@ -12,6 +12,7 @@ export class SubCategoryController extends BaseController<SubCategory>{
         super(SubCategory, true)
     }
 
+    //Sobrescrita de método
     async save(req: Request){
         let subCategoria = <SubCategory>req.body
 
@@ -36,4 +37,14 @@ export class SubCategoryController extends BaseController<SubCategory>{
             }
         })
     }
+
+    //Sobrescrita de método
+    // async all(req: Request){
+    //     return this.repositoryMethod.find({
+    //         where: {
+    //             deleted: false
+    //         }
+    //     })
+    // }
+
 }

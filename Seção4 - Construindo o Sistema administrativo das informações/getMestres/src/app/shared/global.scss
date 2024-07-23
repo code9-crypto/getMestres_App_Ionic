@@ -134,3 +134,13 @@ app-input-file{
     width: 100%;
     float: left;
 }
+
+.titulo-card{
+    text-align: center;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: space-evenly;
+}

@@ -13,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-customer',
@@ -27,7 +28,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginator
+    MatPaginator,
+    CommonModule
   ],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss'

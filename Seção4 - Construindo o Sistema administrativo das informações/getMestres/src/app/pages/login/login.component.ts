@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit{
     if( result.success ){
       this.userService.configureLogin(result)
       this.router.navigateByUrl('/home')
-      localStorage.setItem('privilege', result.data.user.isRoot)
+      localStorage.setItem('privilege', 'root')
       console.log(result.data.user.isRoot)      
     }else{
       this.matSnack.open("Email ou senha incorreta", undefined, { duration: 2000 })
