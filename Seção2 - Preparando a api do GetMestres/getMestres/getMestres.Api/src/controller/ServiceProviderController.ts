@@ -117,29 +117,30 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
         super.isRequired(serviceProvider.state, "Informe o estado")
     }
 
+    //Sobrescrita de método
     async save(request: Request){
         let serviceProvider = <ServiceProvider>request.body
-        let { confirmPassword } = request.body
+        
+        //Verificando se existe o usuário no banco
+        const modelInDB = await this.repositoryMethod.findOne({
+            where: {
+                uid: serviceProvider.uid
+            }
+        })
 
-        //O super está sendo chamado, pois é para que a validação seja feita na superclasse, não na classe local
-        this.validationDefault(serviceProvider)
-
-        if( serviceProvider.photo ){
-            let pictureCreatedResult = await FileHelper.writePicture( serviceProvider.photo )
-            if( pictureCreatedResult ){
-                serviceProvider.photo = pictureCreatedResult
+        //Caso exista, cairá aqui
+        //E a pesquisa que foi feita acima, será substituída pela nova
+        if( modelInDB ){
+            delete serviceProvider['password']
+            return this.repositoryMethod.save(serviceProvider)
+        }else{
+            return {
+                status: 404,
+                errors: 'Usuário não encontrado'
             }
         }
-
-        if( !serviceProvider.uid ){
-            super.isRequired(serviceProvider.password, "A senha é obrigatória")
-            super.isRequired(request.body.confirmPassword, "A confirmação da senha é obrigatória")
-            super.isTrue((serviceProvider.password != confirmPassword), "A senha e a confirmação de senha estão diferentes")    
-        }else{
-            delete serviceProvider.password
-        }        
         
-        return super.save(serviceProvider, request)
+        
     }
 
     async createServiceProvider(req: Request){
@@ -220,7 +221,6 @@ export class ServiceProviderController extends BaseController<ServiceProvider>{
             }
         })
         delete servProv['password']
-        console.log(servProv)
         return servProv
     }
 
